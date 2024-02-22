@@ -11,15 +11,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ClientController {
+    private ClientModel clientModel;
     public ComboBox accountComboBox;
     public Button writeEmailButton;
     public ListView mailListView;
-    public ToggleGroup toggleGroup;
     public RadioButton AllMail, toRead, Sent;
     public ToggleGroup selector;
-    private ClientModel model;
-    private Label myLabel;
-    private VBox radioButtonContainer;
 
 
     // No-argument constructor
@@ -29,15 +26,6 @@ public class ClientController {
     @FXML
     public void initialize() {
 
-        // Set default value
-        accountComboBox.setValue("Account 1");
-
-        // Add items to the ComboBox
-        accountComboBox.setItems(FXCollections.observableArrayList(
-                "Account 1",
-                "Account 2",
-                "Account 3"
-        ));
     }
 
     @FXML

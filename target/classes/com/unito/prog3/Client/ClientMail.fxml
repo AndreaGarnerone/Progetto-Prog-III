@@ -11,7 +11,7 @@
     <!-- Top section for account selection -->
     <top>
         <HBox alignment="CENTER_RIGHT">
-            <ComboBox fx:id="accountComboBox">
+            <ComboBox fx:id="accountComboBox" value="Account 1">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <String fx:value="Account 1"/>

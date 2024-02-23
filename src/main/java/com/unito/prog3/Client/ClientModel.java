@@ -4,17 +4,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class ClientModel {
-    private final ObservableList<String> mailList;
+    private final ObservableList<Email> mailList;
 
     public ClientModel() {
         mailList = FXCollections.observableArrayList(
-                "Mail 1", "Mail 2", "Mail 3", "Mail 4", "Mail 5"
         );
     }
 
-    public ObservableList<String> getMailList() {
+    public ObservableList<Email> getMailList() {
         return mailList;
     }
+
+    public void addEmail(Email email) {
+        mailList.add(0, email);
+    }
+
 
 
 }

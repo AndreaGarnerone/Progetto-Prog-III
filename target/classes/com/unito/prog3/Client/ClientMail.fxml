@@ -32,6 +32,7 @@
     <left>
         <VBox spacing="10">
             <Button fx:id="writeEmailButton" text="Write New Email" onAction="#handleWriteEmailButton"/>
+            <Button fx:id="bottone" text="ggwp" onAction="#prova"/>
             <Separator/>
 
             <RadioButton fx:id="AllMail" text="All Mails" selected="true" onAction="#handleRadioButtonAction">

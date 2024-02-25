@@ -16,7 +16,7 @@ public class ClientController {
     @FXML
     private ClientModel clientModel;
     @FXML
-    public ComboBox accountComboBox;
+    public ComboBox accountSelector;
     @FXML
     public Button writeEmailButton;
     @FXML
@@ -32,22 +32,19 @@ public class ClientController {
     }
 
     @FXML
-    public void initialize() {
+    public void initialize(String selectedAccount) {
         clientModel = new ClientModel();
 
-        mailListView.setCellFactory(new Callback<ListView<Email>, ListCell<Email>>() {
-            @Override
-            public ListCell<Email> call(ListView<Email> param) {
-                return new EmailVisualizer();
-         }
-});
+        mailListView.setCellFactory((Callback<ListView<Email>, ListCell<Email>>) param -> new EmailVisualizer());
         mailListView.setItems(clientModel.getMailList());
+
+        setAccountName.setText(selectedAccount);
 
         //clientModel.addEmail(new Email("me", "you", "prova", "uiregnf", "12"));
     }
 
     @FXML
-    private void writeNewEmail(ActionEvent event) throws IOException {
+    private void writeNewEmail() throws IOException {
         WriteEmailView writeEmailView = new WriteEmailView();
         Stage stage = new Stage();
 
@@ -55,7 +52,7 @@ public class ClientController {
         WriteEmailController writeEmailController = writeEmailView.openWriter(stage, clientModel);
     }
 
-    public void addEmail () {
+    public void addEmail() {
         clientModel.addEmail(new Email("you", "me", "prova", "uiregnf", "12"));
     }
 
@@ -75,14 +72,10 @@ public class ClientController {
 
     }
 
-    public void openClient() {
-        // Load the Client interface
-        try {
-            ClientApplication clientApplication = new ClientApplication();
-            Stage stage = new Stage();
-            clientApplication.start(stage);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void openClient() throws IOException {
+        ClientApplication clientApplication = new ClientApplication();
+        Stage stage = new Stage();
+        clientApplication.start(stage);
     }
+
 }

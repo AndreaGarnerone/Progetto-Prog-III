@@ -24,9 +24,9 @@
             <ComboBox fx:id="accountSelector">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="Account 1"/>
-                        <String fx:value="Account 2"/>
-                        <String fx:value="Account 3"/>
+                        <String fx:value="sommo.luminescente@gormail.com"/>
+                        <String fx:value="carrapax@gormail.com"/>
+                        <String fx:value="orrore.profondo@gormail.com"/>
                     </FXCollections>
                 </items>
             </ComboBox>
@@ -35,4 +35,6 @@
             <Button text="Select" onAction="#openClient"/>
         </VBox>
     </VBox>
+    <Label fx:id="Feedback" layoutX="350.0" layoutY="550.0"/>
+
 </AnchorPane>

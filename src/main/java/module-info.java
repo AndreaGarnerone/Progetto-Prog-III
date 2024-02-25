@@ -6,4 +6,6 @@ module org.example.progiii {
     exports com.unito.prog3.Client;
     opens com.unito.prog3.WriteEmail to javafx.fxml;
     exports com.unito.prog3.WriteEmail;
+    opens com.unito.prog3.Login to javafx.fxml;
+    exports com.unito.prog3.Login;
 }

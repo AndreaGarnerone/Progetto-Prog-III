@@ -1,26 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import java.lang.String?>
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.unito.prog3.Client.ClientController">
 
-    <!-- Top section for account selection -->
+    <!-- Account Name -->
     <top>
-        <HBox alignment="CENTER_RIGHT">
-            <ComboBox fx:id="accountComboBox" value="Account 1">
-                <items>
-                    <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="Account 1"/>
-                        <String fx:value="Account 2"/>
-                        <String fx:value="Account 3"/>
-                    </FXCollections>
-                </items>
-            </ComboBox>
-        </HBox>
+        <VBox spacing="10" alignment="CENTER">
+            <Label text="piero.fasulli@hotmail.cum" fx:id="setAccountName" style="-fx-font-size: 13px;"/>
+        </VBox>
     </top>
 
     <!-- Center section for mail list -->
@@ -31,18 +20,17 @@
     <!-- Left section for sidebar -->
     <left>
         <VBox spacing="10">
-            <Button fx:id="writeEmailButton" text="Write New Email" onAction="#handleWriteEmailButton"/>
-            <Button fx:id="bottone" text="ggwp" onAction="#prova"/>
+            <Button fx:id="writeEmailButton" text="Write New Email" onAction="#writeNewEmail"/>
             <Separator/>
 
-            <RadioButton fx:id="AllMail" text="All Mails" selected="true" onAction="#handleRadioButtonAction">
+            <RadioButton fx:id="AllMail" text="All Mails" selected="true" onAction="#changeListView">
                 <toggleGroup>
                     <ToggleGroup fx:id="selector"/>
                 </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="toRead" text="To Read Mails" onAction="#handleRadioButtonAction"
+            <RadioButton fx:id="toRead" text="To Read Mails" onAction="#changeListView"
                          toggleGroup="$selector"/>
-            <RadioButton fx:id="Sent" text="Sent Mails" onAction="#handleRadioButtonAction" toggleGroup="$selector"/>
+            <RadioButton fx:id="Sent" text="Sent Mails" onAction="#changeListView" toggleGroup="$selector"/>
         </VBox>
     </left>
 

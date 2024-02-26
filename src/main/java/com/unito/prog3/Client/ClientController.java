@@ -33,9 +33,9 @@ public class ClientController {
 
     @FXML
     public void initialize(String selectedAccount) {
-        clientModel = new ClientModel();
+        clientModel = new ClientModel(selectedAccount);
 
-        mailListView.setCellFactory((Callback<ListView<Email>, ListCell<Email>>) param -> new EmailVisualizer());
+        mailListView.setCellFactory(param -> new EmailVisualizer());
         mailListView.setItems(clientModel.getMailList());
 
         setAccountName.setText(selectedAccount);

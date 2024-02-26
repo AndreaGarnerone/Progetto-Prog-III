@@ -2,6 +2,7 @@ package com.unito.prog3.Client;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+
 import java.util.Objects;
 
 public class Email {
@@ -15,7 +16,7 @@ public class Email {
         return from.get();
     }
 
-    public String getFromFirst(){
+    public String getFromFirst() {
         return from.get().split(";")[0];
     }
 
@@ -34,6 +35,7 @@ public class Email {
     public String getToFirst() {
         return to.get().split(";")[0];
     }
+
     public StringProperty toProperty() {
         return to;
     }
@@ -79,7 +81,7 @@ public class Email {
     }
 
 
-    public Email(String from, String to, String subject, String content, String time){
+    public Email(String from, String to, String subject, String content, String time) {
         this.setFrom(from);
         this.setContent(content);
         this.setSubject(subject);
@@ -137,6 +139,47 @@ public class Email {
     private void appendProperty(StringBuilder builder, String key, String value) {
         if (value != null) {
             builder.append("\"").append(key).append("\":\"").append(value).append("\",");
- }
-}
+        }
+    }
+
+    public static Email fromString(String json) {
+        try {
+            // Split the JSON string into individual fields
+            String[] parts = json.substring(1, json.length() - 1).split(",");
+
+            // Extract values for each field
+            String from = null, to = null, subject = null, content = null, timestamp = null;
+            for (String part : parts) {
+                String[] keyValue = part.split(":");
+                String key = keyValue[0].trim().replaceAll("\"", "");
+                String value = keyValue[1].trim().replaceAll("\"", "");
+                switch (key) {
+                    case "from":
+                        from = value;
+                        break;
+                    case "to":
+                        to = value;
+                        break;
+                    case "subject":
+                        subject = value;
+                        break;
+                    case "content":
+                        content = value;
+                        break;
+                    case "timestamp":
+                        timestamp = value;
+                        break;
+                    default:
+                        // Handle unknown fields if necessary
+                        break;
+                }
+            }
+
+            // Create and return an Email instance
+            return new Email(from, to, subject, content, timestamp);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

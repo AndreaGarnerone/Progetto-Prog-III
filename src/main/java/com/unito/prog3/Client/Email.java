@@ -87,7 +87,6 @@ public class Email {
         this.setSubject(subject);
         this.setTo(to);
         this.setTimestamp(time);
-
     }
 
     @Override

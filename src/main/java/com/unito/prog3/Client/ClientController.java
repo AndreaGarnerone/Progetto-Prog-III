@@ -1,10 +1,13 @@
 package com.unito.prog3.Client;
 
+import com.unito.prog3.ShowEmail.ShowEmail;
+import com.unito.prog3.ShowEmail.ShowEmailController;
 import com.unito.prog3.WriteEmail.WriteEmailController;
 import com.unito.prog3.WriteEmail.WriteEmailView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -21,10 +24,13 @@ public class ClientController {
     public Button writeEmailButton;
     @FXML
     public ListView mailListView;
+    private ShowEmailController showEmailController;
     @FXML
     public RadioButton AllMail, toRead, Sent;
     @FXML
     public ToggleGroup selector;
+
+    private String accountName;
 
 
     // No-argument constructor
@@ -34,13 +40,14 @@ public class ClientController {
     @FXML
     public void initialize(String selectedAccount) {
         clientModel = new ClientModel(selectedAccount);
+        accountName = selectedAccount;
 
         mailListView.setCellFactory(param -> new EmailVisualizer());
         mailListView.setItems(clientModel.getMailList());
 
         setAccountName.setText(selectedAccount);
 
-        //clientModel.addEmail(new Email("me", "you", "prova", "uiregnf", "12"));
+        mailListView.setOnMouseClicked(this::handleEmailDoubleClick);
     }
 
     @FXML
@@ -48,14 +55,10 @@ public class ClientController {
         WriteEmailView writeEmailView = new WriteEmailView();
         Stage stage = new Stage();
 
-        // Pass the client model to the openWriter method
-        WriteEmailController writeEmailController = writeEmailView.openWriter(stage, clientModel);
+        writeEmailView.openWriter(stage, clientModel, accountName);
     }
 
-    public void addEmail() {
-        clientModel.addEmail(new Email("you", "me", "prova", "uiregnf", "12"));
-    }
-
+    // Change from "All Mail" to other viewer
     public void changeListView(ActionEvent event) {
         /* Esempio
         if (AllMail.isSelected()) {
@@ -68,14 +71,14 @@ public class ClientController {
          */
     }
 
-    public void setAccountName(String text) {
-
-    }
-
-    public void openClient() throws IOException {
-        ClientApplication clientApplication = new ClientApplication();
-        Stage stage = new Stage();
-        clientApplication.start(stage);
+    private void handleEmailDoubleClick(javafx.scene.input.MouseEvent event) {
+        if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
+            Email selectedEmail = (Email) mailListView.getSelectionModel().getSelectedItem();
+            if (selectedEmail != null && showEmailController != null) {
+                String email = selectedEmail.toJson();
+                showEmailController.initialize(email); // Pass selected email to ShowEmailController
+            }
+        }
     }
 
 }

@@ -1,0 +1,23 @@
+[
+  {
+    "subject": "prova1",
+    "from": "sommo.luminescente@gormail.com",
+    "to": "carrapax@gormail.com",
+    "content": "v",
+    "timestamp": "2024-02-28T18:20:29.883078400"
+  },
+  {
+    "subject": "provadue",
+    "from": "sommo.luminescente@gormail.com",
+    "to": "carrapax@gormail.com",
+    "content": "dc",
+    "timestamp": "2024-02-28T19:12:06.295964700"
+  },
+  {
+    "subject": "prova3",
+    "from": "sommo.luminescente@gormail.com",
+    "to": "carrapax@gormail.com",
+    "content": "v",
+    "timestamp": "2024-02-28T19:26:11.360010500"
+  }
+]

@@ -1,6 +1,5 @@
 package com.unito.prog3.WriteEmail;
 
-import com.unito.prog3.Client.ClientApplication;
 import com.unito.prog3.Client.ClientModel;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,18 +10,18 @@ import java.io.IOException;
 
 public class WriteEmailView {
 
-    public WriteEmailController openWriter(Stage stage, ClientModel clientModel) throws IOException {
+    public void openWriter(Stage stage, ClientModel clientModel, String sender) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("WriteEmail.fxml"));
         Parent root = fxmlLoader.load();
 
         WriteEmailController writeEmailController = fxmlLoader.getController();
         writeEmailController.setClientModel(clientModel); // Set the client model
+        writeEmailController.setSender(sender);
 
         Scene scene = new Scene(root, 600, 400);
         stage.setTitle("Write Email");
         stage.setScene(scene);
         stage.show();
 
-        return writeEmailController;
     }
 }

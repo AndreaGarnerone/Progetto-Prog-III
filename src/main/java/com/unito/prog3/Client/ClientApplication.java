@@ -24,11 +24,11 @@ public class ClientApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ClientApplication.class.getResource("ClientMail.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 600);
-        stage.setTitle("Mail Client - " + selectedAccount); // Append the selected account to the title
+        stage.setTitle("Mail Client - " + selectedAccount);
         stage.setScene(scene);
         stage.show();
 
         ClientController ccl = fxmlLoader.getController();
-        ccl.initialize(selectedAccount); // Pass the selected account to the controller
+        ccl.initialize(selectedAccount);
     }
 }

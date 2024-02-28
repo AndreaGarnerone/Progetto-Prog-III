@@ -20,6 +20,8 @@ public class WriteEmailController {
     @FXML
     public TextArea messageField;
 
+    private String from;
+
     LocalDateTime currentDateTime = LocalDateTime.now();
     private ClientModel clientModel;
 
@@ -41,8 +43,6 @@ public class WriteEmailController {
             alert.setContentText("Please fill in all fields.");
             alert.showAndWait();
         } else {
-            // Proceed to send the email
-            String from = "you"; // Assuming "you" is the sender
             String timestamp = String.valueOf(currentDateTime);
 
             clientModel.addEmail(new Email(from, to, subject, content, timestamp));
@@ -60,5 +60,9 @@ public class WriteEmailController {
         toField.clear();
         subjectField.clear();
         messageField.clear();
+    }
+
+    public void setSender(String sender) {
+        this.from = sender;
     }
 }

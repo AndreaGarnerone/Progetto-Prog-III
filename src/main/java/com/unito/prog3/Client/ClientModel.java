@@ -59,7 +59,7 @@ public class ClientModel {
             fileWriter.flush();
             fileWriter.close();
 
-            System.out.println("Email saved successfully.");
+            //System.out.println("Email saved successfully.");
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
@@ -80,7 +80,7 @@ public class ClientModel {
                 String subject = (String) jsonEmail.get("subject");
                 String content = (String) jsonEmail.get("content");
                 String timestamp = (String) jsonEmail.get("timestamp");
-                mailList.add(new Email(from, to, subject, content, timestamp));
+                mailList.add(0, new Email(from, to, subject, content, timestamp));
             }
 
             System.out.println("Emails loaded successfully.");

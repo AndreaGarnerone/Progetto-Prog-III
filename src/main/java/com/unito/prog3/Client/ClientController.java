@@ -6,6 +6,9 @@ import com.unito.prog3.WriteEmail.WriteEmailController;
 import com.unito.prog3.WriteEmail.WriteEmailView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
@@ -74,9 +77,21 @@ public class ClientController {
     private void handleEmailDoubleClick(javafx.scene.input.MouseEvent event) {
         if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
             Email selectedEmail = (Email) mailListView.getSelectionModel().getSelectedItem();
-            if (selectedEmail != null && showEmailController != null) {
-                String email = selectedEmail.toJson();
-                showEmailController.initialize(email); // Pass selected email to ShowEmailController
+            if (selectedEmail != null) {
+                try {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ShowEmail.fxml"));
+                    Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+                    Stage primaryStage = new Stage();
+                    primaryStage.setTitle("Show Email");
+                    primaryStage.setScene(scene);
+                    primaryStage.show();
+
+                    ShowEmailController showEmailController = fxmlLoader.getController();
+                    showEmailController.initialize(selectedEmail.toJson());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

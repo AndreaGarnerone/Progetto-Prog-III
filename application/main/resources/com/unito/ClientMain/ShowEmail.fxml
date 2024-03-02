@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<?import javafx.scene.text.Font?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.unito.ShowEmail.ShowEmailController"
+      prefHeight="400.0" prefWidth="600.0">
+
+    <HBox spacing="5">
+        <Label text="From:"/>
+        <BorderPane>
+            <center>
+                <Label fx:id="fromField">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Label>
+            </center>
+        </BorderPane>
+    </HBox>
+
+    <HBox spacing="5">
+        <Label text="Subject:"/>
+        <BorderPane>
+            <center>
+                <Label fx:id="subjectField">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Label>
+            </center>
+        </BorderPane>
+    </HBox>
+
+    <BorderPane>
+        <left>
+            <Label text="Message:"/>
+        </left>
+        <center>
+            <VBox  style="-fx-border-color: lightgrey; -fx-border-width: 1;">
+                <Label fx:id="messageField" prefHeight="200" prefWidth="398"/>
+            </VBox>
+        </center>
+    </BorderPane>
+</VBox>

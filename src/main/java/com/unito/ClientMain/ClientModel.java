@@ -9,9 +9,17 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
+import java.net.InetAddress;
+import java.net.Socket;
 
 public class ClientModel {
     private ObservableList<Email> mailList;
+
+    private String hostName = "127.0.0.1";
+    private int port = 27;
+    Socket socket = null;
+    ObjectOutputStream outputStream = null;
+    InputStream inputStream = null;
 
     WriteEmailController writeEmailController = new WriteEmailController();
 
@@ -26,44 +34,55 @@ public class ClientModel {
 
 
     //Add an email to the list
-    public void addEmail(Email email) {
+    public void addEmail(Email email) throws IOException, ClassNotFoundException {
         String filePath = "MailStorage/" + email.getToFirst() + ".json";
 
-        try {
-            // Read existing JSON array from file or create a new one if file doesn't exist
-            File file = new File(filePath);
-            JSONArray jsonArray = null;
-            if (!file.exists()) {
-                writeEmailController.setErrorText();
-            } else {
-                jsonArray = new JSONArray();
-                JSONParser parser = new JSONParser();
-                Object obj = parser.parse(new FileReader(filePath));
-                jsonArray = (JSONArray) obj;
-
-
-                // Convert Email object to JSONObject
-                JSONObject emailJson = new JSONObject();
-                emailJson.put("from", email.getFromAll());
-                emailJson.put("to", email.getToAll());
-                emailJson.put("subject", email.getSubject());
-                emailJson.put("content", email.getContent());
-                emailJson.put("timestamp", email.getTimestamp());
-
-                jsonArray.add(emailJson);
-
-                FileWriter fileWriter = new FileWriter(filePath);
-                fileWriter.write(jsonArray.toJSONString());
-                fileWriter.flush();
-                fileWriter.close();
-            }
-
-            //System.out.println("Email saved successfully.");
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
+        File file = new File(filePath);
+        if (!file.exists()) {
+            writeEmailController.setErrorText();
+        } else {
+            sendToServer(email);
         }
     }
 
+    private void sendToServer(Email email) {
+        try {
+            connectToServer();
+            sendEmail(email);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+    }
+
+    // Create a socket connection with the server
+    private void connectToServer() throws IOException {
+        socket = new Socket(hostName, port);
+
+        outputStream = new ObjectOutputStream(socket.getOutputStream());
+        outputStream.flush();
+
+        inputStream = new ObjectInputStream(socket.getInputStream());
+    }
+
+    // Send the email via the socket connection
+    private void sendEmail(Email email) throws IOException {
+        outputStream.writeObject(email);
+        outputStream.flush();
+    }
+
+    private void closeConnection() {
+        if (socket != null) {
+            try {
+                inputStream.close();
+                outputStream.close();
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     public void removeEmail(Email email) {
         String filePath = "MailStorage/" + email.getToFirst() + ".json";

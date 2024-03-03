@@ -11,6 +11,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class WriteEmailController {
@@ -31,7 +32,7 @@ public class WriteEmailController {
         this.clientModel = clientModel;
     }
 
-    public void sendEmail(ActionEvent event) {
+    public void sendEmail(ActionEvent event) throws IOException, ClassNotFoundException {
         String to = toField.getText();
         String subject = subjectField.getText();
         String content = messageField.getText();

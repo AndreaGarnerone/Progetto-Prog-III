@@ -9,7 +9,6 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
-import java.net.InetAddress;
 import java.net.Socket;
 
 public class ClientModel {

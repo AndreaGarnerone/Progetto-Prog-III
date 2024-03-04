@@ -29,4 +29,13 @@ public class ClientApplication extends Application {
         ClientController ccl = fxmlLoader.getController();
         ccl.initialize(selectedAccount);
     }
+
+    public static void main(String[] args) {
+        new ClientApplication().launchOnNewThread(args);
+    }
+
+    public void launchOnNewThread(String[] args) {
+        Thread thread = new Thread(() -> launch(args));
+        thread.start();
+    }
 }

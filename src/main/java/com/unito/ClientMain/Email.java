@@ -1,92 +1,75 @@
 package com.unito.ClientMain;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Email {
-    private final StringProperty from = new SimpleStringProperty();
-    private final StringProperty to = new SimpleStringProperty();
-    private final StringProperty subject = new SimpleStringProperty();
-    private final StringProperty content = new SimpleStringProperty();
-    private final StringProperty timestamp = new SimpleStringProperty();
+public class Email implements Serializable {
+    private String from;
+    private String to;
+    private String subject;
+    private String content;
+    private String timestamp;
 
     public String getFromAll() {
-        return from.get();
+        return from;
     }
 
     public String getFromFirst() {
-        return from.get().split(";")[0];
-    }
-
-    public StringProperty fromProperty() {
+        if (from != null && from.contains(";")) {
+            return from.split(";")[0];
+        }
         return from;
     }
 
     public void setFrom(String from) {
-        this.from.set(from);
+        this.from = from;
     }
 
     public String getToAll() {
-        return to.get();
+        return to;
     }
 
     public String getToFirst() {
-        return to.get().split(";")[0];
-    }
-
-    public StringProperty toProperty() {
+        if (to != null && to.contains(";")) {
+            return to.split(";")[0];
+        }
         return to;
     }
 
     public void setTo(String to) {
-        this.to.set(to);
+        this.to = to;
     }
 
     public String getSubject() {
-        return subject.get();
-    }
-
-    public StringProperty subjectProperty() {
         return subject;
     }
 
     public void setSubject(String subject) {
-        this.subject.set(subject);
+        this.subject = subject;
     }
 
     public String getContent() {
-        return content.get();
-    }
-
-    public StringProperty contentProperty() {
         return content;
     }
 
     public void setContent(String content) {
-        this.content.set(content);
+        this.content = content;
     }
 
     public String getTimestamp() {
-        return timestamp.get();
-    }
-
-    public StringProperty timestampProperty() {
         return timestamp;
     }
 
     public void setTimestamp(String timestamp) {
-        this.timestamp.set(timestamp);
+        this.timestamp = timestamp;
     }
 
-
-    public Email(String from, String to, String subject, String content, String time) {
-        this.setFrom(from);
-        this.setContent(content);
-        this.setSubject(subject);
-        this.setTo(to);
-        this.setTimestamp(time);
+    public Email(String from, String to, String subject, String content, String timestamp) {
+        this.from = from;
+        this.to = to;
+        this.subject = subject;
+        this.content = content;
+        this.timestamp = timestamp;
     }
 
     @Override
@@ -116,37 +99,13 @@ public class Email {
     }
 
     public String toJson() {
-        StringBuilder jsonBuilder = new StringBuilder();
-        jsonBuilder.append("{");
-
-        appendProperty(jsonBuilder, "from", from.get());
-        appendProperty(jsonBuilder, "to", to.get());
-        appendProperty(jsonBuilder, "subject", subject.get());
-        appendProperty(jsonBuilder, "content", content.get());
-        appendProperty(jsonBuilder, "timestamp", timestamp.get());
-
-        // Remove the trailing comma if it exists
-        if (jsonBuilder.length() > 1) {
-            jsonBuilder.setLength(jsonBuilder.length() - 1);
-        }
-
-        jsonBuilder.append("}");
-        return jsonBuilder.toString();
-    }
-
-    // Helper method to append key-value pairs to the StringBuilder
-    private void appendProperty(StringBuilder builder, String key, String value) {
-        if (value != null) {
-            builder.append("\"").append(key).append("\":\"").append(value).append("\",");
-        }
+        return "{\"from\":\"" + from + "\",\"to\":\"" + to + "\",\"subject\":\"" + subject +
+                "\",\"content\":\"" + content + "\",\"timestamp\":\"" + timestamp + "\"}";
     }
 
     public static Email fromString(String json) {
         try {
-            // Split the JSON string into individual fields
             String[] parts = json.substring(1, json.length() - 1).split(",");
-
-            // Extract values for each field
             String from = null, to = null, subject = null, content = null, timestamp = null;
             for (String part : parts) {
                 String[] keyValue = part.split(":");
@@ -173,8 +132,6 @@ public class Email {
                         break;
                 }
             }
-
-            // Create and return an Email instance
             return new Email(from, to, subject, content, timestamp);
         } catch (Exception e) {
             e.printStackTrace();

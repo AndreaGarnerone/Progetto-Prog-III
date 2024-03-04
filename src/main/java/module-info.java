@@ -2,6 +2,7 @@ module org.example.progiii {
     requires javafx.controls;
     requires javafx.fxml;
     requires json.simple;
+    requires com.google.gson;
 
     exports com.unito.ClientMain;
     opens com.unito.ClientMain to javafx.fxml;

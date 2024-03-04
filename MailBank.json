@@ -1,0 +1,24 @@
+{
+  "UserList": [
+    {
+      "name": "carrapax@gormail.com",
+      "emailList": [
+        {
+          "subject": "sa",
+          "from": "sommo.luminescente@gormail.com",
+          "to": "carrapax@gormail.com",
+          "content": "sasasa",
+          "timestamp": "ParseCaseSensitive(false)Instant()"
+        }
+      ]
+    },
+    {
+      "name": "orrore.profondo@gormail.com",
+      "emailList": []
+    },
+    {
+      "name": "sommo.luminescente@gormail.com",
+      "emailList": []
+    }
+  ]
+}

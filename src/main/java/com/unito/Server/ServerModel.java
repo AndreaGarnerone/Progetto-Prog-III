@@ -6,10 +6,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.unito.ClientMain.Email;
 
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.time.format.DateTimeFormatter;
 
 public class ServerModel {
     private static final String filePath = "MailBank.json";
@@ -20,6 +20,7 @@ public class ServerModel {
     ObjectOutputStream outputStream = null;
 
 
+    /* Methods for receiving an email from a client */
     public void listen() {
         try {
             serverSocket = new ServerSocket(port);
@@ -47,11 +48,19 @@ public class ServerModel {
             outputStream = new ObjectOutputStream(socket.getOutputStream());
             outputStream.flush();
 
-            Email receivedEmail = (Email) inputStream.readObject();
+            try {
+                Object receivedObject = inputStream.readObject();
+                if (receivedObject instanceof String && receivedObject.equals("Refresh")) {
+                    refresh();
+                } else if (receivedObject instanceof Email) {
+                    Email receivedEmail = (Email) receivedObject;
+                    storeEmail(receivedEmail);
+                }
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
 
-            storeEmail(receivedEmail);
-
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException e) {
             System.out.println("------chiusura forzata server-----");
             e.printStackTrace();
         } finally {
@@ -73,43 +82,40 @@ public class ServerModel {
         }
     }
 
-    /* Save email to json file */
+
+    //---------------------------- Store the email sent by the client ----------------------------//
     public static void storeEmail(Email email) {
         try {
-            // Read existing JSON file
+            // Read the JSON file
             JsonObject jsonObject = readJSON();
 
-            // Retrieve the "UserList" array
+            // Get the UserList array
             JsonArray userList = jsonObject.getAsJsonArray("UserList");
 
-            // Find the corresponding user and add email to their emailList
+            // Find the user and update emailSent and emailReceived arrays
             for (int i = 0; i < userList.size(); i++) {
                 JsonObject user = userList.get(i).getAsJsonObject();
-                if (user.get("name").getAsString().equals(email.getToAll())) {
-                    // Create JSON object for the new email
-                    JsonObject newEmail = new JsonObject();
-                    newEmail.addProperty("subject", email.getSubject());
-                    newEmail.addProperty("from", email.getFromAll());
-                    newEmail.addProperty("to", email.getToAll());
-                    newEmail.addProperty("content", email.getContent());
-                    newEmail.addProperty("timestamp", String.format(String.valueOf(DateTimeFormatter.ISO_INSTANT)));
+                String name = user.get("name").getAsString();
 
-                    // Add the new email to the emailList of the user
-                    user.getAsJsonArray("emailList").add(newEmail);
+                if (email.getFromAll().equals(name)) {
+                    JsonArray emailSent = user.getAsJsonArray("emailSent");
+                    emailSent.add(email.toJson());
+                }
 
-                    // Write the updated JSON back to file
-                    writeJSON(jsonObject);
-
-                    return; // Exit method after storing email
+                if (email.getToAll().equals(name)) {
+                    JsonArray emailReceived = user.getAsJsonArray("emailReceived");
+                    emailReceived.add(email.toJson());
                 }
             }
 
-            // If no corresponding user found, handle accordingly (maybe throw exception or log)
-            System.out.println("No user found with email: " + email.getToAll());
+            // Write the updated JSON back to the file
+            writeJSON(jsonObject);
 
+            System.out.println("Email added successfully to the email bank");
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     private static JsonObject readJSON() throws IOException {
@@ -126,4 +132,37 @@ public class ServerModel {
         }
     }
 
+
+    //---------------------------- Send the email on refresh ----------------------------//
+    public void refresh() {
+        try {
+            // Read existing JSON file
+            JsonObject jsonObject = readJSON();
+
+            // Retrieve the "UserList" array
+            JsonArray userList = jsonObject.getAsJsonArray("UserList");
+
+            // Iterate over users and send emails for "carrapax@gormail.com"
+            for (int i = 0; i < userList.size(); i++) {
+                JsonObject user = userList.get(i).getAsJsonObject();
+                String userName = user.get("name").getAsString();
+                if (userName.equals("carrapax@gormail.com")) {
+                    JsonArray emailList = user.getAsJsonArray("emailList");
+                    sendEmails(emailList);
+                    break; // No need to continue after sending emails for the specified user
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendEmails(JsonArray emailList) {
+        try {
+            outputStream.writeObject(emailList);
+            outputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

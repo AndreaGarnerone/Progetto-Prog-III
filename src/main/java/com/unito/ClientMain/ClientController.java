@@ -104,4 +104,9 @@ public class ClientController {
     }
 
 
+    // Refresh the email list
+    @FXML
+    public void refreshEmail(ActionEvent event) {
+        clientModel.refresh();
+    }
 }

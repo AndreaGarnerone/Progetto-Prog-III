@@ -12,7 +12,9 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Calendar;
 
 public class WriteEmailController {
     @FXML
@@ -46,7 +48,7 @@ public class WriteEmailController {
             alert.setContentText("Please fill in all fields.");
             alert.showAndWait();
         } else {
-            String timestamp = String.valueOf(currentDateTime);
+            String timestamp = new SimpleDateFormat("dd/MM/yyyy:HH.mm.ss").format(Calendar.getInstance().getTime());
 
             clientModel.addEmail(new Email(from, to, subject, content, timestamp));
 

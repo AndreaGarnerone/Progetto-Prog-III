@@ -11,6 +11,7 @@
             fx:controller="com.unito.Server.ServerController"
             prefHeight="400.0" prefWidth="600.0">
 
-
+    <TextArea fx:id="logTextArea" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"
+              AnchorPane.topAnchor="0"/>
 
 </AnchorPane>

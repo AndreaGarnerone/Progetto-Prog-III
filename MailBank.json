@@ -2,23 +2,24 @@
   "UserList": [
     {
       "name": "carrapax@gormail.com",
-      "emailList": [
-        {
-          "subject": "sa",
-          "from": "sommo.luminescente@gormail.com",
-          "to": "carrapax@gormail.com",
-          "content": "sasasa",
-          "timestamp": "ParseCaseSensitive(false)Instant()"
-        }
+      "emailSent": [],
+      "emailReceived": [
+        "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"prova2\",\"content\":\"22\",\"timestamp\":\"06/03/2024:18.25.53\"}",
+        "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"prova2\",\"content\":\"sasasa\",\"timestamp\":\"06/03/2024:19.10.39\"}"
       ]
     },
     {
       "name": "orrore.profondo@gormail.com",
-      "emailList": []
+      "emailSent": [],
+      "emailReceived": []
     },
     {
       "name": "sommo.luminescente@gormail.com",
-      "emailList": []
+      "emailSent": [
+        "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"prova2\",\"content\":\"22\",\"timestamp\":\"06/03/2024:18.25.53\"}",
+        "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"prova2\",\"content\":\"sasasa\",\"timestamp\":\"06/03/2024:19.10.39\"}"
+      ],
+      "emailReceived": []
     }
   ]
 }

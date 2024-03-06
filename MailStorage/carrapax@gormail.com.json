@@ -1,16 +1,6 @@
 [
   {
-    "subject": "provadue",
-    "from": "sommo.luminescente@gormail.com",
-    "to": "carrapax@gormail.com",
-    "content": "dc",
-    "timestamp": "2024-02-28T19:12:06.295964700"
-  },
-  {
-    "subject": "Grandalbero",
-    "from": "sommo.luminescente@gormail.com",
-    "to": "carrapax@gormail.com",
-    "content": "uger",
-    "timestamp": "2024-02-29T22:04:08.528764400"
+    "emailRead": [],
+    "emailToRead": []
   }
 ]

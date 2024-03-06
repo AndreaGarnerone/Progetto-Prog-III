@@ -1,5 +1,9 @@
 package com.unito.ClientMain;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonWriter;
 import com.unito.WriteEmail.WriteEmailController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -35,6 +39,7 @@ public class ClientModel {
     //Add an email to the list
     public void addEmail(Email email) throws IOException, ClassNotFoundException {
         String filePath = "MailStorage/" + email.getToFirst() + ".json";
+        String emailJson = null;
 
         File file = new File(filePath);
         if (!file.exists()) {
@@ -121,17 +126,19 @@ public class ClientModel {
         try {
             // Read JSON file
             JSONParser parser = new JSONParser();
-            JSONArray jsonArray = (JSONArray) parser.parse(new BufferedReader(new FileReader(filePath)));
+            JSONArray mainArray = (JSONArray) parser.parse(new BufferedReader(new FileReader(filePath)));
 
-            // Iterate over JSON array and convert each element to Email object
-            for (Object obj : jsonArray) {
-                JSONObject jsonEmail = (JSONObject) obj;
-                String from = (String) jsonEmail.get("from");
-                String to = (String) jsonEmail.get("to");
-                String subject = (String) jsonEmail.get("subject");
-                String content = (String) jsonEmail.get("content");
-                String timestamp = (String) jsonEmail.get("timestamp");
-                mailList.add(0, new Email(from, to, subject, content, timestamp));
+            // Loop through the main array
+            for (Object mainObj : mainArray) {
+                JSONObject mainJson = (JSONObject) mainObj;
+
+                // Process "emailRead" array
+                JSONArray emailReadArray = (JSONArray) mainJson.get("emailRead");
+                addEmailsToList(emailReadArray);
+
+                // Process "emailToRead" array
+                JSONArray emailToReadArray = (JSONArray) mainJson.get("emailToRead");
+                addEmailsToList(emailToReadArray);
             }
 
             System.out.println("Emails loaded successfully.");
@@ -140,5 +147,81 @@ public class ClientModel {
         }
     }
 
+    private void addEmailsToList(JSONArray jsonArray) {
+        // Iterate over JSON array and convert each element to Email object
+        for (Object obj : jsonArray) {
+            JSONObject jsonEmail = (JSONObject) obj;
+            String from = (String) jsonEmail.get("from");
+            String to = (String) jsonEmail.get("to");
+            String subject = (String) jsonEmail.get("subject");
+            String content = (String) jsonEmail.get("content");
+            String timestamp = (String) jsonEmail.get("timestamp");
+            mailList.add(0, new Email(from, to, subject, content, timestamp));
+        }
+    }
+
+
+    // Send the request to the server for obtaining the emails still not read
+    public void refresh() {
+        String request = "Refresh";
+        try {
+            connectToServer();
+
+            outputStream.writeObject(request);
+            outputStream.flush();
+
+            receiveNewEmail();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+    }
+
+    private void receiveNewEmail() throws IOException {
+        try {
+            ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+
+            JsonArray emailList = (JsonArray) objectInputStream.readObject();
+
+            saveEmail(emailList);
+
+            objectInputStream.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void saveEmail(JsonArray emailList) {
+        try {
+            String pathName = "MailStorage/carrapax@gormail.com";
+
+            // Parse the existing JSON file
+            JsonParser parser = new JsonParser();
+            JsonArray jsonArray = parser.parse(new FileReader(pathName)).getAsJsonArray();
+            JsonObject jsonObject = jsonArray.get(0).getAsJsonObject();
+
+            // Get the "emailToRead" array from the JSON object
+            JsonArray emailToReadArray = jsonObject.getAsJsonArray("emailToRead");
+
+            // Add each email from emailList to emailToReadArray
+            for (int i = 0; i < emailList.size(); i++) {
+                emailToReadArray.add(emailList.get(i));
+            }
+
+            // Write the modified JSON object back to the file
+            try (JsonWriter writer = new JsonWriter(new FileWriter(pathName))) {
+                writer.setIndent("  ");
+                writer.beginArray();
+                writer.jsonValue(jsonObject.toString());
+                writer.endArray();
+            }
+
+            System.out.println("Data added successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
 

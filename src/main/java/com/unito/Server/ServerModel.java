@@ -10,6 +10,7 @@ import com.unito.ClientMain.Email;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 
 public class ServerModel {
     private static final String filePath = "MailBank.json";
@@ -52,29 +53,31 @@ public class ServerModel {
                 Object receivedObject = inputStream.readObject();
                 if (receivedObject instanceof String && receivedObject.equals("Refresh")) {
                     refresh();
-                } else if (receivedObject instanceof Email) {
-                    Email receivedEmail = (Email) receivedObject;
+                    System.out.println("Refresho1");
+                } else if (receivedObject instanceof Email receivedEmail) {
+                    System.out.println("Received email");
                     storeEmail(receivedEmail);
-                }
+                } else System.out.println("NO");
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
+            } finally {
+                closeConnection();
             }
 
         } catch (IOException e) {
-            System.out.println("------chiusura forzata server-----");
+            System.out.println("Failed to establish connection");
             e.printStackTrace();
-        } finally {
-            closeConnection();
         }
     }
 
+
     private void closeConnection() {
         try {
-            if(inputStream != null) {
+            if (inputStream != null) {
                 inputStream.close();
             }
 
-            if(outputStream != null) {
+            if (outputStream != null) {
                 outputStream.close();
             }
         } catch (IOException e) {
@@ -134,6 +137,7 @@ public class ServerModel {
 
 
     //---------------------------- Send the email on refresh ----------------------------//
+    // Send the email on refresh
     public void refresh() {
         try {
             // Read existing JSON file
@@ -147,8 +151,12 @@ public class ServerModel {
                 JsonObject user = userList.get(i).getAsJsonObject();
                 String userName = user.get("name").getAsString();
                 if (userName.equals("carrapax@gormail.com")) {
-                    JsonArray emailList = user.getAsJsonArray("emailList");
+                    // Retrieve email list for the user
+                    JsonArray emailList = user.getAsJsonArray("emailReceived");
+
+                    // Send emails to the client
                     sendEmails(emailList);
+
                     break; // No need to continue after sending emails for the specified user
                 }
             }
@@ -157,12 +165,22 @@ public class ServerModel {
         }
     }
 
-    public void sendEmails(JsonArray emailList) {
+
+    public void sendEmails(JsonArray emailArray) {
         try {
-            outputStream.writeObject(emailList);
+            // Convert JsonArray to string
+            String jsonString = emailArray.toString();
+
+            // Send the string representation of JsonArray
+            outputStream.writeObject(jsonString);
             outputStream.flush();
+            System.out.println("ok");
+        } catch (SocketException e) {
+            System.out.println("Client closed the connection");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
 }

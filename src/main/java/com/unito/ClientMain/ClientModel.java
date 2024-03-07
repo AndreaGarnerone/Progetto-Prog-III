@@ -1,16 +1,14 @@
 package com.unito.ClientMain;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import com.google.gson.stream.JsonWriter;
 import com.unito.WriteEmail.WriteEmailController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.io.*;
 import java.net.Socket;
@@ -22,7 +20,7 @@ public class ClientModel {
     private int port = 27;
     Socket socket = null;
     ObjectOutputStream outputStream = null;
-    InputStream inputStream = null;
+    ObjectInputStream inputStream = null;
 
     WriteEmailController writeEmailController = new WriteEmailController();
 
@@ -91,58 +89,31 @@ public class ClientModel {
     public void removeEmail(Email email) {
         String filePath = "MailStorage/" + email.getToFirst() + ".json";
 
-        try {
-            // Read existing JSON array from file
-            JSONParser parser = new JSONParser();
-            JSONArray jsonArray = (JSONArray) parser.parse(new FileReader(filePath));
-
-            // Iterate over the JSON array to find the email to remove
-            for (int i = 0; i < jsonArray.size(); i++) {
-                JSONObject jsonEmail = (JSONObject) jsonArray.get(i);
-                if (email.getFromAll().equals(jsonEmail.get("from"))
-                        && email.getToAll().equals(jsonEmail.get("to"))
-                        && email.getSubject().equals(jsonEmail.get("subject"))
-                        && email.getContent().equals(jsonEmail.get("content"))
-                        && email.getTimestamp().equals(jsonEmail.get("timestamp"))) {
-                    jsonArray.remove(i); // Remove the email from the JSONArray
-                    break; // No need to continue iterating once the email is found and removed
-                }
-            }
-
-            // Write updated JSONArray back to the file
-            FileWriter fileWriter = new FileWriter(filePath);
-            fileWriter.write(jsonArray.toJSONString());
-            fileWriter.flush();
-            fileWriter.close();
-
-            //System.out.println("Email removed successfully.");
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
-        }
     }
 
     private void loadEmailsFromFile(String account) {
         String filePath = "MailStorage/" + account + ".json";
         try {
             // Read JSON file
-            JSONParser parser = new JSONParser();
-            JSONArray mainArray = (JSONArray) parser.parse(new BufferedReader(new FileReader(filePath)));
+            FileReader fileReader = new FileReader(filePath);
+            JSONTokener jsonTokener = new JSONTokener(fileReader);
+            JSONArray mainArray = new JSONArray(jsonTokener);
 
             // Loop through the main array
-            for (Object mainObj : mainArray) {
-                JSONObject mainJson = (JSONObject) mainObj;
+            for (int i = 0; i < mainArray.length(); i++) {
+                JSONObject mainJson = mainArray.getJSONObject(i);
 
-                // Process "emailRead" array
-                JSONArray emailReadArray = (JSONArray) mainJson.get("emailRead");
-                addEmailsToList(emailReadArray);
+                // Process "emailSent" array
+                JSONArray emailSentArray = mainJson.getJSONArray("emailSent");
+                addEmailsToList(emailSentArray);
 
-                // Process "emailToRead" array
-                JSONArray emailToReadArray = (JSONArray) mainJson.get("emailToRead");
-                addEmailsToList(emailToReadArray);
+                // Process "emailReceived" array
+                JSONArray emailReceivedArray = mainJson.getJSONArray("emailReceived");
+                addEmailsToList(emailReceivedArray);
             }
 
             System.out.println("Emails loaded successfully.");
-        } catch (IOException | ParseException e) {
+        } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
     }
@@ -150,16 +121,20 @@ public class ClientModel {
     private void addEmailsToList(JSONArray jsonArray) {
         // Iterate over JSON array and convert each element to Email object
         for (Object obj : jsonArray) {
-            JSONObject jsonEmail = (JSONObject) obj;
-            String from = (String) jsonEmail.get("from");
-            String to = (String) jsonEmail.get("to");
-            String subject = (String) jsonEmail.get("subject");
-            String content = (String) jsonEmail.get("content");
-            String timestamp = (String) jsonEmail.get("timestamp");
+            String jsonString = (String) obj;
+            JSONObject jsonEmail = new JSONObject(jsonString);
+            String from = jsonEmail.getString("from");
+            String to = jsonEmail.getString("to");
+            String subject = jsonEmail.getString("subject");
+            String content = jsonEmail.getString("content");
+            String timestamp = jsonEmail.getString("timestamp");
             mailList.add(0, new Email(from, to, subject, content, timestamp));
         }
     }
 
+
+
+    //---------------------------- Send the email on refresh ----------------------------//
 
     // Send the request to the server for obtaining the emails still not read
     public void refresh() {
@@ -181,21 +156,27 @@ public class ClientModel {
 
     private void receiveNewEmail() throws IOException {
         try {
-            ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+            // Read the string representation of JsonArray
+            String jsonString = (String) inputStream.readObject();
 
-            JsonArray emailList = (JsonArray) objectInputStream.readObject();
+            // Convert the string to JsonArray
+            JsonArray emailList = JsonParser.parseString(jsonString).getAsJsonArray();
 
+            System.out.println("Adesso salvo le mail");
             saveEmail(emailList);
-
-            objectInputStream.close();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
+
     private void saveEmail(JsonArray emailList) {
+        if (emailList.isEmpty()) {
+            System.out.println("Email list is empty. No emails to save.");
+            return;
+        }
         try {
-            String pathName = "MailStorage/carrapax@gormail.com";
+            String pathName = "MailStorage/carrapax@gormail.com.json";
 
             // Parse the existing JSON file
             JsonParser parser = new JsonParser();
@@ -203,7 +184,7 @@ public class ClientModel {
             JsonObject jsonObject = jsonArray.get(0).getAsJsonObject();
 
             // Get the "emailToRead" array from the JSON object
-            JsonArray emailToReadArray = jsonObject.getAsJsonArray("emailToRead");
+            JsonArray emailToReadArray = jsonObject.getAsJsonArray("emailReceived");
 
             // Add each email from emailList to emailToReadArray
             for (int i = 0; i < emailList.size(); i++) {

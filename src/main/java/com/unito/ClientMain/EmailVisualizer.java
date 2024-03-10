@@ -11,7 +11,7 @@ public class EmailVisualizer extends ListCell<Email> {
         if (empty || email == null) {
             setText(null);
         } else {
-            setText(email.getFromAll() + " : " + email.getSubject() + " " + email.getContent());
+            setText(email.getFrom() + " : " + email.getSubject() + " " + email.getContent());
         }
     }
 }

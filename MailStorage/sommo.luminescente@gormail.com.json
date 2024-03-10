@@ -1,8 +1,8 @@
 [
   {
-    "emailRead": [
+    "emailSent": [
+      "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"prova\",\"content\":\"mi serve una mail da visualizzare\",\"timestamp\":\"09/03/2024:17.46.40\"}"
     ],
-    "emailToRead": [
-    ]
+    "emailReceived": []
   }
 ]

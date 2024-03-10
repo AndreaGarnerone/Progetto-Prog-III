@@ -23,8 +23,7 @@ public class WriteEmailController {
     public TextField subjectField;
     @FXML
     public TextArea messageField;
-    public Label ErrorLabel;
-
+    @FXML
     private String from;
 
     LocalDateTime currentDateTime = LocalDateTime.now();

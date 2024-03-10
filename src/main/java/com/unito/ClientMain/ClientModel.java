@@ -14,10 +14,10 @@ import java.io.*;
 import java.net.Socket;
 
 public class ClientModel {
-    private ObservableList<Email> mailList;
+    private final ObservableList<Email> mailList;
 
-    private String hostName = "127.0.0.1";
-    private int port = 27;
+    private static String filePath = null;
+
     Socket socket = null;
     ObjectOutputStream outputStream = null;
     ObjectInputStream inputStream = null;
@@ -25,6 +25,7 @@ public class ClientModel {
     WriteEmailController writeEmailController = new WriteEmailController();
 
     public ClientModel(String account) {
+        filePath = "MailStorage/" + account + ".json";
         mailList = FXCollections.observableArrayList();
         loadEmailsFromFile(account);
     }
@@ -34,16 +35,43 @@ public class ClientModel {
     }
 
 
-    //Add an email to the list
+    // Add an email to the list
     public void addEmail(Email email) throws IOException, ClassNotFoundException {
         String filePath = "MailStorage/" + email.getToFirst() + ".json";
-        String emailJson = null;
 
         File file = new File(filePath);
         if (!file.exists()) {
             writeEmailController.setErrorText();
         } else {
+            saveToSender(email);
             sendToServer(email);
+        }
+    }
+
+    // Save the email in the sender json file in the emailSent array
+    private void saveToSender(Email email) {
+        String emailJson = email.toJson();
+        try {
+            // Read JSON file
+            FileReader reader = new FileReader(filePath);
+            JsonArray jsonArray = JsonParser.parseReader(reader).getAsJsonArray();
+            reader.close();
+
+            // Add email to "emailSent" array
+            JsonObject jsonObject = jsonArray.get(0).getAsJsonObject();
+            JsonArray emailSentArray = jsonObject.getAsJsonArray("emailSent");
+            emailSentArray.add(emailJson);
+
+            // Write updated JSON back to the file
+            FileWriter writer = new FileWriter(filePath);
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            gson.toJson(jsonArray, writer);
+            writer.close();
+
+            System.out.println("Email saved to sender successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Failed to save email to sender.");
         }
     }
 
@@ -60,6 +88,8 @@ public class ClientModel {
 
     // Create a socket connection with the server
     private void connectToServer() throws IOException {
+        String hostName = "127.0.0.1";
+        int port = 27;
         socket = new Socket(hostName, port);
 
         outputStream = new ObjectOutputStream(socket.getOutputStream());
@@ -84,11 +114,6 @@ public class ClientModel {
                 e.printStackTrace();
             }
         }
-    }
-
-    public void removeEmail(Email email) {
-        String filePath = "MailStorage/" + email.getToFirst() + ".json";
-
     }
 
     private void loadEmailsFromFile(String account) {
@@ -119,16 +144,10 @@ public class ClientModel {
     }
 
     private void addEmailsToList(JSONArray jsonArray) {
-        // Iterate over JSON array and convert each element to Email object
         for (Object obj : jsonArray) {
             String jsonString = (String) obj;
-            JSONObject jsonEmail = new JSONObject(jsonString);
-            String from = jsonEmail.getString("from");
-            String to = jsonEmail.getString("to");
-            String subject = jsonEmail.getString("subject");
-            String content = jsonEmail.getString("content");
-            String timestamp = jsonEmail.getString("timestamp");
-            mailList.add(0, new Email(from, to, subject, content, timestamp));
+            Email email = Email.fromString(jsonString);
+            mailList.add(0, email);
         }
     }
 
@@ -168,7 +187,6 @@ public class ClientModel {
             e.printStackTrace();
         }
     }
-
 
     private void saveEmail(JsonArray emailList) {
         if (emailList.isEmpty()) {

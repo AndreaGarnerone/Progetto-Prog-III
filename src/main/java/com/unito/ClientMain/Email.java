@@ -10,7 +10,7 @@ public class Email implements Serializable {
     private String content;
     private String timestamp;
 
-    public String getFromAll() {
+    public String getFrom() {
         return from;
     }
 
@@ -74,7 +74,7 @@ public class Email implements Serializable {
 
     @Override
     public String toString() {
-        return "from=" + getFromAll() +
+        return "from=" + getFrom() +
                 ", to=" + getToAll() +
                 ", subject=" + getSubject() +
                 ", content=" + getContent() +
@@ -86,7 +86,7 @@ public class Email implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Email email = (Email) o;
-        return email.getFromAll().equals(this.getFromAll()) &&
+        return email.getFrom().equals(this.getFrom()) &&
                 email.getToAll().equals(this.getToAll()) &&
                 email.getSubject().equals(this.getSubject()) &&
                 email.getContent().equals(this.getContent()) &&

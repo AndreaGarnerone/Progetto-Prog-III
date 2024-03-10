@@ -1,9 +1,3 @@
 [
-  {
-    "emailSent": [],
-    "emailReceived": [
-      "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"prova2\",\"content\":\"22\",\"timestamp\":\"06/03/2024:18.25.53\"}",
-      "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"prova2\",\"content\":\"sasasa\",\"timestamp\":\"06/03/2024:19.10.39\"}"
-    ]
-  }
+  {"emailSent":[],"emailReceived":["{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"prova\",\"content\":\"mi serve una mail da visualizzare\",\"timestamp\":\"09/03/2024:17.46.40\"}"]}
 ]

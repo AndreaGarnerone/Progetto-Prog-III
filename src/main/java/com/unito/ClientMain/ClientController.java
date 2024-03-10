@@ -22,7 +22,6 @@ public class ClientController {
     public Button writeEmailButton;
     @FXML
     public ListView mailListView;
-    private ShowEmailController showEmailController;
     @FXML
     public RadioButton AllMail, toRead, Sent;
     @FXML
@@ -56,7 +55,7 @@ public class ClientController {
         writeEmailView.openWriter(stage, clientModel, accountName);
     }
 
-    // Change from "All Mail" to other viewer
+    // Change from "All Mail" to other view
     public void changeListView(ActionEvent event) {
         /* Esempio
         if (AllMail.isSelected()) {
@@ -97,8 +96,6 @@ public class ClientController {
     private void deleteEmail() {
         Email selectedEmail = (Email) mailListView.getSelectionModel().getSelectedItem();
         if (selectedEmail != null) {
-            clientModel.removeEmail(selectedEmail);
-            // Optionally, you can refresh the mailListView after deletion
             mailListView.getItems().remove(selectedEmail);
         }
     }

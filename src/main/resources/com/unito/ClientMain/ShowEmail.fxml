@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
 
 <?import javafx.scene.text.Font?>
 <VBox xmlns="http://javafx.com/javafx"
@@ -46,4 +45,9 @@
             </VBox>
         </center>
     </BorderPane>
+
+    <HBox spacing="10">
+        <Button text="Reply" onAction="#reply"/>
+        <Button text="Reply-all" onAction="#replyAll"/>
+    </HBox>
 </VBox>

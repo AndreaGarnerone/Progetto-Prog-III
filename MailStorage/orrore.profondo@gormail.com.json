@@ -1,8 +1,6 @@
 [
   {
-    "emailRead": [
-    ],
-    "emailToRead": [
-    ]
+    "emailSent": [],
+    "emailReceived": []
   }
 ]

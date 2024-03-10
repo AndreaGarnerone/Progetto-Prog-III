@@ -6,7 +6,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.unito.ClientMain.Email;
 
-
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -53,7 +52,7 @@ public class ServerModel {
                 Object receivedObject = inputStream.readObject();
                 if (receivedObject instanceof String && receivedObject.equals("Refresh")) {
                     refresh();
-                    System.out.println("Refresho1");
+                    System.out.println("Refresh");
                 } else if (receivedObject instanceof Email receivedEmail) {
                     System.out.println("Received email");
                     storeEmail(receivedEmail);
@@ -100,14 +99,31 @@ public class ServerModel {
                 JsonObject user = userList.get(i).getAsJsonObject();
                 String name = user.get("name").getAsString();
 
-                if (email.getFromAll().equals(name)) {
+                if (email.getFrom().equals(name)) {
                     JsonArray emailSent = user.getAsJsonArray("emailSent");
                     emailSent.add(email.toJson());
                 }
 
-                if (email.getToAll().equals(name)) {
-                    JsonArray emailReceived = user.getAsJsonArray("emailReceived");
-                    emailReceived.add(email.toJson());
+                // Check if there are multiple receivers
+                if (!email.getToAll().equals(email.getToFirst())) {
+                    // Split the 'to' field into multiple recipients
+                    String[] recipients = email.getToAll().split(";");
+
+                    for (String recipient : recipients) {
+                        for (int j = 0; j < userList.size(); j++) {
+                            if (recipient.trim().equals(name)) {
+                                JsonArray emailReceived = user.getAsJsonArray("emailReceived");
+                                emailReceived.add(email.toJson());
+                                break;
+                            }
+                        }
+                    }
+
+                } else {
+                    if (email.getToAll().equals(name)) {
+                        JsonArray emailReceived = user.getAsJsonArray("emailReceived");
+                        emailReceived.add(email.toJson());
+                    }
                 }
             }
 
@@ -154,8 +170,16 @@ public class ServerModel {
                     // Retrieve email list for the user
                     JsonArray emailList = user.getAsJsonArray("emailReceived");
 
-                    // Send emails to the client
+                    // Send emails to the client via socket
                     sendEmails(emailList);
+
+                    // Clear the emailReceived array
+                    for (int j = emailList.size() - 1; j >= 0; j--) {
+                        emailList.remove(j);
+                    }
+
+                    // Write back the modified JSON to file
+                    writeJSON(jsonObject);
 
                     break; // No need to continue after sending emails for the specified user
                 }

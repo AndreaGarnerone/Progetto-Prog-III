@@ -26,8 +26,6 @@
         <Button text="Clear" onAction="#clearFields"/>
         <Region HBox.hgrow="ALWAYS" />
 
-        <Label text="Your Label Text Here" fx:id="ErrorLabel" alignment="CENTER" visible="false" style="-fx-text-fill: red;" />
-
         <Region HBox.hgrow="ALWAYS" />
         <Button text="Send" onAction="#sendEmail"/>
     </HBox>

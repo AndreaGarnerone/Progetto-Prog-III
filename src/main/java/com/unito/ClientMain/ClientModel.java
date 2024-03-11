@@ -15,9 +15,6 @@ import java.net.Socket;
 
 public class ClientModel {
     private final ObservableList<Email> mailList;
-
-    private static String filePath = null;
-
     Socket socket = null;
     ObjectOutputStream outputStream = null;
     ObjectInputStream inputStream = null;
@@ -25,7 +22,6 @@ public class ClientModel {
     WriteEmailController writeEmailController = new WriteEmailController();
 
     public ClientModel(String account) {
-        filePath = "MailStorage/" + account + ".json";
         mailList = FXCollections.observableArrayList();
         loadEmailsFromFile(account);
     }
@@ -36,16 +32,22 @@ public class ClientModel {
 
 
     // Add an email to the list
-    public void addEmail(Email email) throws IOException, ClassNotFoundException {
-        String filePath = "MailStorage/" + email.getToFirst() + ".json";
-
-        File file = new File(filePath);
-        if (!file.exists()) {
-            writeEmailController.setErrorText();
-        } else {
-            saveToSender(email);
-            sendToServer(email);
+    public void addEmail(Email email) {
+        if (!email.getToAll().equals(email.getToFirst())) { // Check if there are error in the receiver
+            String[] recipients = email.getToAll().split(";");
+            for (String recipient : recipients) {
+                String filePath = "MailStorage/" + recipient + ".json";
+                File file = new File(filePath);
+                if (!file.exists()) {
+                    writeEmailController.setErrorText();
+                }
+            }
         }
+
+        saveToSender(email);
+        sendToServer(email);
+
+
     }
 
     // Save the email in the sender json file in the emailSent array
@@ -53,7 +55,7 @@ public class ClientModel {
         String emailJson = email.toJson();
         try {
             // Read JSON file
-            FileReader reader = new FileReader(filePath);
+            FileReader reader = new FileReader("MailStorage/" + email.getFrom() + ".json");
             JsonArray jsonArray = JsonParser.parseReader(reader).getAsJsonArray();
             reader.close();
 
@@ -63,7 +65,7 @@ public class ClientModel {
             emailSentArray.add(emailJson);
 
             // Write updated JSON back to the file
-            FileWriter writer = new FileWriter(filePath);
+            FileWriter writer = new FileWriter("MailStorage/" + email.getFrom() + ".json");
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             gson.toJson(jsonArray, writer);
             writer.close();
@@ -129,8 +131,8 @@ public class ClientModel {
                 JSONObject mainJson = mainArray.getJSONObject(i);
 
                 // Process "emailSent" array
-                JSONArray emailSentArray = mainJson.getJSONArray("emailSent");
-                addEmailsToList(emailSentArray);
+                //JSONArray emailSentArray = mainJson.getJSONArray("emailSent");
+                //addEmailsToList(emailSentArray);
 
                 // Process "emailReceived" array
                 JSONArray emailReceivedArray = mainJson.getJSONArray("emailReceived");
@@ -150,7 +152,6 @@ public class ClientModel {
             mailList.add(0, email);
         }
     }
-
 
 
     //---------------------------- Send the email on refresh ----------------------------//

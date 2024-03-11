@@ -2,20 +2,27 @@
   "UserList": [
     {
       "name": "carrapax@gormail.com",
-      "emailSent": [],
+      "emailSent": [
+        "{\"from\":\"carrapax@gormail.com\",\"to\":\"orrore.profondo@gormail.com;sommo.luminescente@gormail.com\",\"subject\":\"Re: W IL MALE\",\"content\":\"w il mare (wlevacanze)\",\"timestamp\":\"11/03/2024:22.18.48\"}"
+      ],
       "emailReceived": []
     },
     {
       "name": "orrore.profondo@gormail.com",
-      "emailSent": [],
-      "emailReceived": []
+      "emailSent": [
+        "{\"from\":\"orrore.profondo@gormail.com\",\"to\":\"sommo.luminescente@gormail.com;carrapax@gormail.com\",\"subject\":\"W IL MALE\",\"content\":\"forza magmion\",\"timestamp\":\"11/03/2024:22.18.03\"}"
+      ],
+      "emailReceived": [
+        "{\"from\":\"carrapax@gormail.com\",\"to\":\"orrore.profondo@gormail.com;sommo.luminescente@gormail.com\",\"subject\":\"Re: W IL MALE\",\"content\":\"w il mare (wlevacanze)\",\"timestamp\":\"11/03/2024:22.18.48\"}"
+      ]
     },
     {
       "name": "sommo.luminescente@gormail.com",
-      "emailSent": [
-        "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"prova\",\"content\":\"mi serve una mail da visualizzare\",\"timestamp\":\"09/03/2024:17.46.40\"}"
-      ],
-      "emailReceived": []
+      "emailSent": [],
+      "emailReceived": [
+        "{\"from\":\"orrore.profondo@gormail.com\",\"to\":\"sommo.luminescente@gormail.com;carrapax@gormail.com\",\"subject\":\"W IL MALE\",\"content\":\"forza magmion\",\"timestamp\":\"11/03/2024:22.18.03\"}",
+        "{\"from\":\"carrapax@gormail.com\",\"to\":\"orrore.profondo@gormail.com;sommo.luminescente@gormail.com\",\"subject\":\"Re: W IL MALE\",\"content\":\"w il mare (wlevacanze)\",\"timestamp\":\"11/03/2024:22.18.48\"}"
+      ]
     }
   ]
 }

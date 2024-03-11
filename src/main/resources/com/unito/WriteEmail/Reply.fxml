@@ -16,7 +16,7 @@
     <VBox spacing="5.0">
         <HBox spacing="10.0">
             <Label text="To:"/>
-            <Label fx:id="toField" disable="true" prefWidth="200.0" text="Mail receiver qui"/>
+            <Label fx:id="toField" disable="true" text="Mail receiver qui"/>
         </HBox>
         <HBox spacing="10.0">
             <Label text="Subject:"/>

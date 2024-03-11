@@ -13,12 +13,24 @@ public class Reply extends Application {
     public Reply() {
     }
 
+    @Override
+    public void start(Stage stage) throws Exception {
+
+    }
+
     public Reply(Email email) {
         this.email = email;
     }
 
-    @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage, String selectedAccount) throws Exception {
+        loader(stage, 0, selectedAccount);
+    }
+
+    public void startAll(Stage stage, String selectedAccount) throws IOException {
+        loader(stage, 1, selectedAccount);
+    }
+
+    private void loader(Stage stage, int option, String selectedAcocunt) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Reply.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         stage.setTitle("Reply");
@@ -26,7 +38,11 @@ public class Reply extends Application {
         stage.show();
 
         ReplyController replyController = fxmlLoader.getController();
-        replyController.loadEmail(email);
+        if (option == 0) {
+            replyController.loadEmail(email);
+        } else {
+            replyController.loadEmailAll(email, selectedAcocunt);
+        }
     }
-    
+
 }

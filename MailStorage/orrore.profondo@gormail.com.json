@@ -1,6 +1,9 @@
 [
   {
-    "emailSent": [],
+    "emailSent": [
+      "{\"from\":\"orrore.profondo@gormail.com\",\"to\":\"sommo.luminescente@gormail.com;carrapax@gormail.com\",\"subject\":\"COGLIONI\",\"content\":\"W il male e il vulcano\",\"timestamp\":\"11/03/2024:19.50.42\"}",
+      "{\"from\":\"orrore.profondo@gormail.com\",\"to\":\"sommo.luminescente@gormail.com;carrapax@gormail.com\",\"subject\":\"W IL MALE\",\"content\":\"forza magmion\",\"timestamp\":\"11/03/2024:22.18.03\"}"
+    ],
     "emailReceived": []
   }
 ]

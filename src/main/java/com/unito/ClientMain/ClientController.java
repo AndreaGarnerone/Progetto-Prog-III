@@ -82,7 +82,7 @@ public class ClientController {
                     primaryStage.show();
 
                     ShowEmailController showEmailController = fxmlLoader.getController();
-                    showEmailController.initialize(selectedEmail.toJson());
+                    showEmailController.initialize(selectedEmail.toJson(), accountName);
 
                 } catch (IOException e) {
                     e.printStackTrace();

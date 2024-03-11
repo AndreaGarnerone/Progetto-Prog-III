@@ -18,10 +18,13 @@ public class ShowEmailController {
     public Label messageField;
 
     public Email emailV = null;
+    String accountName = null;
 
-    public void initialize(String emailJson) {
+    public void initialize(String emailJson, String selectedAccount) {
         Email email = Email.fromString(emailJson);
+
         emailV = email;
+        accountName = selectedAccount;
 
         if (email != null) {
             fromField.setText(email.getFrom());
@@ -32,13 +35,17 @@ public class ShowEmailController {
         }
     }
 
-    public void reply(ActionEvent event) throws Exception {
+    public void reply() throws Exception {
         Stage stage = new Stage();
         Reply reply = new Reply(emailV);
 
-        reply.start(stage);
+        reply.start(stage, accountName);
     }
 
-    public void replyAll() {
+    public void replyAll() throws IOException {
+        Stage stage = new Stage();
+        Reply reply = new Reply(emailV);
+
+        reply.startAll(stage, accountName);
     }
 }

@@ -17,8 +17,11 @@ public class ShowEmailController {
     @FXML
     public Label messageField;
 
+    public Email emailV = null;
+
     public void initialize(String emailJson) {
         Email email = Email.fromString(emailJson);
+        emailV = email;
 
         if (email != null) {
             fromField.setText(email.getFrom());
@@ -29,13 +32,13 @@ public class ShowEmailController {
         }
     }
 
-    public void reply(ActionEvent event) throws IOException {
+    public void reply(ActionEvent event) throws Exception {
         Stage stage = new Stage();
-        Reply reply = new Reply();
+        Reply reply = new Reply(emailV);
 
         reply.start(stage);
     }
 
-    public void replyAll(ActionEvent event) {
+    public void replyAll() {
     }
 }

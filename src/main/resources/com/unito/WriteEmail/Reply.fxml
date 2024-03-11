@@ -1,50 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Region?>
 
-<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.unito.WriteEmail.ReplyController">
+<VBox prefHeight="400.0" prefWidth="600.0" style="-fx-padding: 10;"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.unito.WriteEmail.ReplyController">
 
-    <Label layoutX="33.0" layoutY="291.0" text="Message:" />
-    <VBox layoutX="95.0" layoutY="291.0" prefHeight="85.0" prefWidth="394.0">
-        <Label alignment="TOP_LEFT" disable="true" prefHeight="143.0" prefWidth="378.0" text="Testo della mail qui" />
+    <VBox spacing="5.0">
+        <HBox spacing="10.0">
+            <Label text="To:"/>
+            <Label fx:id="toField" disable="true" prefWidth="200.0" text="Mail receiver qui"/>
+        </HBox>
+        <HBox spacing="10.0">
+            <Label text="Subject:"/>
+            <Label fx:id="subjectField" disable="true" prefHeight="18.0" prefWidth="461.0" text="Re: Oggetto qui"/>
+        </HBox>
+        <HBox spacing="10.0">
+            <Label text="Message:"/>
+            <VBox prefHeight="122.0" prefWidth="438.0" spacing="5.0">
+                <TextField fx:id="messageField" alignment="TOP_LEFT" prefHeight="124.0" prefWidth="508.0"/>
+            </VBox>
+        </HBox>
     </VBox>
-
-    <Label layoutX="34.0" layoutY="257.0" text="Oggetto:" />
-    <VBox layoutX="96.0" layoutY="256.0" prefHeight="18.0" prefWidth="351.0">
-        <Label disable="true" prefHeight="18.0" prefWidth="330.0" text="Oggetto qui" />
+    <Separator prefWidth="585.0"/>
+    <VBox spacing="5.0">
+        <HBox spacing="10.0">
+            <Label text="From:"/>
+            <Label fx:id="fromReField" disable="true" prefWidth="450.0" text="Mail sender qui"/>
+        </HBox>
+        <HBox spacing="10.0">
+            <Label text="To:"/>
+            <Label fx:id="toReField" disable="true" prefWidth="450.0" text="Mail receiver qui"/>
+        </HBox>
+        <HBox spacing="10.0">
+            <Label text="Date:"/>
+            <Label fx:id="dateReField" disable="true" prefWidth="450.0" text="Data e ora qui"/>
+        </HBox>
+        <HBox spacing="10.0">
+            <Label text="Subject:"/>
+            <Label fx:id="subjectReField" disable="true" prefWidth="450.0" text="Data e ora qui"/>
+        </HBox>
+        <HBox spacing="10.0">
+            <Label text="Message:"/>
+            <VBox prefHeight="106.0" prefWidth="436.0" spacing="5.0">
+                <Label fx:id="messageReField" alignment="TOP_LEFT" disable="true" prefHeight="106.0" prefWidth="509.0"/>
+            </VBox>
+        </HBox>
     </VBox>
-
-    <Label layoutX="34.0" layoutY="200.0" text="From:" />
-    <VBox layoutX="96.0" layoutY="199.0" prefHeight="18.0" prefWidth="192.0">
-        <Label disable="true" prefHeight="18.0" prefWidth="150.0" text="Mail sender qui" />
-    </VBox>
-
-    <Separator layoutX="34.0" layoutY="181.0" prefHeight="18.0" prefWidth="518.0" />
-    <Label layoutX="292.0" layoutY="200.0" text="To:" />
-    <VBox layoutX="320.0" layoutY="199.0" prefHeight="18.0" prefWidth="210.0">
-        <Label disable="true" prefHeight="18.0" prefWidth="174.0" text="Mail receiver qui" />
-    </VBox>
-
-    <Label layoutX="35.0" layoutY="231.0" prefHeight="18.0" prefWidth="48.0" text="Inviato:" />
-    <VBox layoutX="96.0" layoutY="231.0" prefHeight="18.0" prefWidth="217.0">
-        <Label disable="true" prefHeight="18.0" prefWidth="190.0" text="Data e ora qui" />
-    </VBox>
-
-    <VBox layoutX="96.0" layoutY="44.0" prefHeight="18.0" prefWidth="174.0">
-        <Label disable="true" prefHeight="18.0" prefWidth="146.0" text="Receiver gia' deciso" />
-    </VBox>
-
-    <Label layoutX="34.0" layoutY="72.0" prefHeight="18.0" prefWidth="65.0" text="Oggetto:" />
-    <Label disable="true" layoutX="96.0" layoutY="72.0" prefHeight="18.0" prefWidth="30.0" text="Re:" />
-    <VBox layoutX="125.0" layoutY="72.0" prefHeight="18.0" prefWidth="134.0">
-        <Label disable="true" prefHeight="18.0" prefWidth="65.0" text="Gia' deciso" />
-    </VBox>
-
-    <Label layoutX="33.0" layoutY="115.0" text="Message:" />
-    <VBox layoutX="95.0" layoutY="115.0" prefHeight="59.0" prefWidth="394.0">
-        <Label alignment="TOP_LEFT" prefHeight="143.0" prefWidth="378.0" text="Testo della mail qui" />
-    </VBox>
+    <HBox spacing="10">
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" text="Send" onAction="#sendEmail"/>
+    </HBox>
 
 </VBox>

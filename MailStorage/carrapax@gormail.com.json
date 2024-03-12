@@ -1,7 +1,8 @@
 [
   {
     "emailSent": [
-      "{\"from\":\"carrapax@gormail.com\",\"to\":\"orrore.profondo@gormail.com;sommo.luminescente@gormail.com\",\"subject\":\"Re: W IL MALE\",\"content\":\"w il mare (wlevacanze)\",\"timestamp\":\"11/03/2024:22.18.48\"}"
+      "{\"from\":\"carrapax@gormail.com\",\"to\":\"orrore.profondo@gormail.com;sommo.luminescente@gormail.com\",\"subject\":\"Re: W IL MALE\",\"content\":\"w il mare (wlevacanze)\",\"timestamp\":\"11/03/2024:22.18.48\"}",
+      "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com\",\"subject\":\"W IL MALE\",\"content\":\"forza magmion\",\"timestamp\":\"12/03/2024:11.47.16\"}"
     ],
     "emailReceived": [
       "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"prova\",\"content\":\"mi serve una mail da visualizzare\",\"timestamp\":\"09/03/2024:17.46.40\"}",

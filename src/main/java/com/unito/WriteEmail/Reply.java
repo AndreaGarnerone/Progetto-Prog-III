@@ -30,7 +30,22 @@ public class Reply extends Application {
         loader(stage, 1, selectedAccount);
     }
 
-    private void loader(Stage stage, int option, String selectedAcocunt) throws IOException {
+    public void startLoaded(Stage stage, String selectedAccount) throws IOException {
+        forwardLoaded(stage, selectedAccount);
+    }
+
+    private void forwardLoaded(Stage stage, String selectedAccount) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Forward.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 500, 200);
+        stage.setTitle("Forward");
+        stage.setScene(scene);
+        stage.show();
+
+        ReplyController replyController = fxmlLoader.getController();
+        replyController.loadForward(email, selectedAccount);
+    }
+
+    private void loader(Stage stage, int option, String selectedAccount) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Reply.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         stage.setTitle("Reply");
@@ -41,7 +56,7 @@ public class Reply extends Application {
         if (option == 0) {
             replyController.loadEmail(email);
         } else {
-            replyController.loadEmailAll(email, selectedAcocunt);
+            replyController.loadEmailAll(email, selectedAccount);
         }
     }
 

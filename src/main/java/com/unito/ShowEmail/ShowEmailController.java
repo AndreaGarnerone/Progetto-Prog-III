@@ -2,7 +2,6 @@ package com.unito.ShowEmail;
 
 import com.unito.ClientMain.Email;
 import com.unito.WriteEmail.Reply;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -47,5 +46,12 @@ public class ShowEmailController {
         Reply reply = new Reply(emailV);
 
         reply.startAll(stage, accountName);
+    }
+
+    public void forward() throws IOException {
+        Stage stage = new Stage();
+        Reply reply = new Reply(emailV);
+
+        reply.startLoaded(stage, accountName);
     }
 }

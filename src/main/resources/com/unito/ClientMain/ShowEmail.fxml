@@ -49,5 +49,6 @@
     <HBox spacing="10">
         <Button text="Reply" onAction="#reply"/>
         <Button text="Reply-all" onAction="#replyAll"/>
+        <Button text="Forward" onAction="#forward"/>
     </HBox>
 </VBox>

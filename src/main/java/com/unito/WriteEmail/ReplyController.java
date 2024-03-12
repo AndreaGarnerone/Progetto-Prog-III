@@ -34,12 +34,23 @@ public class ReplyController {
 
     public Email email = null;
     public String selectedAccount = null;
+    @FXML
+    public TextField toFieldForward;
+    @FXML
+    public Label subjectFieldForward;
+    @FXML
+    public Label messageFieldForward;
+    @FXML
+    public Label fromFieldForward;
 
     public ReplyController() {
     }
 
-    public ReplyController(Email email) {
-        this.email = email;
+    public void loadForward(Email email, String selectedAccount) {
+        this.selectedAccount = selectedAccount;
+        fromFieldForward.setText(email.getFrom());
+        subjectFieldForward.setText(email.getSubject());
+        messageFieldForward.setText(email.getContent());
     }
 
     public void loadEmail(Email email) {
@@ -99,9 +110,35 @@ public class ReplyController {
         String to = toField.getText();
         String subject = subjectField.getText();
         String content = messageField.getText();
-        String from =selectedAccount;
+        String from = selectedAccount;
 
-        if (messageField.getText().isEmpty()) {
+        String[] fields = new String[4];
+        fields[0] = from;
+        fields[1] = to;
+        fields[2] = subject;
+        fields[3] = content;
+
+        sendEmailAction(fields, event);
+    }
+
+    public void sendEmailForward(ActionEvent event) {
+        String from = selectedAccount;
+        String to = toFieldForward.getText();
+        String subject = subjectFieldForward.getText();
+        String content = messageFieldForward.getText();
+        System.out.println(from);
+
+        String[] fields = new String[4];
+        fields[0] = from;
+        fields[1] = to;
+        fields[2] = subject;
+        fields[3] = content;
+
+        sendEmailAction(fields, event);
+    }
+
+    private void sendEmailAction(String[] fields, ActionEvent event) {
+        if (fields[3].isEmpty()) {
             // Show a warning dialog
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
@@ -111,8 +148,8 @@ public class ReplyController {
         } else {
             String timestamp = new SimpleDateFormat("dd/MM/yyyy:HH.mm.ss").format(Calendar.getInstance().getTime());
 
-            ClientModel clientModel = new ClientModel(from);
-            clientModel.addEmail(new Email(from, to, subject, content, timestamp));
+            ClientModel clientModel = new ClientModel(fields[0]);
+            clientModel.addEmail(new Email(fields[0], fields[1], fields[2], fields[3], timestamp));
 
             // Get the stage from the event source
             Node source = (Node) event.getSource();
@@ -121,4 +158,5 @@ public class ReplyController {
             stage.close();
         }
     }
+
 }

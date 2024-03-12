@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="226.0" prefWidth="493.0"
+            xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.unito.WriteEmail.ReplyController">
+
+    <VBox layoutX="14.0" layoutY="22.0" prefHeight="26.0" prefWidth="70.0">
+        <Label disable="true" prefHeight="26.0" prefWidth="70.0" text="Forward to:"/>
+    </VBox>
+
+    <VBox layoutX="97.0" layoutY="18.0" prefHeight="34.0" prefWidth="298.0">
+        <TextField fx:id="toFieldForward" prefHeight="34.0" prefWidth="295.0"/>
+    </VBox>
+
+    <Separator layoutX="14.0" layoutY="51.0" prefHeight="26.0" prefWidth="454.0"/>
+
+    <VBox layoutX="14.0" layoutY="100.0" prefHeight="26.0" prefWidth="70.0">
+        <Label disable="true" prefHeight="34.0" prefWidth="166.0" text="Subject:"/>
+    </VBox>
+
+    <VBox layoutX="14.0" layoutY="130.0" prefHeight="26.0" prefWidth="62.0">
+        <Label disable="true" text="Message:"/>
+    </VBox>
+
+    <VBox layoutX="91.0" layoutY="100.0" prefHeight="26.0" prefWidth="350.0">
+        <Label fx:id="subjectFieldForward" disable="true" prefHeight="48.0" prefWidth="417.0" text="Oggetto qui"/>
+    </VBox>
+
+    <VBox layoutX="91.0" layoutY="130.0" prefHeight="87.0" prefWidth="361.0">
+        <Label fx:id="messageFieldForward" alignment="TOP_LEFT" disable="true" prefHeight="116.0" prefWidth="414.0"
+               text="Messaggio qui"/>
+    </VBox>
+
+    <VBox layoutX="14.0" layoutY="77.0" prefHeight="18.0" prefWidth="62.0">
+        <Label disable="true" prefHeight="18.0" prefWidth="69.0" text="From:"/>
+    </VBox>
+
+    <VBox layoutX="91.0" layoutY="70.0" prefHeight="26.0" prefWidth="378.0">
+        <Label fx:id="fromFieldForward" alignment="BOTTOM_LEFT" disable="true" prefHeight="53.0" prefWidth="445.0"
+               text="Mandante qui"/>
+    </VBox>
+
+
+    <Button layoutX="357.0" layoutY="167.0" mnemonicParsing="false" text="Send" onAction="#sendEmailForward" />
+
+</AnchorPane>

@@ -3,7 +3,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.chart.BubbleChart?>
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.unito.ClientMain.ClientController">
 
     <!-- Account Name -->
@@ -24,13 +23,11 @@
             <Button fx:id="writeEmailButton" text="Write New Email" onAction="#writeNewEmail"/>
             <Separator/>
 
-            <RadioButton fx:id="AllMail" text="All Mails" selected="true" onAction="#changeListView">
+            <RadioButton fx:id="AllMail" text="Received" selected="true" onAction="#changeListView">
                 <toggleGroup>
                     <ToggleGroup fx:id="selector"/>
                 </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="toRead" text="To Read Mails" onAction="#changeListView"
-                         toggleGroup="$selector"/>
             <RadioButton fx:id="Sent" text="Sent Mails" onAction="#changeListView" toggleGroup="$selector"/>
 
             <VBox VBox.vgrow="ALWAYS"/>

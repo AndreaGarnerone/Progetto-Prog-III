@@ -2,18 +2,35 @@
   "UserList": [
     {
       "name": "carrapax@gormail.com",
-      "emailSent": [],
+      "emailSent": [
+        "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com\",\"subject\":\"d\",\"content\":\"dd\",\"timestamp\":\"12/03/2024:20.46.34\"}",
+        "{\"from\":\"carrapax@gormail.com\",\"to\":\"orrore.profondo@gormail.com\",\"subject\":\"s\",\"content\":\"ss\",\"timestamp\":\"12/03/2024:20.47.10\"}",
+        "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com\",\"subject\":\"d\",\"content\":\"dd\",\"timestamp\":\"12/03/2024:21.12.49\"}",
+        "{\"from\":\"carrapax@gormail.com\",\"to\":\"orrore.profondo@gormail.com\",\"subject\":\"df\",\"content\":\"dsvd\",\"timestamp\":\"12/03/2024:21.15.18\"}",
+        "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com\",\"subject\":\"fvdf\",\"content\":\" vfkqo fdqj\",\"timestamp\":\"12/03/2024:21.46.20\"}"
+      ],
       "emailReceived": []
     },
     {
       "name": "orrore.profondo@gormail.com",
       "emailSent": [],
-      "emailReceived": []
+      "emailReceived": [
+        "{\"from\":\"carrapax@gormail.com\",\"to\":\"orrore.profondo@gormail.com\",\"subject\":\"s\",\"content\":\"ss\",\"timestamp\":\"12/03/2024:20.47.10\"}",
+        "{\"from\":\"carrapax@gormail.com\",\"to\":\"orrore.profondo@gormail.com\",\"subject\":\"df\",\"content\":\"dsvd\",\"timestamp\":\"12/03/2024:21.15.18\"}"
+      ]
     },
     {
       "name": "sommo.luminescente@gormail.com",
-      "emailSent": [],
-      "emailReceived": []
+      "emailSent": [
+        "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"prova LOG\",\"content\":\"ffffffffffffffff\",\"timestamp\":\"12/03/2024:19.53.30\"}",
+        "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"s\",\"content\":\"dd\",\"timestamp\":\"12/03/2024:20.40.53\"}",
+        "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"s\",\"content\":\"s\",\"timestamp\":\"12/03/2024:20.42.08\"}"
+      ],
+      "emailReceived": [
+        "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com\",\"subject\":\"d\",\"content\":\"dd\",\"timestamp\":\"12/03/2024:20.46.34\"}",
+        "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com\",\"subject\":\"d\",\"content\":\"dd\",\"timestamp\":\"12/03/2024:21.12.49\"}",
+        "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com\",\"subject\":\"fvdf\",\"content\":\" vfkqo fdqj\",\"timestamp\":\"12/03/2024:21.46.20\"}"
+      ]
     }
   ]
 }

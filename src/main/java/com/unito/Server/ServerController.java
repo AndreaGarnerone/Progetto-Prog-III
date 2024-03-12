@@ -1,14 +1,23 @@
 package com.unito.Server;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.ListView;
 
 public class ServerController {
+    public ServerApplication serverApplication;
     @FXML
-    public TextArea logTextArea;
+    public ListView<String> listView;
+    private ServerModel serverModel; // declare ServerModel here
 
-    @FXML
-    public void log(String message) {
-        logTextArea.appendText(message + "\n");
+    public void setServerModel(ServerModel serverModel) {
+        this.serverModel = serverModel;
+    }
+
+    public void initialize() {
+        listView.setCellFactory(param -> new LogVisualizer());
+        if (serverModel != null) {
+            listView.setItems(serverModel.getEventLog());
+        }
     }
 }
+

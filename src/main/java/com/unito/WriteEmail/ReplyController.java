@@ -15,6 +15,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class ReplyController {
+
+    public Email email = null;
+    public String selectedAccount;
+
+    //---------- xml elements ----------//
     @FXML
     public TextField messageField;
     @FXML
@@ -31,9 +36,6 @@ public class ReplyController {
     public Label subjectReField;
     @FXML
     public Label messageReField;
-
-    public Email email = null;
-    public String selectedAccount = null;
     @FXML
     public TextField toFieldForward;
     @FXML
@@ -54,11 +56,9 @@ public class ReplyController {
     }
 
     public void loadEmail(Email email) {
-        // Sopra
         toField.setText(email.getFrom());
         subjectField.setText("Re: " + email.getSubject());
 
-        // Sotto
         fromReField.setText(email.getFrom());
         toReField.setText(email.getToFirst());
         dateReField.setText(email.getTimestamp());

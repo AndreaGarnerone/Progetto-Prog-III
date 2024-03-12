@@ -1,6 +1,13 @@
 [
   {
-    "emailSent": [],
+    "emailSent": [
+      "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"dd\",\"content\":\"dddd\",\"timestamp\":\"12/03/2024:18.23.46\"}",
+      "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"bj nk\",\"content\":\" bnbmn,\",\"timestamp\":\"12/03/2024:18.25.01\"}",
+      "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"d\",\"content\":\"dd\",\"timestamp\":\"12/03/2024:19.45.59\"}",
+      "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"prova LOG\",\"content\":\"ffffffffffffffff\",\"timestamp\":\"12/03/2024:19.53.30\"}",
+      "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"s\",\"content\":\"dd\",\"timestamp\":\"12/03/2024:20.40.53\"}",
+      "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"s\",\"content\":\"s\",\"timestamp\":\"12/03/2024:20.42.08\"}"
+    ],
     "emailReceived": []
   }
 ]

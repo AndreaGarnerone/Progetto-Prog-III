@@ -16,8 +16,8 @@ import java.net.Socket;
 public class ClientModel {
     private final ObservableList<Email> mailList;
     Socket socket = null;
-    ObjectOutputStream outputStream = null;
-    ObjectInputStream inputStream = null;
+    ObjectOutputStream outputStream;
+    ObjectInputStream inputStream;
 
     WriteEmailController writeEmailController = new WriteEmailController();
 
@@ -33,6 +33,7 @@ public class ClientModel {
 
     // Add an email to the list
     public void addEmail(Email email) {
+        boolean ok = true;
         if (!email.getToAll().equals(email.getToFirst())) { // Check if there are error in the receiver
             String[] recipients = email.getToAll().split(";");
             for (String recipient : recipients) {
@@ -40,14 +41,15 @@ public class ClientModel {
                 File file = new File(filePath);
                 if (!file.exists()) {
                     writeEmailController.setErrorText();
+                    ok = false;
                 }
             }
         }
 
-        saveToSender(email);
-        sendToServer(email);
-
-
+        if (ok) {
+            saveToSender(email);
+            sendToServer(email);
+        }
     }
 
     // Save the email in the sender json file in the emailSent array
@@ -107,14 +109,12 @@ public class ClientModel {
     }
 
     private void closeConnection() {
-        if (socket != null) {
-            try {
-                inputStream.close();
-                outputStream.close();
-                socket.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            inputStream.close();
+            outputStream.close();
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

@@ -5,6 +5,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.unito.ClientMain.Email;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -12,6 +15,7 @@ import java.net.Socket;
 import java.net.SocketException;
 
 public class ServerModel {
+    private final ObservableList<String> eventLog = FXCollections.observableArrayList();
     private static final String filePath = "MailBank.json";
     private int port = 27;
     ServerSocket serverSocket;
@@ -19,16 +23,20 @@ public class ServerModel {
     ObjectInputStream inputStream = null;
     ObjectOutputStream outputStream = null;
 
+    public ServerModel() {
+    }
 
     /* Methods for receiving an email from a client */
     public void listen() {
         try {
             serverSocket = new ServerSocket(port);
-            while (true) {
+            while (!serverSocket.isClosed()) { // Check if the socket is closed
                 receiveEmail();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            if (!serverSocket.isClosed()) { // Check if the socket is not closed
+                e.printStackTrace();
+            }
         } finally {
             try {
                 if (socket != null) {
@@ -43,6 +51,8 @@ public class ServerModel {
     private void receiveEmail() {
         try {
             socket = serverSocket.accept();
+            addEventLog("Connected");
+            System.out.println("Connected");
 
             inputStream = new ObjectInputStream(socket.getInputStream());
             outputStream = new ObjectOutputStream(socket.getOutputStream());
@@ -51,20 +61,24 @@ public class ServerModel {
             try {
                 Object receivedObject = inputStream.readObject();
                 if (receivedObject instanceof String && receivedObject.equals("Refresh")) {
-                    refresh();
                     System.out.println("Refresh");
+                    addEventLog("Refresh");
+                    refresh();
                 } else if (receivedObject instanceof Email receivedEmail) {
                     System.out.println("Received email");
+                    addEventLog("Client: Sent email");
                     storeEmail(receivedEmail);
                 } else System.out.println("NO");
             } catch (IOException | ClassNotFoundException e) {
+                System.out.println("oh oh");
                 e.printStackTrace();
             } finally {
+                System.out.println("Closed connection");
+                addEventLog("Closed connection");
                 closeConnection();
             }
-
         } catch (IOException e) {
-            System.out.println("Failed to establish connection");
+            addEventLog("Failed to create a socket connection between Client and Server");
             e.printStackTrace();
         }
     }
@@ -189,7 +203,6 @@ public class ServerModel {
         }
     }
 
-
     public void sendEmails(JsonArray emailArray) {
         try {
             // Convert JsonArray to string
@@ -206,5 +219,23 @@ public class ServerModel {
         }
     }
 
+    //--------- Event Log ---------//
+    public ObservableList<String> getEventLog() {
+        return eventLog;
+    }
+
+    private void addEventLog(String event) {
+        Platform.runLater(() -> eventLog.add(0, event));
+    }
+
+    public void stopServer() {
+        try {
+            if (serverSocket != null && !serverSocket.isClosed()) {
+                serverSocket.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

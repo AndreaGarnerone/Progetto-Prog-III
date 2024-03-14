@@ -52,7 +52,6 @@ public class ServerModel {
         try {
             socket = serverSocket.accept();
             addEventLog("Connected");
-            System.out.println("Connected");
 
             inputStream = new ObjectInputStream(socket.getInputStream());
             outputStream = new ObjectOutputStream(socket.getOutputStream());
@@ -60,12 +59,10 @@ public class ServerModel {
 
             try {
                 Object receivedObject = inputStream.readObject();
-                if (receivedObject instanceof String && receivedObject.equals("Refresh")) {
-                    System.out.println("Refresh");
-                    addEventLog("Refresh");
-                    refresh();
+                if (receivedObject instanceof String) {
+                    String receivedString = (String) receivedObject;
+                    refresh(receivedString);
                 } else if (receivedObject instanceof Email receivedEmail) {
-                    System.out.println("Received email");
                     addEventLog("Client: Sent email");
                     storeEmail(receivedEmail);
                 } else System.out.println("NO");
@@ -73,7 +70,6 @@ public class ServerModel {
                 System.out.println("oh oh");
                 e.printStackTrace();
             } finally {
-                System.out.println("Closed connection");
                 addEventLog("Closed connection");
                 closeConnection();
             }
@@ -168,7 +164,7 @@ public class ServerModel {
 
     //---------------------------- Send the email on refresh ----------------------------//
     // Send the email on refresh
-    public void refresh() {
+    public void refresh(String selectedAccount) {
         try {
             // Read existing JSON file
             JsonObject jsonObject = readJSON();
@@ -176,11 +172,10 @@ public class ServerModel {
             // Retrieve the "UserList" array
             JsonArray userList = jsonObject.getAsJsonArray("UserList");
 
-            // Iterate over users and send emails for "carrapax@gormail.com"
             for (int i = 0; i < userList.size(); i++) {
                 JsonObject user = userList.get(i).getAsJsonObject();
                 String userName = user.get("name").getAsString();
-                if (userName.equals("carrapax@gormail.com")) {
+                if (userName.equals(selectedAccount)) {
                     // Retrieve email list for the user
                     JsonArray emailList = user.getAsJsonArray("emailReceived");
 
@@ -211,7 +206,6 @@ public class ServerModel {
             // Send the string representation of JsonArray
             outputStream.writeObject(jsonString);
             outputStream.flush();
-            System.out.println("ok");
         } catch (SocketException e) {
             System.out.println("Client closed the connection");
         } catch (IOException e) {

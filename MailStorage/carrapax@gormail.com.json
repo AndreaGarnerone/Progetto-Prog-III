@@ -1,18 +1,14 @@
 [
   {
     "emailSent": [
-      "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com\",\"subject\":\"d\",\"content\":\"dd\",\"timestamp\":\"12/03/2024:20.46.34\"}",
-      "{\"from\":\"carrapax@gormail.com\",\"to\":\"orrore.profondo@gormail.com\",\"subject\":\"s\",\"content\":\"ss\",\"timestamp\":\"12/03/2024:20.47.10\"}",
-      "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com\",\"subject\":\"d\",\"content\":\"dd\",\"timestamp\":\"12/03/2024:21.12.49\"}",
-      "{\"from\":\"carrapax@gormail.com\",\"to\":\"orrore.profondo@gormail.com\",\"subject\":\"df\",\"content\":\"dsvd\",\"timestamp\":\"12/03/2024:21.15.18\"}",
-      "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com\",\"subject\":\"fvdf\",\"content\":\" vfkqo fdqj\",\"timestamp\":\"12/03/2024:21.46.20\"}"
+      "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com\",\"subject\":\"prova\",\"content\":\"mi senti?\",\"timestamp\":\"13/03/2024:19.29.38\"}",
+      "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com\",\"subject\":\"dfg\",\"content\":\"dfd\",\"timestamp\":\"13/03/2024:19.33.54\"}",
+      "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com\",\"subject\":\"rbgvfdcsx\",\"content\":\"b vfcdx gfdx fd\",\"timestamp\":\"13/03/2024:20.53.29\"}"
     ],
     "emailReceived": [
       "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"prova\",\"content\":\"mi serve una mail da visualizzare\",\"timestamp\":\"09/03/2024:17.46.40\"}",
-      "{\"from\":\"orrore.profondo@gormail.com\",\"to\":\"sommo.luminescente@gormail.com;carrapax@gormail.com\",\"subject\":\"W IL MALE\",\"content\":\"forza magmion\",\"timestamp\":\"11/03/2024:22.18.03\"}",
-      "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"prova LOG\",\"content\":\"ffffffffffffffff\",\"timestamp\":\"12/03/2024:19.53.30\"}",
-      "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"s\",\"content\":\"dd\",\"timestamp\":\"12/03/2024:20.40.53\"}",
-      "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"s\",\"content\":\"s\",\"timestamp\":\"12/03/2024:20.42.08\"}"
+      "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com;sommo.luminescente@gormail.com\",\"subject\":\"prova\",\"content\":\"porcaccio dio\",\"timestamp\":\"13/03/2024:13.21.57\"}",
+      "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"ssssss\",\"content\":\"ssssssssssssssssssssssss\",\"timestamp\":\"13/03/2024:20.53.06\"}"
     ]
   }
 ]

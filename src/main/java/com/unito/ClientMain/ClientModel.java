@@ -23,7 +23,6 @@ public class ClientModel {
 
     public ClientModel(String account) {
         mailList = FXCollections.observableArrayList();
-        loadEmailsFromFile(account);
     }
 
     public ObservableList<Email> getMailList() {
@@ -139,7 +138,6 @@ public class ClientModel {
                 addEmailsToList(emailReceivedArray);
             }
 
-            System.out.println("Emails loaded successfully.");
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
@@ -149,7 +147,20 @@ public class ClientModel {
         for (Object obj : jsonArray) {
             String jsonString = (String) obj;
             Email email = Email.fromString(jsonString);
-            mailList.add(0, email);
+
+            // Check if the email already exists in mailList. Add only the new emails
+            boolean emailExists = false;
+            for (Email existingEmail : mailList) {
+                if (existingEmail.equals(email)) {
+                    emailExists = true;
+                    break;
+                }
+            }
+
+            // Add the email to mailList only if it doesn't already exist
+            if (!emailExists) {
+                mailList.add(0, email);
+            }
         }
     }
 
@@ -157,24 +168,25 @@ public class ClientModel {
     //---------------------------- Send the email on refresh ----------------------------//
 
     // Send the request to the server for obtaining the emails still not read
-    public void refresh() {
-        String request = "Refresh";
+    public void refresh(String selectedAccount) {
         try {
             connectToServer();
 
-            outputStream.writeObject(request);
+            outputStream.writeObject(selectedAccount);
             outputStream.flush();
 
-            receiveNewEmail();
+            receiveNewEmail(selectedAccount);
 
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             closeConnection();
         }
+
+        loadEmailsFromFile(selectedAccount);
     }
 
-    private void receiveNewEmail() throws IOException {
+    private void receiveNewEmail(String selectedAccount) throws IOException {
         try {
             // Read the string representation of JsonArray
             String jsonString = (String) inputStream.readObject();
@@ -182,20 +194,18 @@ public class ClientModel {
             // Convert the string to JsonArray
             JsonArray emailList = JsonParser.parseString(jsonString).getAsJsonArray();
 
-            System.out.println("Adesso salvo le mail");
-            saveEmail(emailList);
+            if (!emailList.isEmpty()) {
+                saveEmail(emailList, selectedAccount);
+            }
+
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    private void saveEmail(JsonArray emailList) {
-        if (emailList.isEmpty()) {
-            System.out.println("Email list is empty. No emails to save.");
-            return;
-        }
+    private void saveEmail(JsonArray emailList, String selectedAccount) {
         try {
-            String pathName = "MailStorage/carrapax@gormail.com.json";
+            String pathName = "MailStorage/" + selectedAccount + ".json";
 
             // Parse the existing JSON file
             JsonParser parser = new JsonParser();

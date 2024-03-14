@@ -4,6 +4,8 @@
       "{\"from\":\"orrore.profondo@gormail.com\",\"to\":\"sommo.luminescente@gormail.com;carrapax@gormail.com\",\"subject\":\"COGLIONI\",\"content\":\"W il male e il vulcano\",\"timestamp\":\"11/03/2024:19.50.42\"}",
       "{\"from\":\"orrore.profondo@gormail.com\",\"to\":\"sommo.luminescente@gormail.com;carrapax@gormail.com\",\"subject\":\"W IL MALE\",\"content\":\"forza magmion\",\"timestamp\":\"11/03/2024:22.18.03\"}"
     ],
-    "emailReceived": []
+    "emailReceived": [
+      "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"orrore.profondo@gormail.com\",\"subject\":\"PROVAA\",\"content\":\"AAAA\",\"timestamp\":\"13/03/2024:23.14.50\"}"
+    ]
   }
 ]

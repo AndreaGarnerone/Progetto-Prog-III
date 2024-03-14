@@ -3,6 +3,7 @@ package com.unito.ClientMain;
 import com.google.gson.*;
 import com.google.gson.stream.JsonWriter;
 import com.unito.WriteEmail.WriteEmailController;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.json.JSONArray;
@@ -20,6 +21,7 @@ public class ClientModel {
     ObjectInputStream inputStream;
 
     WriteEmailController writeEmailController = new WriteEmailController();
+    ClientController clientController = new ClientController();
 
     public ClientModel(String account) {
         mailList = FXCollections.observableArrayList();
@@ -135,7 +137,11 @@ public class ClientModel {
 
                 // Process "emailReceived" array
                 JSONArray emailReceivedArray = mainJson.getJSONArray("emailReceived");
-                addEmailsToList(emailReceivedArray);
+
+                // Wrap UI update inside Platform.runLater()
+                Platform.runLater(() -> {
+                    addEmailsToList(emailReceivedArray);
+                });
             }
 
         } catch (IOException | JSONException e) {
@@ -196,6 +202,7 @@ public class ClientModel {
 
             if (!emailList.isEmpty()) {
                 saveEmail(emailList, selectedAccount);
+                clientController.showEmailNotification(selectedAccount);
             }
 
         } catch (IOException | ClassNotFoundException e) {

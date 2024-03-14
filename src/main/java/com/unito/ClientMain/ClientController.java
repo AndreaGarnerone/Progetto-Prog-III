@@ -2,6 +2,7 @@ package com.unito.ClientMain;
 
 import com.unito.ShowEmail.ShowEmailController;
 import com.unito.WriteEmail.WriteEmailView;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -98,6 +99,16 @@ public class ClientController {
         if (selectedEmail != null) {
             mailListView.getItems().remove(selectedEmail);
         }
+    }
+
+    public void showEmailNotification(String sender) {
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("New Email Notification");
+            alert.setHeaderText("New Email Received");
+            alert.setContentText("From: " + sender);
+            alert.showAndWait();
+        });
     }
 
 

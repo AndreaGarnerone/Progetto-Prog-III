@@ -49,9 +49,10 @@ public class ServerModel {
     }
 
     private void receiveEmail() {
+        boolean newClient = false;
         try {
             socket = serverSocket.accept();
-            addEventLog("Connected");
+            //addEventLog("Connected");
 
             inputStream = new ObjectInputStream(socket.getInputStream());
             outputStream = new ObjectOutputStream(socket.getOutputStream());
@@ -61,16 +62,24 @@ public class ServerModel {
                 Object receivedObject = inputStream.readObject();
                 if (receivedObject instanceof String) {
                     String receivedString = (String) receivedObject;
-                    refresh(receivedString);
+                    if (receivedString.equals("new")) {
+                        addEventLog("New client connected");
+                        newClient = true;
+                    } else {
+                        receivedString = (String) receivedObject;
+                        refresh(receivedString);
+                    }
                 } else if (receivedObject instanceof Email receivedEmail) {
-                    addEventLog("Client: Sent email");
+                    addEventLog("Email sent");
                     storeEmail(receivedEmail);
                 } else System.out.println("NO");
             } catch (IOException | ClassNotFoundException e) {
                 System.out.println("oh oh");
                 e.printStackTrace();
             } finally {
-                addEventLog("Closed connection");
+                if (newClient) {
+                    addEventLog("Closed connection");
+                }
                 closeConnection();
             }
         } catch (IOException e) {

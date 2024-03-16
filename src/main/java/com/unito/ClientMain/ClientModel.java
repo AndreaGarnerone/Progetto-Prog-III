@@ -13,9 +13,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.io.*;
-import java.net.ConnectException;
 import java.net.Socket;
-import java.net.SocketException;
 
 public class ClientModel {
     private final ObservableList<Email> mailList;
@@ -28,6 +26,7 @@ public class ClientModel {
 
     public ClientModel(String account) {
         mailList = FXCollections.observableArrayList();
+        loadEmailsFromFile(account, "emailReceived");
     }
 
     public ObservableList<Email> getMailList() {
@@ -51,8 +50,10 @@ public class ClientModel {
         }
 
         if (ok) {
-            saveToSender(email);
-            sendToServer(email);
+            if (sendToServer(email) == 0) {
+                // Save the mail to the sender only if the connection was established correctly
+                saveToSender(email);
+            }
         }
     }
 
@@ -83,15 +84,18 @@ public class ClientModel {
         }
     }
 
-    private void sendToServer(Email email) {
+    private int sendToServer(Email email) {
+        int res = 0;
         try {
             connectToServer();
             sendEmail(email);
         } catch (NullPointerException | IOException e) {
             clientController.showAlert(Alert.AlertType.ERROR, "Connection Error", "Server Down", "Unable to connect to the server.");
+            res = -1;
         } finally {
             closeConnection();
         }
+        return res;
     }
 
     // Create a socket connection with the server
@@ -124,7 +128,7 @@ public class ClientModel {
         }
     }
 
-    private void loadEmailsFromFile(String account) {
+    private void loadEmailsFromFile(String account, String selector) {
         String filePath = "MailStorage/" + account + ".json";
         try {
             // Read JSON file
@@ -136,12 +140,8 @@ public class ClientModel {
             for (int i = 0; i < mainArray.length(); i++) {
                 JSONObject mainJson = mainArray.getJSONObject(i);
 
-                // Process "emailSent" array
-                //JSONArray emailSentArray = mainJson.getJSONArray("emailSent");
-                //addEmailsToList(emailSentArray);
-
                 // Process "emailReceived" array
-                JSONArray emailReceivedArray = mainJson.getJSONArray("emailReceived");
+                JSONArray emailReceivedArray = mainJson.getJSONArray(selector);
 
                 // Wrap UI update inside Platform.runLater()
                 Platform.runLater(() -> addEmailsToList(emailReceivedArray));
@@ -150,6 +150,16 @@ public class ClientModel {
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public void viewSent(String selectedAccount) {
+        mailList.clear();
+        loadEmailsFromFile(selectedAccount, "emailSent");
+    }
+
+    public void viewReceived(String selectedAccount) {
+        mailList.clear();
+        loadEmailsFromFile(selectedAccount, "emailReceived");
     }
 
     private void addEmailsToList(JSONArray jsonArray) {
@@ -172,7 +182,6 @@ public class ClientModel {
             }
         }
     }
-
 
     //---------------------------- Send the email on refresh ----------------------------//
 
@@ -202,7 +211,16 @@ public class ClientModel {
             closeConnection();
         }
 
-        loadEmailsFromFile(selectedAccount);
+        loadEmailsFromFile(selectedAccount, "emailReceived");
+    }
+
+    public void sendString(String s) throws IOException {
+        connectToServer();
+
+        outputStream.writeObject(s);
+        outputStream.flush();
+
+        closeConnection();
     }
 
     private void receiveNewEmail(String selectedAccount) throws IOException {
@@ -253,5 +271,6 @@ public class ClientModel {
             e.printStackTrace();
         }
     }
+
 }
 

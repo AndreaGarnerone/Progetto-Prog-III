@@ -31,9 +31,7 @@ public class ClientApplication extends Application {
         stage.setTitle("Gormail Client");
         stage.setScene(scene);
 
-        // Set event handler to handle application exit
         stage.setOnCloseRequest(event -> {
-            // Shutdown the application properly
             shutdown();
         });
 

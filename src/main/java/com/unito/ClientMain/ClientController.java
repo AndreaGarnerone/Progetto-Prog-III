@@ -46,6 +46,12 @@ public class ClientController {
         setAccountName.setText(selectedAccount);
 
         mailListView.setOnMouseClicked(this::handleEmailDoubleClick);
+
+        try {
+            clientModel.sendString("new");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -112,12 +118,15 @@ public class ClientController {
     // Refresh the email list
     @FXML
     public void refreshEmail(ActionEvent event) {
-        clientModel.refresh(this.accountName);
+        clientModel.refresh(accountName);
     }
 
     public void changeListViewReceived(ActionEvent event) {
+        clientModel.viewReceived(accountName);
     }
 
     public void changeListViewSent(ActionEvent event) {
+        clientModel.viewSent(accountName);
     }
+
 }

@@ -21,8 +21,9 @@ public class ServerApplication extends Application {
         serverController.setServerModel(serverModel);
         serverController.initialize();
 
-        // 1. Create the server thread and store it for proper interruption:
+        // 1. Create the server thread and set it as daemon:
         Thread serverThread = new Thread(serverModel::listen);
+        serverThread.setDaemon(true); // Set the thread as daemon
 
         // 2. Start the server thread:
         serverThread.start();

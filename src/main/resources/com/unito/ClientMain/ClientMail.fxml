@@ -23,12 +23,12 @@
             <Button fx:id="writeEmailButton" text="Write New Email" onAction="#writeNewEmail"/>
             <Separator/>
 
-            <RadioButton fx:id="AllMail" text="Received" selected="true" onAction="#changeListView">
+            <RadioButton fx:id="Received" text="Received" selected="true" onAction="#changeListViewReceived">
                 <toggleGroup>
                     <ToggleGroup fx:id="selector"/>
                 </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="Sent" text="Sent Mails" onAction="#changeListView" toggleGroup="$selector"/>
+            <RadioButton fx:id="Sent" text="Sent Mails" toggleGroup="$selector" onAction="#changeListViewSent"/>
 
             <VBox VBox.vgrow="ALWAYS"/>
             <Button text="Refresh" onAction="#refreshEmail"/>

@@ -6,13 +6,16 @@ import com.unito.WriteEmail.WriteEmailController;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.io.*;
+import java.net.ConnectException;
 import java.net.Socket;
+import java.net.SocketException;
 
 public class ClientModel {
     private final ObservableList<Email> mailList;
@@ -84,23 +87,25 @@ public class ClientModel {
         try {
             connectToServer();
             sendEmail(email);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (NullPointerException | IOException e) {
+            clientController.showAlert(Alert.AlertType.ERROR, "Connection Error", "Server Down", "Unable to connect to the server.");
         } finally {
             closeConnection();
         }
     }
 
     // Create a socket connection with the server
-    private void connectToServer() throws IOException {
+    private void connectToServer() {
         String hostName = "127.0.0.1";
         int port = 27;
-        socket = new Socket(hostName, port);
+        try {
+            socket = new Socket(hostName, port);
+            outputStream = new ObjectOutputStream(socket.getOutputStream());
+            outputStream.flush();
+            inputStream = new ObjectInputStream(socket.getInputStream());
+        } catch (IOException e) {
 
-        outputStream = new ObjectOutputStream(socket.getOutputStream());
-        outputStream.flush();
-
-        inputStream = new ObjectInputStream(socket.getInputStream());
+        }
     }
 
     // Send the email via the socket connection
@@ -114,8 +119,8 @@ public class ClientModel {
             inputStream.close();
             outputStream.close();
             socket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (NullPointerException | IOException e) {
+            clientController.showAlert(Alert.AlertType.ERROR, "Connection Error", "Server Down", "Unable to connect to the server.");
         }
     }
 
@@ -139,9 +144,7 @@ public class ClientModel {
                 JSONArray emailReceivedArray = mainJson.getJSONArray("emailReceived");
 
                 // Wrap UI update inside Platform.runLater()
-                Platform.runLater(() -> {
-                    addEmailsToList(emailReceivedArray);
-                });
+                Platform.runLater(() -> addEmailsToList(emailReceivedArray));
             }
 
         } catch (IOException | JSONException e) {
@@ -182,9 +185,19 @@ public class ClientModel {
             outputStream.flush();
 
             receiveNewEmail(selectedAccount);
-
         } catch (IOException e) {
-            e.printStackTrace();
+            boolean retry = true;
+            while (retry) {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException ex) {
+                    // Handle interruption if needed
+                    ex.printStackTrace();
+                    // Resume waiting if interrupted
+                    // Interrupt the current thread again to maintain interrupted status
+                    Thread.currentThread().interrupt();
+                }
+            }
         } finally {
             closeConnection();
         }

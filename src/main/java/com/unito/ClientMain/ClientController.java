@@ -24,7 +24,7 @@ public class ClientController {
     @FXML
     public ListView mailListView;
     @FXML
-    public RadioButton AllMail, toRead, Sent;
+    public RadioButton Received, Sent;
     @FXML
     public ToggleGroup selector;
 
@@ -54,19 +54,6 @@ public class ClientController {
         Stage stage = new Stage();
 
         writeEmailView.openWriter(stage, clientModel, accountName);
-    }
-
-    // Change from "All Mail" to other view
-    public void changeListView(ActionEvent event) {
-        /* Esempio
-        if (AllMail.isSelected()) {
-            myLabel.setText(AllMail.getText());
-        } else if (toRead.isSelected()) {
-            myLabel.setText(toRead.getText());
-        } else if (Sent.isSelected()) {
-            myLabel.setText(Sent.getText());
-        }
-         */
     }
 
     //Visualize an email
@@ -111,10 +98,26 @@ public class ClientController {
         });
     }
 
+    void showAlert(Alert.AlertType alertType, String title, String header, String content) {
+        Platform.runLater(() -> {
+            Alert alert = new Alert(alertType);
+            alert.setTitle(title);
+            alert.setHeaderText(header);
+            alert.setContentText(content);
+            alert.showAndWait();
+        });
+    }
+
 
     // Refresh the email list
     @FXML
     public void refreshEmail(ActionEvent event) {
         clientModel.refresh(this.accountName);
+    }
+
+    public void changeListViewReceived(ActionEvent event) {
+    }
+
+    public void changeListViewSent(ActionEvent event) {
     }
 }

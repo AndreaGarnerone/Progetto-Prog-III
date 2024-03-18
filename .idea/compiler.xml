@@ -12,7 +12,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="ProgIII" options="--add-exports java.base/jdk.internal.misc=org.example.progiii" />
+      <module name="ProgIII" options="" />
     </option>
   </component>
 </project>

@@ -6,17 +6,22 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.Objects;
+import java.util.ResourceBundle;
 
 public class LoginController {
     @FXML
     public ComboBox<String> accountSelector;
-    public Label Feedback;
-    private Stage stage; // Reference to the stage of login page
+    @FXML
+    public ImageView logo;
+    private Stage stage;
 
-    // Setter method to set the stage
     public void setStage(Stage stage) {
         this.stage = stage;
     }
@@ -35,9 +40,16 @@ public class LoginController {
 
             // Open the client org.example.progiii
             ClientApplication clientApplication = new ClientApplication();
-            clientApplication.setSelectedAccount(accountSelector.getValue()); // Set the selected account
+            clientApplication.setSelectedAccount(accountSelector.getValue());
             Stage clientStage = new Stage();
             clientApplication.start(clientStage);
         }
+    }
+
+    public void initialize() {
+        // Load the image from the file system
+        Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Logo.png")));
+        // Set the loaded image to the ImageView
+        logo.setImage(image);
     }
 }

@@ -4,37 +4,46 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.ImageView?>
+
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.unito.Login.LoginController"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="400.0" prefWidth="600.0"
+            style="-fx-background-color: lightblue;">
 
+    <ImageView fx:id="logo"  fitHeight="200" fitWidth="200"
+               AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0"
+               AnchorPane.bottomAnchor="100.0"
+               preserveRatio="true" />
 
-    <VBox alignment="CENTER" AnchorPane.topAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-          AnchorPane.bottomAnchor="0.0">
-        <VBox alignment="CENTER">
-            <Label text="Choose your account" style="-fx-font-size: 16px;"/>
-        </VBox>
-        <VBox alignment="CENTER">
-            <ComboBox fx:id="accountSelector">
-                <items>
-                    <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="sommo.luminescente@gormail.com"/>
-                        <String fx:value="carrapax@gormail.com"/>
-                        <String fx:value="orrore.profondo@gormail.com"/>
-                    </FXCollections>
-                </items>
-            </ComboBox>
-        </VBox>
-        <VBox alignment="CENTER">
-            <Button text="Select" onAction="#openClient"/>
-        </VBox>
+    <VBox layoutX="235.0" layoutY="185.0" prefHeight="30.0" prefWidth="130.0">
+        <Label alignment="TOP_CENTER" prefHeight="20.0" prefWidth="148.0" text="Select your account:">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
     </VBox>
-    <Label fx:id="Feedback" layoutX="350.0" layoutY="550.0"/>
+
+    <VBox layoutX="235.0" layoutY="226.0" prefHeight="42.0" prefWidth="130.0">
+        <ComboBox prefWidth="150.0" fx:id="accountSelector">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="sommo.luminescente@gormail.com"/>
+                    <String fx:value="carrapax@gormail.com"/>
+                    <String fx:value="orrore.profondo@gormail.com"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+    </VBox>
+
+    <AnchorPane layoutX="253.0" layoutY="268.0" prefHeight="42.0" prefWidth="94.0">
+        <Button layoutX="23.0" layoutY="8.0" mnemonicParsing="false" text="Select" onAction="#openClient"/>
+    </AnchorPane>
 
 </AnchorPane>

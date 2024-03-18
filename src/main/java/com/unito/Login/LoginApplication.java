@@ -11,14 +11,10 @@ import java.io.IOException;
 public class LoginApplication extends Application {
 
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginPage.fxml"));
-        Parent root = loader.load();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LoginPage.fxml"));
+        Parent root = fxmlLoader.load();
 
-        // Get the controller and set the stage reference
-        LoginController controller = loader.getController();
-        controller.setStage(stage);
-
-        Scene scene = new Scene(root, 800, 600);
+        Scene scene = new Scene(root, 600, 400);
         stage.setTitle("Mail Client");
         stage.setScene(scene);
         stage.show();

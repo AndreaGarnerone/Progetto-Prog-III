@@ -17,7 +17,6 @@ import java.net.SocketException;
 public class ServerModel {
     private final ObservableList<String> eventLog = FXCollections.observableArrayList();
     private static final String filePath = "MailBank.json";
-    private int port = 27;
     ServerSocket serverSocket;
     Socket socket = null;
     ObjectInputStream inputStream = null;
@@ -29,6 +28,7 @@ public class ServerModel {
     /* Methods for receiving an email from a client */
     public void listen() {
         try {
+            int port = 27;
             serverSocket = new ServerSocket(port);
             while (!serverSocket.isClosed()) { // Check if the socket is closed
                 receiveEmail();
@@ -60,8 +60,7 @@ public class ServerModel {
 
             try {
                 Object receivedObject = inputStream.readObject();
-                if (receivedObject instanceof String) {
-                    String receivedString = (String) receivedObject;
+                if (receivedObject instanceof String receivedString) {
                     if (receivedString.equals("new")) {
                         addEventLog("New client connected");
                         newClient = true;
@@ -82,11 +81,15 @@ public class ServerModel {
                 }
                 closeConnection();
             }
+        } catch (SocketException ignored) {
+            // Socket is closed, exit the method
+            return;
         } catch (IOException e) {
             addEventLog("Failed to create a socket connection between Client and Server");
             e.printStackTrace();
         }
     }
+
 
 
     private void closeConnection() {
@@ -236,9 +239,12 @@ public class ServerModel {
             if (serverSocket != null && !serverSocket.isClosed()) {
                 serverSocket.close();
             }
+        } catch (SocketException ignored) {
+            // Socket is already closed, no need to handle this exception
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
 }

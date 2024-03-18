@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class ServerApplication extends Application {
@@ -12,10 +13,12 @@ public class ServerApplication extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MailServer.fxml"));
         Parent root = loader.load();
 
+
         ServerModel serverModel = new ServerModel();
 
         primaryStage.setTitle("Mail Application");
-        primaryStage.setScene(new Scene(root, 800, 600));
+        // Set the scene dimensions based on the preferred height
+        primaryStage.setScene(new Scene(root, 600, 400));
 
         ServerController serverController = loader.getController();
         serverController.setServerModel(serverModel);

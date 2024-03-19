@@ -108,7 +108,9 @@ public class ClientModel {
             outputStream.flush();
             inputStream = new ObjectInputStream(socket.getInputStream());
         } catch (IOException e) {
-
+            e.printStackTrace();
+            // Handle connection error gracefully, for example:
+            clientController.showAlert(Alert.AlertType.ERROR, "Connection Error", "Server Down", "Unable to connect to the server.");
         }
     }
 

@@ -49,47 +49,52 @@ public class ServerModel {
     }
 
     private void receiveEmail() {
-        boolean newClient = false;
         try {
             socket = serverSocket.accept();
-            //addEventLog("Connected");
 
-            inputStream = new ObjectInputStream(socket.getInputStream());
-            outputStream = new ObjectOutputStream(socket.getOutputStream());
-            outputStream.flush();
+            // Handle client connection in a new thread
+            Thread clientThread = new Thread(() -> {
+                boolean newClient = false;
+                try {
+                    inputStream = new ObjectInputStream(socket.getInputStream());
+                    outputStream = new ObjectOutputStream(socket.getOutputStream());
+                    outputStream.flush();
 
-            try {
-                Object receivedObject = inputStream.readObject();
-                if (receivedObject instanceof String receivedString) {
-                    if (receivedString.equals("new")) {
-                        addEventLog("New client connected");
-                        newClient = true;
-                    } else {
-                        receivedString = (String) receivedObject;
-                        refresh(receivedString);
+                    try {
+                        Object receivedObject = inputStream.readObject();
+                        if (receivedObject instanceof String receivedString) {
+                            if (receivedString.equals("new")) {
+                                addEventLog("New client connected");
+                                newClient = true;
+                            } else {
+                                receivedString = (String) receivedObject;
+                                refresh(receivedString);
+                            }
+                        } else if (receivedObject instanceof Email receivedEmail) {
+                            addEventLog("Email sent");
+                            storeEmail(receivedEmail);
+                        } else System.out.println("NO");
+                    } catch (IOException | ClassNotFoundException e) {
+                        System.out.println("oh oh");
+                        e.printStackTrace();
+                    } finally {
+                        closeConnection();
                     }
-                } else if (receivedObject instanceof Email receivedEmail) {
-                    addEventLog("Email sent");
-                    storeEmail(receivedEmail);
-                } else System.out.println("NO");
-            } catch (IOException | ClassNotFoundException e) {
-                System.out.println("oh oh");
-                e.printStackTrace();
-            } finally {
-                if (newClient) {
-                    addEventLog("Closed connection");
+                } catch (SocketException ignored) {
+                    // Socket is closed, exit the method
+                    return;
+                } catch (IOException e) {
+                    addEventLog("Failed to create a socket connection between Client and Server");
+                    e.printStackTrace();
                 }
-                closeConnection();
-            }
-        } catch (SocketException ignored) {
-            // Socket is closed, exit the method
-            return;
+            });
+
+            // Start the client thread
+            clientThread.start();
         } catch (IOException e) {
-            addEventLog("Failed to create a socket connection between Client and Server");
             e.printStackTrace();
         }
     }
-
 
 
     private void closeConnection() {

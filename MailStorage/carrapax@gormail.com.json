@@ -9,7 +9,8 @@
       "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com\",\"subject\":\"prova\",\"content\":\"vdf\",\"timestamp\":\"16/03/2024:11.57.10\"}",
       "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com\",\"subject\":\"porva\",\"content\":\"efv\",\"timestamp\":\"16/03/2024:12.03.25\"}",
       "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com\",\"subject\":\"ddd\",\"content\":\"dddddddd\",\"timestamp\":\"16/03/2024:12.05.51\"}",
-      "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com\",\"subject\":\"defb\",\"content\":\"sdfb\",\"timestamp\":\"16/03/2024:12.10.59\"}"
+      "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com\",\"subject\":\"defb\",\"content\":\"sdfb\",\"timestamp\":\"16/03/2024:12.10.59\"}",
+      "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com;orrore.profondo@gormail.com\",\"subject\":\"threads!\",\"content\":\"vre\",\"timestamp\":\"19/03/2024:18.51.37\"}"
     ],
     "emailReceived": [
       "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"prova\",\"content\":\"mi serve una mail da visualizzare\",\"timestamp\":\"09/03/2024:17.46.40\"}",

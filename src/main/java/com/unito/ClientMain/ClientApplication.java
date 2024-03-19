@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ClientApplication extends Application {
     private String selectedAccount;
-    private ScheduledExecutorService scheduler; // Declare scheduler at the class level
+    private ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     public String getSelectedAccount() {
         return selectedAccount;
@@ -50,11 +50,14 @@ public class ClientApplication extends Application {
 
     // Method to properly shut down the application
     private void shutdown() {
-        scheduler.shutdown();
+        if (scheduler != null) {
+            scheduler.shutdown();
+        }
 
         Platform.exit();
         System.exit(0);
     }
+
 
     public static void main(String[] args) {
         launch(args);

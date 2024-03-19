@@ -14,6 +14,10 @@ public class LoginApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LoginPage.fxml"));
         Parent root = fxmlLoader.load();
 
+
+        LoginController controller = fxmlLoader.getController();
+        controller.setStage(stage);
+
         Scene scene = new Scene(root, 600, 400);
         stage.setTitle("Mail Client");
         stage.setScene(scene);

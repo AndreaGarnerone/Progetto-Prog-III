@@ -13,6 +13,8 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class ServerModel {
     private final ObservableList<String> eventLog = FXCollections.observableArrayList();
@@ -21,6 +23,8 @@ public class ServerModel {
     Socket socket = null;
     ObjectInputStream inputStream = null;
     ObjectOutputStream outputStream = null;
+    private final Lock lock = new ReentrantLock();
+
 
     public ServerModel() {
     }
@@ -54,6 +58,7 @@ public class ServerModel {
 
             // Handle client connection in a new thread
             Thread clientThread = new Thread(() -> {
+                lock.lock();
                 boolean newClient = false;
                 try {
                     inputStream = new ObjectInputStream(socket.getInputStream());
@@ -86,6 +91,8 @@ public class ServerModel {
                 } catch (IOException e) {
                     addEventLog("Failed to create a socket connection between Client and Server");
                     e.printStackTrace();
+                } finally {
+                    lock.unlock();
                 }
             });
 

@@ -23,7 +23,8 @@
         "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"ssssss\",\"content\":\"ssssssssssssssssssssssss\",\"timestamp\":\"13/03/2024:20.53.06\"}",
         "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"orrore.profondo@gormail.com\",\"subject\":\"PROVAA\",\"content\":\"AAAA\",\"timestamp\":\"13/03/2024:23.14.50\"}",
         "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"prova notify\",\"content\":\"prova notify\",\"timestamp\":\"14/03/2024:21.22.49\"}",
-        "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"notify\",\"content\":\"notify\",\"timestamp\":\"14/03/2024:21.28.19\"}"
+        "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"notify\",\"content\":\"notify\",\"timestamp\":\"14/03/2024:21.28.19\"}",
+        "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"lock\",\"content\":\"cfgvhb\",\"timestamp\":\"19/03/2024:19.20.06\"}"
       ],
       "emailReceived": []
     }

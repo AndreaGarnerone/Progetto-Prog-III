@@ -31,14 +31,15 @@ public class ClientApplication extends Application {
         stage.setTitle("Gormail Client");
         stage.setScene(scene);
 
-        stage.setOnCloseRequest(event -> {
-            shutdown();
-        });
-
         stage.show();
 
         ClientController ccl = fxmlLoader.getController();
         ccl.initialize(selectedAccount);
+
+        stage.setOnCloseRequest(event -> {
+            ccl.close();
+            shutdown();
+        });
 
         // Start a ScheduledExecutorService to call refresh() every two seconds
         scheduler = Executors.newScheduledThreadPool(1);

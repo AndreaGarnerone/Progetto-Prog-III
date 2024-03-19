@@ -59,7 +59,6 @@ public class ServerModel {
             // Handle client connection in a new thread
             Thread clientThread = new Thread(() -> {
                 lock.lock();
-                boolean newClient = false;
                 try {
                     inputStream = new ObjectInputStream(socket.getInputStream());
                     outputStream = new ObjectOutputStream(socket.getOutputStream());
@@ -70,7 +69,8 @@ public class ServerModel {
                         if (receivedObject instanceof String receivedString) {
                             if (receivedString.equals("new")) {
                                 addEventLog("New client connected");
-                                newClient = true;
+                            } else if (receivedString.equals("close")) {
+                                addEventLog("Client closed");
                             } else {
                                 receivedString = (String) receivedObject;
                                 refresh(receivedString);
@@ -85,9 +85,6 @@ public class ServerModel {
                     } finally {
                         closeConnection();
                     }
-                } catch (SocketException ignored) {
-                    // Socket is closed, exit the method
-                    return;
                 } catch (IOException e) {
                     addEventLog("Failed to create a socket connection between Client and Server");
                     e.printStackTrace();
@@ -98,6 +95,10 @@ public class ServerModel {
 
             // Start the client thread
             clientThread.start();
+        } catch (SocketException e) {
+            if (!serverSocket.isClosed()) {
+                e.printStackTrace();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

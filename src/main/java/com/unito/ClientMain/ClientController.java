@@ -59,6 +59,14 @@ public class ClientController {
         }
     }
 
+    void close() {
+        try {
+            clientModel.sendString("close");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     private void writeNewEmail() throws IOException {
         WriteEmailView writeEmailView = new WriteEmailView();

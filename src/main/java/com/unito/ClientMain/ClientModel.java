@@ -47,6 +47,14 @@ public class ClientModel {
                     ok = false;
                 }
             }
+        } else {
+            String receiver = email.getToFirst();
+            String filePath = "MailStorage/" + receiver + ".json";
+            File file = new File(filePath);
+            if (!file.exists()) {
+                writeEmailController.setErrorText();
+                ok = false;
+            }
         }
 
         if (ok) {
@@ -108,9 +116,7 @@ public class ClientModel {
             outputStream.flush();
             inputStream = new ObjectInputStream(socket.getInputStream());
         } catch (IOException e) {
-            e.printStackTrace();
-            // Handle connection error gracefully, for example:
-            clientController.showAlert(Alert.AlertType.ERROR, "Connection Error", "Server Down", "Unable to connect to the server.");
+            //clientController.showAlert(Alert.AlertType.ERROR, "Connection Error", "Server Down", "Unable to connect to the server.");
         }
     }
 
@@ -126,7 +132,7 @@ public class ClientModel {
             outputStream.close();
             socket.close();
         } catch (NullPointerException | IOException e) {
-            clientController.showAlert(Alert.AlertType.ERROR, "Connection Error", "Server Down", "Unable to connect to the server.");
+            //clientController.showAlert(Alert.AlertType.ERROR, "Connection Error", "Server Down", "Unable to connect to the server.");
         }
     }
 

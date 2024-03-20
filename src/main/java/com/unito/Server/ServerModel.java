@@ -13,8 +13,10 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class ServerModel {
     private final ObservableList<String> eventLog = FXCollections.observableArrayList();
@@ -23,8 +25,11 @@ public class ServerModel {
     Socket socket = null;
     ObjectInputStream inputStream = null;
     ObjectOutputStream outputStream = null;
-    private final Lock lock = new ReentrantLock();
 
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private static final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+    private final Lock rl = lock.readLock();
+    private final Lock wl = lock.writeLock();
 
     public ServerModel() {
     }
@@ -56,9 +61,8 @@ public class ServerModel {
         try {
             socket = serverSocket.accept();
 
-            // Handle client connection in a new thread
-            Thread clientThread = new Thread(() -> {
-                lock.lock();
+            // Handle client connection using ExecutorService
+            executor.submit(() -> {
                 try {
                     inputStream = new ObjectInputStream(socket.getInputStream());
                     outputStream = new ObjectOutputStream(socket.getOutputStream());
@@ -88,13 +92,8 @@ public class ServerModel {
                 } catch (IOException e) {
                     addEventLog("Failed to create a socket connection between Client and Server");
                     e.printStackTrace();
-                } finally {
-                    lock.unlock();
                 }
             });
-
-            // Start the client thread
-            clientThread.start();
         } catch (SocketException e) {
             if (!serverSocket.isClosed()) {
                 e.printStackTrace();
@@ -103,7 +102,6 @@ public class ServerModel {
             e.printStackTrace();
         }
     }
-
 
     private void closeConnection() {
         try {
@@ -121,7 +119,9 @@ public class ServerModel {
 
 
     //---------------------------- Store the email sent by the client ----------------------------//
-    public static void storeEmail(Email email) {
+
+    public void storeEmail(Email email) {
+        wl.lock();
         try {
             // Read the JSON file
             JsonObject jsonObject = readJSON();
@@ -168,21 +168,29 @@ public class ServerModel {
             System.out.println("Email added successfully to the email bank");
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            wl.unlock();
         }
 
     }
 
-    private static JsonObject readJSON() throws IOException {
+    private JsonObject readJSON() throws IOException {
+        rl.lock();
         try (FileReader reader = new FileReader(filePath)) {
             Gson gson = new Gson();
             return gson.fromJson(reader, JsonObject.class);
+        } finally {
+            rl.unlock();
         }
     }
 
-    private static void writeJSON(JsonObject jsonObject) throws IOException {
+    private void writeJSON(JsonObject jsonObject) throws IOException {
+        wl.lock();
         try (FileWriter writer = new FileWriter(filePath)) {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             gson.toJson(jsonObject, writer);
+        } finally {
+            wl.unlock();
         }
     }
 
@@ -224,6 +232,7 @@ public class ServerModel {
     }
 
     public void sendEmails(JsonArray emailArray) {
+        lock.readLock().lock();
         try {
             // Convert JsonArray to string
             String jsonString = emailArray.toString();
@@ -235,6 +244,8 @@ public class ServerModel {
             System.out.println("Client closed the connection");
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            lock.readLock().unlock();
         }
     }
 

@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Calendar;
 
 public class WriteEmailController {
@@ -24,15 +23,13 @@ public class WriteEmailController {
     public TextArea messageField;
     @FXML
     private String from;
-
-    LocalDateTime currentDateTime = LocalDateTime.now();
     private ClientModel clientModel;
 
     public void setClientModel(ClientModel clientModel) {
         this.clientModel = clientModel;
     }
 
-    public void sendEmail(ActionEvent event) throws IOException, ClassNotFoundException {
+    public void sendEmail(ActionEvent event) {
         String to = toField.getText();
         String subject = subjectField.getText();
         String content = messageField.getText();
@@ -40,26 +37,77 @@ public class WriteEmailController {
         // Check if any of the fields are empty
         if (to.isEmpty() || subject.isEmpty() || content.isEmpty()) {
             // Show a warning dialog
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Warning");
-            alert.setHeaderText(null);
-            alert.setContentText("Please fill in all fields.");
-            alert.showAndWait();
+            showAlert("Please fill in all fields.");
         } else {
-            String timestamp = new SimpleDateFormat("dd/MM/yyyy:HH.mm.ss").format(Calendar.getInstance().getTime());
+            String[] recipients = to.split(";");
+            boolean allValidDomain = true;
+            boolean allValidName = true;
 
-            clientModel.addEmail(new Email(from, to, subject, content, timestamp));
+            for (String recipient : recipients) {
+                recipient = recipient.trim();
+                if (!isValidEmail(recipient)) {
+                    allValidDomain = false;
+                    break;
+                }
+                if (!isValidUsername(recipient)) {
+                    allValidName = false;
+                    break;
+                }
+            }
 
-            // Get the stage from the event source
-            Node source = (Node) event.getSource();
-            Stage stage = (Stage) source.getScene().getWindow();
+            if (allValidDomain && allValidName) {
+                String timestamp = new SimpleDateFormat("dd/MM/yyyy:HH.mm.ss").format(Calendar.getInstance().getTime());
+                // Assuming 'from' is declared somewhere else in your code
+                clientModel.addEmail(new Email(from, to, subject, content, timestamp));
 
-            // Close the stage
-            stage.close();
+                // Get the stage from the event source
+                Node source = (Node) event.getSource();
+                Stage stage = (Stage) source.getScene().getWindow();
+
+                stage.close();
+            } else {
+                if (!allValidName) {
+                    showAlert("Wrong mail name");
+                } else {
+                    showAlert("Wrong mail domain");
+                }
+            }
         }
     }
 
-    public void clearFields(ActionEvent event) {
+    public boolean isValidEmail(String email) {
+        String[] parts = email.split("@");
+        if (parts.length != 2) {
+            return false;
+        }
+        String domain = parts[1].trim();
+        return domain.equals("gormail.com");
+    }
+
+    public boolean isValidUsername(String email) {
+        String[] parts = email.split("@");
+        if (parts.length != 2) {
+            return false;
+        }
+        String username = parts[0].trim();
+        for (char c : username.toCharArray()) {
+            if (!(Character.isLetterOrDigit(c) || c == '.' || c == '_')) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+
+    public void clearFields() {
         toField.clear();
         subjectField.clear();
         messageField.clear();
@@ -74,7 +122,7 @@ public class WriteEmailController {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Warning");
         alert.setHeaderText(null);
-        alert.setContentText("Please fill in all fields.");
+        alert.setContentText("Incorrect user mail address");
         alert.showAndWait();
     }
 

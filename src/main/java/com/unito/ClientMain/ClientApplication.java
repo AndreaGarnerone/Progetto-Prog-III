@@ -45,7 +45,7 @@ public class ClientApplication extends Application {
         scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(() -> {
             // Call refresh() method here
-            ccl.refreshEmail(new ActionEvent());
+            ccl.refreshEmail();
         }, 0, 2, TimeUnit.SECONDS);
     }
 

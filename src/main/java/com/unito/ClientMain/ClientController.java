@@ -130,15 +130,15 @@ public class ClientController {
 
     // Refresh the email list
     @FXML
-    public void refreshEmail(ActionEvent event) {
+    public void refreshEmail() {
         clientModel.refresh(accountName);
     }
 
-    public void changeListViewReceived(ActionEvent event) {
+    public void changeListViewReceived() {
         clientModel.viewReceived(accountName);
     }
 
-    public void changeListViewSent(ActionEvent event) {
+    public void changeListViewSent() {
         clientModel.viewSent(accountName);
     }
 

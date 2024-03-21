@@ -1,7 +1,7 @@
-package com.unito.ShowEmail;
+package com.unito.ClientMain.ShowEmail;
 
 import com.unito.ClientMain.Email;
-import com.unito.WriteEmail.Reply;
+import com.unito.ClientMain.WriteEmail.Reply;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;

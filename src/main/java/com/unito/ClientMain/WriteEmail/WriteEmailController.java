@@ -1,4 +1,4 @@
-package com.unito.WriteEmail;
+package com.unito.ClientMain.WriteEmail;
 
 import com.unito.ClientMain.ClientModel;
 import com.unito.ClientMain.Email;
@@ -10,7 +10,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -37,25 +37,31 @@ public class WriteEmailController {
         // Check if any of the fields are empty
         if (to.isEmpty() || subject.isEmpty() || content.isEmpty()) {
             // Show a warning dialog
-            showAlert("Please fill in all fields.");
+            showAlert("Please fill in all fields.", 0);
         } else {
             String[] recipients = to.split(";");
-            boolean allValidDomain = true;
-            boolean allValidName = true;
+            boolean allValid = true;
 
             for (String recipient : recipients) {
                 recipient = recipient.trim();
                 if (!isValidEmail(recipient)) {
-                    allValidDomain = false;
+                    allValid = false;
+                    showAlert("Wrong mail domain", 0);
                     break;
                 }
                 if (!isValidUsername(recipient)) {
-                    allValidName = false;
+                    allValid = false;
+                    showAlert("Wrong mail name", 0);
+                    break;
+                }
+
+                if (!checkValidEmail(recipient)) {
+                    allValid = false;
                     break;
                 }
             }
 
-            if (allValidDomain && allValidName) {
+            if (allValid) {
                 String timestamp = new SimpleDateFormat("dd/MM/yyyy:HH.mm.ss").format(Calendar.getInstance().getTime());
                 // Assuming 'from' is declared somewhere else in your code
                 clientModel.addEmail(new Email(from, to, subject, content, timestamp));
@@ -65,14 +71,18 @@ public class WriteEmailController {
                 Stage stage = (Stage) source.getScene().getWindow();
 
                 stage.close();
-            } else {
-                if (!allValidName) {
-                    showAlert("Wrong mail name");
-                } else {
-                    showAlert("Wrong mail domain");
-                }
             }
         }
+    }
+
+    private boolean checkValidEmail(String recipient) {
+        String filePath = "MailStorage/" + recipient + ".json";
+        File file = new File(filePath);
+        if (!file.exists()) {
+            showAlert("Incorrect user mail address", 1);
+            return false;
+        }
+        return true;
     }
 
     public boolean isValidEmail(String email) {
@@ -98,12 +108,20 @@ public class WriteEmailController {
         return true;
     }
 
-    public void showAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
+    public void showAlert(String message, int typeError) {
+        if (typeError == 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText(message);
+            alert.showAndWait();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText(null);
+            alert.setContentText(message);
+            alert.showAndWait();
+        }
     }
 
 
@@ -115,15 +133,6 @@ public class WriteEmailController {
 
     public void setSender(String sender) {
         this.from = sender;
-    }
-
-
-    public void setErrorText() {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Warning");
-        alert.setHeaderText(null);
-        alert.setContentText("Incorrect user mail address");
-        alert.showAndWait();
     }
 
 }

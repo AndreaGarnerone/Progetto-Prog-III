@@ -8,14 +8,14 @@ module org.example.progiii {
     exports com.unito.ClientMain;
     opens com.unito.ClientMain to javafx.fxml;
 
-    exports com.unito.Login;
-    opens com.unito.Login to javafx.fxml;
+    exports com.unito.ClientMain.Login;
+    opens com.unito.ClientMain.Login to javafx.fxml;
 
-    exports com.unito.ShowEmail;
-    opens com.unito.ShowEmail to javafx.fxml;
+    exports com.unito.ClientMain.ShowEmail;
+    opens com.unito.ClientMain.ShowEmail to javafx.fxml;
 
-    exports com.unito.WriteEmail;
-    opens com.unito.WriteEmail to javafx.fxml;
+    exports com.unito.ClientMain.WriteEmail;
+    opens com.unito.ClientMain.WriteEmail to javafx.fxml;
 
     exports com.unito.Server;
     opens com.unito.Server to javafx.fxml;

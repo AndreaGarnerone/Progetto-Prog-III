@@ -7,14 +7,17 @@
         "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com\",\"subject\":\"dfg\",\"content\":\"dfd\",\"timestamp\":\"13/03/2024:19.33.54\"}",
         "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com\",\"subject\":\"rbgvfdcsx\",\"content\":\"b vfcdx gfdx fd\",\"timestamp\":\"13/03/2024:20.53.29\"}",
         "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com\",\"subject\":\"prova notify\",\"content\":\"evqrfreq\",\"timestamp\":\"14/03/2024:21.21.58\"}",
-        "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com;orrore.profondo@gormail.com\",\"subject\":\"threads!\",\"content\":\"vre\",\"timestamp\":\"19/03/2024:18.51.37\"}"
+        "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com;orrore.profondo@gormail.com\",\"subject\":\"threads!\",\"content\":\"vre\",\"timestamp\":\"19/03/2024:18.51.37\"}",
+        "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.lumiescente@gormail.com\",\"subject\":\"c\",\"content\":\"c\",\"timestamp\":\"21/03/2024:11.20.36\"}",
+        "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com;orrore.profondo@gormail.com\",\"subject\":\"sasa\",\"content\":\"sasa\",\"timestamp\":\"21/03/2024:12.08.00\"}"
       ],
       "emailReceived": []
     },
     {
       "name": "orrore.profondo@gormail.com",
       "emailSent": [
-        "{\"from\":\"orrore.profondo@gormail.com\",\"to\":\"carrapa\",\"subject\":\"xx\",\"content\":\"xxx\",\"timestamp\":\"19/03/2024:20.01.57\"}"
+        "{\"from\":\"orrore.profondo@gormail.com\",\"to\":\"carrapa\",\"subject\":\"xx\",\"content\":\"xxx\",\"timestamp\":\"19/03/2024:20.01.57\"}",
+        "{\"from\":\"orrore.profondo@gormail.com\",\"to\":\"carrapax@gormail.com;sommo.luminescente@gormail.com\",\"subject\":\"Re: sasa\",\"content\":\"momomo\",\"timestamp\":\"21/03/2024:12.17.31\"}"
       ],
       "emailReceived": []
     },
@@ -28,7 +31,8 @@
         "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"notify\",\"content\":\"notify\",\"timestamp\":\"14/03/2024:21.28.19\"}",
         "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"lock\",\"content\":\"cfgvhb\",\"timestamp\":\"19/03/2024:19.20.06\"}",
         "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"cc\",\"subject\":\"cc\",\"content\":\"cc\",\"timestamp\":\"19/03/2024:19.58.42\"}",
-        "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"ss\",\"content\":\"ss\",\"timestamp\":\"20/03/2024:17.30.14\"}"
+        "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"ss\",\"content\":\"ss\",\"timestamp\":\"20/03/2024:17.30.14\"}",
+        "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapa@gormail.com\",\"subject\":\"s\",\"content\":\"s\",\"timestamp\":\"21/03/2024:11.21.27\"}"
       ],
       "emailReceived": []
     }

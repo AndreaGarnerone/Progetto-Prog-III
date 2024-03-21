@@ -2,7 +2,7 @@ package com.unito.ClientMain;
 
 import com.google.gson.*;
 import com.google.gson.stream.JsonWriter;
-import com.unito.WriteEmail.WriteEmailController;
+import com.unito.ClientMain.WriteEmail.WriteEmailController;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,32 +36,9 @@ public class ClientModel {
 
     // Add an email to the list
     public void addEmail(Email email) {
-        boolean ok = true;
-        if (!email.getToAll().equals(email.getToFirst())) { // Check if there are error in the receiver
-            String[] recipients = email.getToAll().split(";");
-            for (String recipient : recipients) {
-                String filePath = "MailStorage/" + recipient + ".json";
-                File file = new File(filePath);
-                if (!file.exists()) {
-                    writeEmailController.setErrorText();
-                    ok = false;
-                }
-            }
-        } else {
-            String receiver = email.getToFirst();
-            String filePath = "MailStorage/" + receiver + ".json";
-            File file = new File(filePath);
-            if (!file.exists()) {
-                writeEmailController.setErrorText();
-                ok = false;
-            }
-        }
-
-        if (ok) {
-            if (sendToServer(email) == 0) {
-                // Save the mail to the sender only if the connection was established correctly
-                saveToSender(email);
-            }
+        if (sendToServer(email) == 0) {
+            // Save the mail to the sender only if the connection was established correctly
+            saveToSender(email);
         }
     }
 
@@ -225,11 +202,18 @@ public class ClientModel {
     public void sendString(String s) throws IOException {
         connectToServer();
 
-        outputStream.writeObject(s);
-        outputStream.flush();
-
-        closeConnection();
+        try {
+            if (outputStream != null) { // Check if outputStream is not null
+                outputStream.writeObject(s);
+                outputStream.flush();
+            }
+        } catch (NullPointerException ignored) {
+            // Handle any NullPointerException if needed
+        } finally {
+            closeConnection();
+        }
     }
+
 
     private void receiveNewEmail(String selectedAccount) throws IOException {
         try {

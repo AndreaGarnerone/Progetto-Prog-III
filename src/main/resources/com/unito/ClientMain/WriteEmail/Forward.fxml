@@ -6,7 +6,7 @@
 <AnchorPane prefHeight="226.0" prefWidth="493.0"
             xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.unito.WriteEmail.ReplyController">
+            fx:controller="com.unito.ClientMain.WriteEmail.ReplyController">
 
     <VBox layoutX="14.0" layoutY="22.0" prefHeight="26.0" prefWidth="70.0">
         <Label disable="true" prefHeight="26.0" prefWidth="70.0" text="Forward to:"/>

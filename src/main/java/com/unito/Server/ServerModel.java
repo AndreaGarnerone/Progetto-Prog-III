@@ -263,12 +263,15 @@ public class ServerModel {
             if (serverSocket != null && !serverSocket.isClosed()) {
                 serverSocket.close();
             }
+            // Shutdown the executor service
+            executor.shutdown();
         } catch (SocketException ignored) {
             // Socket is already closed, no need to handle this exception
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
 
 }

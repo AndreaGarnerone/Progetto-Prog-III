@@ -1,4 +1,4 @@
-package com.unito.WriteEmail;
+package com.unito.ClientMain.WriteEmail;
 
 import com.unito.ClientMain.Email;
 import javafx.application.Application;

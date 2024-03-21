@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.unito.ShowEmail.ShowEmailController"
+      fx:controller="com.unito.ClientMain.ShowEmail.ShowEmailController"
       prefHeight="400.0" prefWidth="600.0">
 
     <HBox spacing="5">

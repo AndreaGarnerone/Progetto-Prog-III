@@ -43,10 +43,8 @@ public class ClientApplication extends Application {
 
         // Start a ScheduledExecutorService to call refresh() every two seconds
         scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.scheduleAtFixedRate(() -> {
-            // Call refresh() method here
-            ccl.refreshEmail();
-        }, 0, 2, TimeUnit.SECONDS);
+        // Call refresh() method here
+        scheduler.scheduleAtFixedRate(ccl::refreshEmail, 0, 2, TimeUnit.SECONDS);
     }
 
     // Method to properly shut down the application

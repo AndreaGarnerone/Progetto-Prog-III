@@ -1,4 +1,4 @@
-package com.unito.Login;
+package com.unito.ClientMain.Login;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

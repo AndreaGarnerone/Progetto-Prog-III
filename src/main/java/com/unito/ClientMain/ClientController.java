@@ -1,9 +1,8 @@
 package com.unito.ClientMain;
 
-import com.unito.ShowEmail.ShowEmailController;
-import com.unito.WriteEmail.WriteEmailView;
+import com.unito.ClientMain.ShowEmail.ShowEmailController;
+import com.unito.ClientMain.WriteEmail.WriteEmailView;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,12 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
 
 public class ClientController {
     @FXML

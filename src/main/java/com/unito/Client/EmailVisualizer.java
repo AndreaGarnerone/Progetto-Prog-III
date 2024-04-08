@@ -1,4 +1,4 @@
-package com.unito.ClientMain;
+package com.unito.Client;
 
 import javafx.scene.control.ListCell;
 

@@ -1,4 +1,4 @@
-package com.unito.ClientMain;
+package com.unito.Client;
 
 import java.io.Serializable;
 import java.util.Objects;

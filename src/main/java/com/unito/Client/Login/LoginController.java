@@ -1,6 +1,6 @@
-package com.unito.ClientMain.Login;
+package com.unito.Client.Login;
 
-import com.unito.ClientMain.ClientApplication;
+import com.unito.Client.ClientApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;

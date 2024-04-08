@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.unito.ClientMain.Email;
+import com.unito.Client.Email;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,7 +20,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class ServerModel {
     private final ObservableList<String> eventLog = FXCollections.observableArrayList();
-    private static final String filePath = "MailBank.json";
+    private static final String filePath = "src/main/java/com/unito/Server/MailBank.json";
     ServerSocket serverSocket;
     Socket socket = null;
     ObjectInputStream inputStream = null;

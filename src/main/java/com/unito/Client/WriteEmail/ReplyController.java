@@ -1,7 +1,7 @@
-package com.unito.ClientMain.WriteEmail;
+package com.unito.Client.WriteEmail;
 
-import com.unito.ClientMain.ClientModel;
-import com.unito.ClientMain.Email;
+import com.unito.Client.ClientModel;
+import com.unito.Client.Email;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;

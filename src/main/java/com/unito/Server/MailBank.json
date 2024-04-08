@@ -17,7 +17,8 @@
       "name": "orrore.profondo@gormail.com",
       "emailSent": [
         "{\"from\":\"orrore.profondo@gormail.com\",\"to\":\"carrapa\",\"subject\":\"xx\",\"content\":\"xxx\",\"timestamp\":\"19/03/2024:20.01.57\"}",
-        "{\"from\":\"orrore.profondo@gormail.com\",\"to\":\"carrapax@gormail.com;sommo.luminescente@gormail.com\",\"subject\":\"Re: sasa\",\"content\":\"momomo\",\"timestamp\":\"21/03/2024:12.17.31\"}"
+        "{\"from\":\"orrore.profondo@gormail.com\",\"to\":\"carrapax@gormail.com;sommo.luminescente@gormail.com\",\"subject\":\"Re: sasa\",\"content\":\"momomo\",\"timestamp\":\"21/03/2024:12.17.31\"}",
+        "{\"from\":\"orrore.profondo@gormail.com\",\"to\":\"sommo.luminescente@gormail.com;carrapax@gormail.com\",\"subject\":\"Prova1\",\"content\":\"prova esame\",\"timestamp\":\"08/04/2024:20.43.58\"}"
       ],
       "emailReceived": []
     },
@@ -32,7 +33,8 @@
         "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"lock\",\"content\":\"cfgvhb\",\"timestamp\":\"19/03/2024:19.20.06\"}",
         "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"cc\",\"subject\":\"cc\",\"content\":\"cc\",\"timestamp\":\"19/03/2024:19.58.42\"}",
         "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"ss\",\"content\":\"ss\",\"timestamp\":\"20/03/2024:17.30.14\"}",
-        "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapa@gormail.com\",\"subject\":\"s\",\"content\":\"s\",\"timestamp\":\"21/03/2024:11.21.27\"}"
+        "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapa@gormail.com\",\"subject\":\"s\",\"content\":\"s\",\"timestamp\":\"21/03/2024:11.21.27\"}",
+        "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"orrore.profondo@gormail.com;carrapax@gormail.com\",\"subject\":\"Re: Prova1\",\"content\":\"prova reply\",\"timestamp\":\"08/04/2024:20.44.35\"}"
       ],
       "emailReceived": []
     }

@@ -1,7 +1,7 @@
-package com.unito.ClientMain;
+package com.unito.Client;
 
-import com.unito.ClientMain.ShowEmail.ShowEmailController;
-import com.unito.ClientMain.WriteEmail.WriteEmailView;
+import com.unito.Client.ShowEmail.ShowEmailController;
+import com.unito.Client.WriteEmail.WriteEmailView;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

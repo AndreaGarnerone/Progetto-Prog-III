@@ -1,4 +1,4 @@
-package com.unito.ClientMain.ShowEmail;
+package com.unito.Client.ShowEmail;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

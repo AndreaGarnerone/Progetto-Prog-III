@@ -1,8 +1,8 @@
-package com.unito.ClientMain;
+package com.unito.Client;
 
 import com.google.gson.*;
 import com.google.gson.stream.JsonWriter;
-import com.unito.ClientMain.WriteEmail.WriteEmailController;
+import com.unito.Client.WriteEmail.WriteEmailController;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,7 +36,7 @@ public class ClientModel {
 
     // Add an email to the list
     public void addEmail(Email email) {
-        if (sendToServer(email) == 0) {
+        if (sendToServer(email)) {
             // Save the mail to the sender only if the connection was established correctly
             saveToSender(email);
         }
@@ -69,18 +69,18 @@ public class ClientModel {
         }
     }
 
-    private int sendToServer(Email email) {
-        int res = 0;
+    private boolean sendToServer(Email email) {
+        boolean sent = true;
         try {
             connectToServer();
             sendEmail(email);
         } catch (NullPointerException | IOException e) {
             clientController.showAlert(Alert.AlertType.ERROR, "Connection Error", "Server Down", "Unable to connect to the server.");
-            res = -1;
+            sent = false;
         } finally {
             closeConnection();
         }
-        return res;
+        return sent;
     }
 
     // Create a socket connection with the server
@@ -114,7 +114,7 @@ public class ClientModel {
     }
 
     private void loadEmailsFromFile(String account, String selector) {
-        String filePath = "MailStorage/" + account + ".json";
+        String filePath = "src/main/java/com/unito/Client/MailStorage/" + account + ".json";
         try {
             // Read JSON file
             FileReader fileReader = new FileReader(filePath);

@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.unito.ClientMain.ClientController">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.unito.Client.ClientController">
 
     <!-- Account Name -->
     <top>

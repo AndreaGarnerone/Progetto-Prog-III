@@ -10,25 +10,32 @@ public class Email implements Serializable {
     private String content;
     private String timestamp;
 
+    /**
+     * Getter method
+     * @return the from field
+     */
     public String getFrom() {
         return from;
     }
 
-    public String getFromFirst() {
-        if (from != null && from.contains(";")) {
-            return from.split(";")[0];
-        }
-        return from;
-    }
-
+    /**
+     * Setter method
+     * @param from the from field
+     */
     public void setFrom(String from) {
         this.from = from;
     }
 
+    /**
+     * Getter method
+     */
     public String getToAll() {
         return to;
     }
 
+    /**
+     * Getter method
+     */
     public String getToFirst() {
         if (to != null && to.contains(";")) {
             return to.split(";")[0];
@@ -40,28 +47,33 @@ public class Email implements Serializable {
         this.to = to;
     }
 
+    /**
+     * Getter method
+     */
     public String getSubject() {
         return subject;
     }
 
+    /**
+     * Setter method
+     * @param subject The subject field
+     */
     public void setSubject(String subject) {
         this.subject = subject;
     }
 
+    /**
+     * Getter method
+     */
     public String getContent() {
         return content;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
+    /**
+     * Getter method
+     */
     public String getTimestamp() {
         return timestamp;
-    }
-
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
     }
 
     public Email(String from, String to, String subject, String content, String timestamp) {

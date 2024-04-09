@@ -19,6 +19,11 @@ public class ShowEmailController {
     public Email emailV = null;
     String accountName = null;
 
+    /**
+     * Convert the JSon to Email  and set the parameters
+     * @param emailJson The email selected to show
+     * @param selectedAccount The user's account
+     */
     public void initialize(String emailJson, String selectedAccount) {
         Email email = Email.fromString(emailJson);
 
@@ -34,6 +39,10 @@ public class ShowEmailController {
         }
     }
 
+    /**
+     * Start the reply fxml page
+     * @throws Exception
+     */
     public void reply() throws Exception {
         Stage stage = new Stage();
         Reply reply = new Reply(emailV);
@@ -41,6 +50,10 @@ public class ShowEmailController {
         reply.start(stage, accountName);
     }
 
+    /**
+     * Start the reply all fxml page
+     * @throws Exception
+     */
     public void replyAll() throws IOException {
         Stage stage = new Stage();
         Reply reply = new Reply(emailV);
@@ -48,6 +61,10 @@ public class ShowEmailController {
         reply.startAll(stage, accountName);
     }
 
+    /**
+     * Start the forward fxml page
+     * @throws Exception
+     */
     public void forward() throws IOException {
         Stage stage = new Stage();
         Reply reply = new Reply(emailV);

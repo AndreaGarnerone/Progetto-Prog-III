@@ -14,7 +14,6 @@ public class LoginApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LoginPage.fxml"));
         Parent root = fxmlLoader.load();
 
-
         LoginController controller = fxmlLoader.getController();
         controller.setStage(stage);
 

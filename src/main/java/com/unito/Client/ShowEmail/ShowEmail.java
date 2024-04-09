@@ -12,6 +12,10 @@ public class ShowEmail extends Application {
     public ShowEmail(Stage stage) {
     }
 
+    /**
+     * Starter method that load the fxml page
+     * @throws IOException
+     */
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MailServer.fxml"));

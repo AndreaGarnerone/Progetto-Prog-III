@@ -23,19 +23,20 @@ public class LoginController {
         this.stage = stage;
     }
 
-    public void openClient(ActionEvent event) throws IOException {
+    /**
+     * Let the user select the account and then open the client window
+     * @throws IOException
+     */
+    public void openClient() throws IOException {
         if (accountSelector.getValue() == null) {
-            // Show a warning dialog
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
             alert.setHeaderText(null);
             alert.setContentText("Please select an account.");
             alert.showAndWait();
         } else {
-            // Close the login stage
             stage.close();
 
-            // Open the client org.example.progiii
             ClientApplication clientApplication = new ClientApplication();
             clientApplication.setSelectedAccount(accountSelector.getValue());
             Stage clientStage = new Stage();
@@ -43,10 +44,11 @@ public class LoginController {
         }
     }
 
+    /**
+     * Load the logo image
+     */
     public void initialize() {
-        // Load the image from the file system
         Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Logo.png")));
-        // Set the loaded image to the ImageView
         logo.setImage(image);
     }
 }

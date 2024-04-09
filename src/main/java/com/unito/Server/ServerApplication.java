@@ -8,11 +8,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class ServerApplication extends Application {
+    /**
+     * Starter method that load the server application
+     * @param primaryStage
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MailServer.fxml"));
         Parent root = loader.load();
-
 
         ServerModel serverModel = new ServerModel();
 

@@ -29,14 +29,17 @@ public class WriteEmailController {
         this.clientModel = clientModel;
     }
 
+    /**
+     * Check if all the fields are correct.
+     * If all are valid, send the mail anc close the page
+     * @param event
+     */
     public void sendEmail(ActionEvent event) {
         String to = toField.getText();
         String subject = subjectField.getText();
         String content = messageField.getText();
 
-        // Check if any of the fields are empty
         if (to.isEmpty() || subject.isEmpty() || content.isEmpty()) {
-            // Show a warning dialog
             showAlert("Please fill in all fields.", 0);
         } else {
             String[] recipients = to.split(";");
@@ -63,10 +66,8 @@ public class WriteEmailController {
 
             if (allValid) {
                 String timestamp = new SimpleDateFormat("dd/MM/yyyy:HH.mm.ss").format(Calendar.getInstance().getTime());
-                // Assuming 'from' is declared somewhere else in your code
                 clientModel.addEmail(new Email(from, to, subject, content, timestamp));
 
-                // Get the stage from the event source
                 Node source = (Node) event.getSource();
                 Stage stage = (Stage) source.getScene().getWindow();
 
@@ -75,6 +76,11 @@ public class WriteEmailController {
         }
     }
 
+    /**
+     * Perform the check for the correctness of the email address
+     * @param recipient The account name
+     * @return true if the email is valid, false otherwise
+     */
     private boolean checkValidEmail(String recipient) {
         String filePath = "MailStorage/" + recipient + ".json";
         File file = new File(filePath);
@@ -85,6 +91,11 @@ public class WriteEmailController {
         return true;
     }
 
+    /**
+     * Perform the check for the correctness of the email address
+     * @param email The email written
+     * @return true if the email is valid, false otherwise
+     */
     public boolean isValidEmail(String email) {
         String[] parts = email.split("@");
         if (parts.length != 2) {
@@ -94,6 +105,11 @@ public class WriteEmailController {
         return domain.equals("gormail.com");
     }
 
+    /**
+     * Perform the check for the correctness of the email address
+     * @param email The email written
+     * @return true if the email is valid, false otherwise
+     */
     public boolean isValidUsername(String email) {
         String[] parts = email.split("@");
         if (parts.length != 2) {
@@ -108,6 +124,11 @@ public class WriteEmailController {
         return true;
     }
 
+    /**
+     * Show an alert element type if there were some errors compiling all the fields.
+     * @param message The error message to be shown
+     * @param typeError The error type (ERROR or WARNING)
+     */
     public void showAlert(String message, int typeError) {
         if (typeError == 0) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -124,13 +145,19 @@ public class WriteEmailController {
         }
     }
 
-
+    /**
+     * Remove the written text from all the fields
+     */
     public void clearFields() {
         toField.clear();
         subjectField.clear();
         messageField.clear();
     }
 
+    /**
+     * Setter method
+     * @param sender
+     */
     public void setSender(String sender) {
         this.from = sender;
     }

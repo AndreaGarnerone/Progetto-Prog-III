@@ -15,14 +15,15 @@ public class ClientApplication extends Application {
     private String selectedAccount;
     private ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
-    public String getSelectedAccount() {
-        return selectedAccount;
-    }
-
     public void setSelectedAccount(String selectedAccount) {
         this.selectedAccount = selectedAccount;
     }
 
+    /**
+     * Start the application
+     * @param stage
+     * @throws IOException
+     */
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ClientApplication.class.getResource("ClientMail.fxml"));
@@ -32,21 +33,22 @@ public class ClientApplication extends Application {
 
         stage.show();
 
-        ClientController ccl = fxmlLoader.getController();
-        ccl.initialize(selectedAccount);
+        ClientController clientController = fxmlLoader.getController();
+        clientController.initialize(selectedAccount);
 
         stage.setOnCloseRequest(event -> {
-            ccl.close();
+            clientController.close();
             shutdown();
         });
 
         // Start a ScheduledExecutorService to call refresh() every two seconds
         scheduler = Executors.newScheduledThreadPool(1);
-        // Call refresh() method here
-        scheduler.scheduleAtFixedRate(ccl::refreshEmail, 0, 2, TimeUnit.SECONDS);
+        scheduler.scheduleAtFixedRate(clientController::refreshEmail, 0, 2, TimeUnit.SECONDS);
     }
 
-    // Method to properly shut down the application
+    /**
+     * Shut down the application and all the threads
+     */
     private void shutdown() {
         if (scheduler != null) {
             scheduler.shutdown();

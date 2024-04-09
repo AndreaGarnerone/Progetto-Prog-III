@@ -34,7 +34,9 @@ public class ServerModel {
     public ServerModel() {
     }
 
-    /* Methods for receiving an email from a client */
+    /**
+     * Methods for receiving an email from a client
+     */
     public void listen() {
         try {
             int port = 27;
@@ -57,6 +59,9 @@ public class ServerModel {
         }
     }
 
+    /**
+     * Connect the server with socket and wait for new mails to save
+     */
     private void receiveEmail() {
         try {
             socket = serverSocket.accept();
@@ -103,6 +108,9 @@ public class ServerModel {
         }
     }
 
+    /**
+     * Close the server connection
+     */
     private void closeConnection() {
         try {
             if (inputStream != null) {
@@ -120,6 +128,10 @@ public class ServerModel {
 
     //---------------------------- Store the email sent by the client ----------------------------//
 
+    /**
+     * After receiving a new mail it stores it in the JSon file
+     * @param email The email to be saved
+     */
     public void storeEmail(Email email) {
         wl.lock();
         try {
@@ -141,7 +153,6 @@ public class ServerModel {
 
                 // Check if there are multiple receivers
                 if (!email.getToAll().equals(email.getToFirst())) {
-                    // Split the 'to' field into multiple recipients
                     String[] recipients = email.getToAll().split(";");
 
                     for (String recipient : recipients) {
@@ -162,7 +173,6 @@ public class ServerModel {
                 }
             }
 
-            // Write the updated JSON back to the file
             writeJSON(jsonObject);
 
             System.out.println("Email added successfully to the email bank");
@@ -174,6 +184,11 @@ public class ServerModel {
 
     }
 
+    /**
+     * Read the json for sending the email received to the client
+     * @return the JSon mail file
+     * @throws IOException
+     */
     private JsonObject readJSON() throws IOException {
         rl.lock();
         try (FileReader reader = new FileReader(filePath)) {
@@ -184,6 +199,11 @@ public class ServerModel {
         }
     }
 
+    /**
+     * After receiving a mail it stores it in the JSon file
+     * @param jsonObject
+     * @throws IOException
+     */
     private void writeJSON(JsonObject jsonObject) throws IOException {
         wl.lock();
         try (FileWriter writer = new FileWriter(filePath)) {
@@ -196,7 +216,11 @@ public class ServerModel {
 
 
     //---------------------------- Send the email on refresh ----------------------------//
-    // Send the email on refresh
+
+    /**
+     * Send the email on refresh
+     * @param selectedAccount The user account
+     */
     public void refresh(String selectedAccount) {
         try {
             // Read existing JSON file
@@ -231,6 +255,10 @@ public class ServerModel {
         }
     }
 
+    /**
+     * Send the email to the client
+     * @param emailArray The email to be sent
+     */
     public void sendEmails(JsonArray emailArray) {
         lock.readLock().lock();
         try {
@@ -250,14 +278,26 @@ public class ServerModel {
     }
 
     //--------- Event Log ---------//
+
+    /**
+     * Getter method
+     * @return the eventLog
+     */
     public ObservableList<String> getEventLog() {
         return eventLog;
     }
 
+    /**
+     * Add a new line to the log
+     * @param event The event to be added
+     */
     private void addEventLog(String event) {
         Platform.runLater(() -> eventLog.add(0, event));
     }
 
+    /**
+     * Close the server
+     */
     public void stopServer() {
         try {
             if (serverSocket != null && !serverSocket.isClosed()) {
@@ -271,7 +311,5 @@ public class ServerModel {
             e.printStackTrace();
         }
     }
-
-
 
 }

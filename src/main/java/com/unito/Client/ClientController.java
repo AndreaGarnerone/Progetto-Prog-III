@@ -26,14 +26,18 @@ public class ClientController {
     public RadioButton Received, Sent;
     @FXML
     public ToggleGroup selector;
-
     private String accountName;
 
-
-    // No-argument constructor
+    /**
+     * Constructor
+     */
     public ClientController() {
     }
 
+    /**
+     * Initialize the necessary elements for the application
+     * @param selectedAccount The user account
+     */
     @FXML
     public void initialize(String selectedAccount) {
         clientModel = new ClientModel(selectedAccount);
@@ -53,6 +57,9 @@ public class ClientController {
         }
     }
 
+    /**
+     * Close the applications
+     */
     void close() {
         try {
             clientModel.sendString("close");
@@ -61,6 +68,10 @@ public class ClientController {
         }
     }
 
+    /**
+     * Open the writer for writing a new email
+     * @throws IOException
+     */
     @FXML
     private void writeNewEmail() throws IOException {
         WriteEmailView writeEmailView = new WriteEmailView();
@@ -69,7 +80,10 @@ public class ClientController {
         writeEmailView.openWriter(stage, clientModel, accountName);
     }
 
-    //Visualize an email
+    /**
+     * Visualize the selected email
+     * @param event
+     */
     private void handleEmailDoubleClick(javafx.scene.input.MouseEvent event) {
         if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
             Email selectedEmail = (Email) mailListView.getSelectionModel().getSelectedItem();
@@ -92,7 +106,9 @@ public class ClientController {
         }
     }
 
-    // Remove an email from the file
+    /**
+     * Remove an email from the file
+     */
     @FXML
     private void deleteEmail() {
         Email selectedEmail = (Email) mailListView.getSelectionModel().getSelectedItem();
@@ -101,6 +117,10 @@ public class ClientController {
         }
     }
 
+    /**
+     * Send a notification to the user if arrive a new email
+     * @param sender The account name
+     */
     public void showEmailNotification(String sender) {
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -111,27 +131,38 @@ public class ClientController {
         });
     }
 
-    void showAlert(Alert.AlertType alertType, String title, String header, String content) {
+    /**
+     * Actually show the alert
+     */
+    void showAlert() {
         Platform.runLater(() -> {
-            Alert alert = new Alert(alertType);
-            alert.setTitle(title);
-            alert.setHeaderText(header);
-            alert.setContentText(content);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Connection Error");
+            alert.setHeaderText("Server Down");
+            alert.setContentText("Unable to connect to the server.");
             alert.showAndWait();
         });
     }
 
 
-    // Refresh the email list
+    /**
+     * Refresh the email list
+     */
     @FXML
     public void refreshEmail() {
         clientModel.refresh(accountName);
     }
 
+    /**
+     * Change from the email sent view to the email received view
+     */
     public void changeListViewReceived() {
         clientModel.viewReceived(accountName);
     }
 
+    /**
+     * Change from the email received view to the email sent view
+     */
     public void changeListViewSent() {
         clientModel.viewSent(accountName);
     }

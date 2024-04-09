@@ -45,9 +45,17 @@ public class ReplyController {
     @FXML
     public Label fromFieldForward;
 
+    /**
+     * Constructor
+     */
     public ReplyController() {
     }
 
+    /**
+     * Set the texts of the fields of the mail to forward on the forward page
+     * @param email The email to be showed
+     * @param selectedAccount The user account
+     */
     public void loadForward(Email email, String selectedAccount) {
         this.selectedAccount = selectedAccount;
         fromFieldForward.setText(email.getFrom());
@@ -55,6 +63,10 @@ public class ReplyController {
         messageFieldForward.setText(email.getContent());
     }
 
+    /**
+     * Set the text of the mail to be showed
+     * @param email The email to be showed
+     */
     public void loadEmail(Email email) {
         toField.setText(email.getFrom());
         subjectField.setText("Re: " + email.getSubject());
@@ -66,8 +78,12 @@ public class ReplyController {
         messageReField.setText(email.getContent());
     }
 
+    /**
+     * Set the text of the mail to be showed
+     * @param email The email to be showed
+     * @param selectedAccount The user account
+     */
     public void loadEmailAll(Email email, String selectedAccount) {
-        // Sopra
         this.selectedAccount = selectedAccount;
         String toAllCorrect = getToAll(email, selectedAccount);
         System.out.println(toAllCorrect);
@@ -75,7 +91,6 @@ public class ReplyController {
         toField.setText(toAllCorrect);
         subjectField.setText("Re: " + email.getSubject());
 
-        // Sotto
         fromReField.setText(email.getFrom());
         toReField.setText(email.getToAll());
         dateReField.setText(email.getTimestamp());
@@ -83,29 +98,40 @@ public class ReplyController {
         messageReField.setText(email.getContent());
     }
 
-    // Return the string with all the receivers of the new mail
+    /**
+     * Return the string with all the receivers of the new mail
+     * @param email The email to be showed
+     * @param selectedAccount The user account
+     * @return The list of all the email receivers
+     */
     private static String getToAll(Email email, String selectedAccount) {
         boolean addedRecipient = false; // Flag to track if any recipients were added
 
         String[] toControlled = email.getToAll().split(";");
-        String toAllCorrect = email.getFrom() + ";";
+        StringBuilder toAllCorrect = new StringBuilder(email.getFrom() + ";");
 
         for (String toSingle : toControlled) {
             if (!toSingle.equals(selectedAccount)) {
                 if (addedRecipient) {
-                    toAllCorrect += ";";
+                    toAllCorrect.append(";");
                 }
-                toAllCorrect += toSingle;
+                toAllCorrect.append(toSingle);
                 addedRecipient = true;
             }
         }
         // If any recipient was added, remove ending ";"
-        if (addedRecipient && toAllCorrect.endsWith(";")) {
-            toAllCorrect = toAllCorrect.substring(0, toAllCorrect.length() - 1);
+        if (addedRecipient && toAllCorrect.toString().endsWith(";")) {
+            toAllCorrect = new StringBuilder(toAllCorrect.substring(0, toAllCorrect.length() - 1));
         }
-        return toAllCorrect;
+        return toAllCorrect.toString();
     }
 
+    /**
+     * Set up the fields and call the sender
+     * @param event
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public void sendEmail(ActionEvent event) throws IOException, ClassNotFoundException {
         String to = toField.getText();
         String subject = subjectField.getText();
@@ -121,6 +147,10 @@ public class ReplyController {
         sendEmailAction(fields, event);
     }
 
+    /**
+     * Set up the fields and call the sender
+     * @param event
+     */
     public void sendEmailForward(ActionEvent event) {
         String from = selectedAccount;
         String to = toFieldForward.getText();
@@ -137,9 +167,12 @@ public class ReplyController {
         sendEmailAction(fields, event);
     }
 
+    /**
+     * Check for the correctness of the fields and send the email. Then close the window
+     * @param fields The fields of the mail, saved in an array for simplicity
+     */
     private void sendEmailAction(String[] fields, ActionEvent event) {
         if (fields[3].isEmpty()) {
-            // Show a warning dialog
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
             alert.setHeaderText(null);
@@ -151,7 +184,6 @@ public class ReplyController {
             ClientModel clientModel = new ClientModel(fields[0]);
             clientModel.addEmail(new Email(fields[0], fields[1], fields[2], fields[3], timestamp));
 
-            // Get the stage from the event source
             Node source = (Node) event.getSource();
             Stage stage = (Stage) source.getScene().getWindow();
 

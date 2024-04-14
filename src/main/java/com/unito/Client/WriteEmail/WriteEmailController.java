@@ -82,7 +82,7 @@ public class WriteEmailController {
      * @return true if the email is valid, false otherwise
      */
     private boolean checkValidEmail(String recipient) {
-        String filePath = "MailStorage/" + recipient + ".json";
+        String filePath = "src/main/java/com/unito/Client/MailStorage/" + recipient + ".json";
         File file = new File(filePath);
         if (!file.exists()) {
             showAlert("Incorrect user mail address", 1);

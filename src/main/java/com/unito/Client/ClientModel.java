@@ -49,7 +49,7 @@ public class ClientModel {
         String emailJson = email.toJson();
         try {
             // Read JSON file
-            FileReader reader = new FileReader("MailStorage/" + email.getFrom() + ".json");
+            FileReader reader = new FileReader("src/main/java/com/unito/Client/MailStorage/" + email.getFrom() + ".json");
             JsonArray jsonArray = JsonParser.parseReader(reader).getAsJsonArray();
             reader.close();
 
@@ -59,7 +59,7 @@ public class ClientModel {
             emailSentArray.add(emailJson);
 
             // Write updated JSON back to the file
-            FileWriter writer = new FileWriter("MailStorage/" + email.getFrom() + ".json");
+            FileWriter writer = new FileWriter("src/main/java/com/unito/Client/MailStorage/" + email.getFrom() + ".json");
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             gson.toJson(jsonArray, writer);
             writer.close();
@@ -260,7 +260,7 @@ public class ClientModel {
 
             if (!emailList.isEmpty()) {
                 saveEmail(emailList, selectedAccount);
-                clientController.showEmailNotification(selectedAccount);
+                clientController.showEmailNotification();
             }
 
         } catch (IOException | ClassNotFoundException e) {
@@ -275,7 +275,7 @@ public class ClientModel {
      */
     private void saveEmail(JsonArray emailList, String selectedAccount) {
         try {
-            String pathName = "MailStorage/" + selectedAccount + ".json";
+            String pathName = "src/main/java/com/unito/Client/MailStorage/" + selectedAccount + ".json";
 
             // Parse the existing JSON file
             JsonParser parser = new JsonParser();

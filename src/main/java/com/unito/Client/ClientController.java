@@ -119,14 +119,12 @@ public class ClientController {
 
     /**
      * Send a notification to the user if arrive a new email
-     * @param sender The account name
      */
-    public void showEmailNotification(String sender) {
+    public void showEmailNotification() {
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("New Email Notification");
             alert.setHeaderText("New Email Received");
-            alert.setContentText("From: " + sender);
             alert.showAndWait();
         });
     }

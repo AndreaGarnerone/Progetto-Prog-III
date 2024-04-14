@@ -7,48 +7,60 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.unito.Client.ShowEmail.ShowEmailController"
-      prefHeight="400.0" prefWidth="600.0">
+      prefHeight="400.0" prefWidth="600.0"
+      spacing="10"
+      alignment="CENTER">
 
-    <HBox spacing="5">
-        <Label text="From:"/>
-        <BorderPane>
-            <center>
-                <Label fx:id="fromField">
-                    <font>
-                        <Font size="14.0"/>
-                    </font>
-                </Label>
-            </center>
-        </BorderPane>
-    </HBox>
+    <VBox spacing="5">
+        <HBox spacing="5">
+            <Label text="From:">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </Label>
+            <Label fx:id="fromField">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </Label>
+        </HBox>
 
-    <HBox spacing="5">
-        <Label text="Subject:"/>
-        <BorderPane>
-            <center>
-                <Label fx:id="subjectField">
-                    <font>
-                        <Font size="14.0"/>
-                    </font>
-                </Label>
-            </center>
-        </BorderPane>
-    </HBox>
+        <HBox spacing="5">
+            <Label text="Subject:">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </Label>
+            <Label fx:id="subjectField">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </Label>
+        </HBox>
+    </VBox>
 
-    <BorderPane>
+    <BorderPane prefWidth="530" style="-fx-padding: 0 10 0 0;">
         <left>
-            <Label text="Message:"/>
+            <Label text="Message:">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </Label>
         </left>
-        <center>
-            <VBox  style="-fx-border-color: lightgrey; -fx-border-width: 1;">
-                <Label fx:id="messageField" alignment="TOP_LEFT" prefHeight="200" prefWidth="398"/>
+        <right>
+            <VBox style="-fx-border-color: lightgrey; -fx-padding-width: 2;" spacing="20" prefWidth="520">
+                <Label fx:id="messageField" alignment="TOP_LEFT" prefHeight="200" prefWidth="300">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Label>
             </VBox>
-        </center>
+        </right>
     </BorderPane>
 
-    <HBox spacing="10">
+    <VBox spacing="10" alignment="CENTER">
         <Button text="Reply" onAction="#reply"/>
         <Button text="Reply-all" onAction="#replyAll"/>
         <Button text="Forward" onAction="#forward"/>
-    </HBox>
+    </VBox>
 </VBox>

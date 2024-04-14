@@ -1,12 +1,3 @@
 [
-  {
-    "emailSent": [
-      "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"orrore.profondo@gormail.com;carrapax@gormail.com\",\"subject\":\"Re: Prova1\",\"content\":\"prova reply\",\"timestamp\":\"08/04/2024:20.44.35\"}"
-    ],
-    "emailReceived": [
-      "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com;orrore.profondo@gormail.com\",\"subject\":\"sasa\",\"content\":\"sasa\",\"timestamp\":\"21/03/2024:12.08.00\"}",
-      "{\"from\":\"orrore.profondo@gormail.com\",\"to\":\"carrapax@gormail.com;sommo.luminescente@gormail.com\",\"subject\":\"Re: sasa\",\"content\":\"momomo\",\"timestamp\":\"21/03/2024:12.17.31\"}",
-      "{\"from\":\"orrore.profondo@gormail.com\",\"to\":\"sommo.luminescente@gormail.com;carrapax@gormail.com\",\"subject\":\"Prova1\",\"content\":\"prova esame\",\"timestamp\":\"08/04/2024:20.43.58\"}"
-    ]
-  }
+  {"emailSent":["{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"orrore.profondo@gormail.com;carrapax@gormail.com\",\"subject\":\"Re: Prova1\",\"content\":\"prova reply\",\"timestamp\":\"08/04/2024:20.44.35\"}"],"emailReceived":["{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com;orrore.profondo@gormail.com\",\"subject\":\"sasa\",\"content\":\"sasa\",\"timestamp\":\"21/03/2024:12.08.00\"}","{\"from\":\"orrore.profondo@gormail.com\",\"to\":\"carrapax@gormail.com;sommo.luminescente@gormail.com\",\"subject\":\"Re: sasa\",\"content\":\"momomo\",\"timestamp\":\"21/03/2024:12.17.31\"}","{\"from\":\"orrore.profondo@gormail.com\",\"to\":\"sommo.luminescente@gormail.com;carrapax@gormail.com\",\"subject\":\"Prova1\",\"content\":\"prova esame\",\"timestamp\":\"08/04/2024:20.43.58\"}","{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com\",\"subject\":\"s\",\"content\":\"s\",\"timestamp\":\"14/04/2024:12.19.36\"}","{\"from\":\"orrore.profondo@gormail.com\",\"to\":\"sommo.luminescente@gormail.com;carrapax@gormail.com\",\"subject\":\"perche\",\"content\":\"daoi\",\"timestamp\":\"14/04/2024:12.22.56\"}","{\"from\":\"carrapax@gormail.com\",\"to\":\"orrore.profondo@gormail.com;sommo.luminescente@gormail.com\",\"subject\":\"Re: perche\",\"content\":\"per la fuerza\",\"timestamp\":\"14/04/2024:12.23.27\"}"]}
 ]

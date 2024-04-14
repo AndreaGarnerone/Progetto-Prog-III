@@ -17,8 +17,6 @@ public class ClientController {
     public Label setAccountName;
     private ClientModel clientModel;
     @FXML
-    public ComboBox accountSelector;
-    @FXML
     public Button writeEmailButton;
     @FXML
     public ListView mailListView;
@@ -141,7 +139,6 @@ public class ClientController {
             alert.showAndWait();
         });
     }
-
 
     /**
      * Refresh the email list

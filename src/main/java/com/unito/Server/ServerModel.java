@@ -135,10 +135,8 @@ public class ServerModel {
     public void storeEmail(Email email) {
         wl.lock();
         try {
-            // Read the JSON file
             JsonObject jsonObject = readJSON();
 
-            // Get the UserList array
             JsonArray userList = jsonObject.getAsJsonArray("UserList");
 
             // Find the user and update emailSent and emailReceived arrays
@@ -233,21 +231,17 @@ public class ServerModel {
                 JsonObject user = userList.get(i).getAsJsonObject();
                 String userName = user.get("name").getAsString();
                 if (userName.equals(selectedAccount)) {
-                    // Retrieve email list for the user
                     JsonArray emailList = user.getAsJsonArray("emailReceived");
 
-                    // Send emails to the client via socket
                     sendEmails(emailList);
 
-                    // Clear the emailReceived array
                     for (int j = emailList.size() - 1; j >= 0; j--) {
                         emailList.remove(j);
                     }
 
-                    // Write back the modified JSON to file
                     writeJSON(jsonObject);
 
-                    break; // No need to continue after sending emails for the specified user
+                    break;
                 }
             }
         } catch (IOException e) {

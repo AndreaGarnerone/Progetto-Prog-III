@@ -109,7 +109,6 @@ public class ClientModel {
     /**
      * Send the email via the socket connection
      * @param email The email to be sent
-     * @throws IOException
      */
     private void sendEmail(Email email) throws IOException {
         outputStream.writeObject(email);
@@ -155,7 +154,7 @@ public class ClientModel {
     }
 
     /**
-     * Load the sent email list
+     * Load the email sent list
      * @param selectedAccount The user account
      */
     public void viewSent(String selectedAccount) {
@@ -230,7 +229,6 @@ public class ClientModel {
     /**
      * Send a message to the server for the server log
      * @param s The parameter. Values: new or close
-     * @throws IOException
      */
     public void sendString(String s) throws IOException {
         connectToServer();
@@ -250,7 +248,6 @@ public class ClientModel {
     /**
      * Receive a new email and store it
      * @param selectedAccount The account of the user
-     * @throws IOException
      */
     private void receiveNewEmail(String selectedAccount) throws IOException {
         try {

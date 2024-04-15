@@ -19,7 +19,6 @@ public class ReplyController {
     public Email email = null;
     public String selectedAccount;
 
-    //---------- xml elements ----------//
     @FXML
     public TextField messageField;
     @FXML
@@ -128,9 +127,6 @@ public class ReplyController {
 
     /**
      * Set up the fields and call the sender
-     * @param event
-     * @throws IOException
-     * @throws ClassNotFoundException
      */
     public void sendEmail(ActionEvent event) throws IOException, ClassNotFoundException {
         String to = toField.getText();
@@ -149,7 +145,6 @@ public class ReplyController {
 
     /**
      * Set up the fields and call the sender
-     * @param event
      */
     public void sendEmailForward(ActionEvent event) {
         String from = selectedAccount;

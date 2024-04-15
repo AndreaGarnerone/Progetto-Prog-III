@@ -21,14 +21,12 @@ public class ClientApplication extends Application {
 
     /**
      * Start the application
-     * @param stage
-     * @throws IOException
      */
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ClientApplication.class.getResource("ClientMail.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 600);
-        stage.setTitle("Gormail Client");
+        stage.setTitle("Gimail Client");
         stage.setScene(scene);
 
         stage.show();

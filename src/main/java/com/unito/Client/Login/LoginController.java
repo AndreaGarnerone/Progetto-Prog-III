@@ -1,7 +1,6 @@
 package com.unito.Client.Login;
 
 import com.unito.Client.ClientApplication;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
@@ -25,7 +24,6 @@ public class LoginController {
 
     /**
      * Let the user select the account and then open the client window
-     * @throws IOException
      */
     public void openClient() throws IOException {
         if (accountSelector.getValue() == null) {

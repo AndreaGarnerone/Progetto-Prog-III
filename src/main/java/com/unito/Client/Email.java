@@ -7,8 +7,8 @@ public class Email implements Serializable {
     private String from;
     private String to;
     private String subject;
-    private String content;
-    private String timestamp;
+    private final String content;
+    private final String timestamp;
 
     /**
      * Getter method

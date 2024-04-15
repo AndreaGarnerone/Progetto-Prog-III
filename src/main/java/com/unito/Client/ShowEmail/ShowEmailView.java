@@ -7,14 +7,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ShowEmail extends Application {
+public class ShowEmailView extends Application {
 
-    public ShowEmail(Stage stage) {
+    public ShowEmailView(Stage stage) {
     }
 
     /**
      * Starter method that load the fxml page
-     * @throws IOException
      */
     @Override
     public void start(Stage stage) throws IOException {

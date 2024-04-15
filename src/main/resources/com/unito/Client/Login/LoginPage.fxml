@@ -34,9 +34,9 @@
         <ComboBox prefWidth="150.0" fx:id="accountSelector">
             <items>
                 <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="sommo.luminescente@gormail.com"/>
-                    <String fx:value="carrapax@gormail.com"/>
-                    <String fx:value="orrore.profondo@gormail.com"/>
+                    <String fx:value="holly@gimail.com"/>
+                    <String fx:value="ginevra@gimail.com"/>
+                    <String fx:value="andrea@gimail.com"/>
                 </FXCollections>
             </items>
         </ComboBox>

@@ -68,7 +68,6 @@ public class ClientController {
 
     /**
      * Open the writer for writing a new email
-     * @throws IOException
      */
     @FXML
     private void writeNewEmail() throws IOException {
@@ -80,7 +79,6 @@ public class ClientController {
 
     /**
      * Visualize the selected email
-     * @param event
      */
     private void handleEmailDoubleClick(javafx.scene.input.MouseEvent event) {
         if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {

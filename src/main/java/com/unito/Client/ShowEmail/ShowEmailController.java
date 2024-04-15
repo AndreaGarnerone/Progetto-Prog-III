@@ -1,7 +1,7 @@
 package com.unito.Client.ShowEmail;
 
 import com.unito.Client.Email;
-import com.unito.Client.WriteEmail.Reply;
+import com.unito.Client.WriteEmail.ReplyView;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -15,7 +15,8 @@ public class ShowEmailController {
     public Label subjectField;
     @FXML
     public Label messageField;
-
+    @FXML
+    public Label timestampField = null;
     public Email emailV = null;
     String accountName = null;
 
@@ -34,6 +35,7 @@ public class ShowEmailController {
             fromField.setText(email.getFrom());
             subjectField.setText(email.getSubject());
             messageField.setText(email.getContent());
+            timestampField.setText(email.getTimestamp());
         } else {
             System.err.println("Failed to parse email JSON.");
         }
@@ -41,33 +43,30 @@ public class ShowEmailController {
 
     /**
      * Start the reply fxml page
-     * @throws Exception
      */
     public void reply() throws Exception {
         Stage stage = new Stage();
-        Reply reply = new Reply(emailV);
+        ReplyView reply = new ReplyView(emailV);
 
         reply.start(stage, accountName);
     }
 
     /**
      * Start the reply all fxml page
-     * @throws Exception
      */
     public void replyAll() throws IOException {
         Stage stage = new Stage();
-        Reply reply = new Reply(emailV);
+        ReplyView reply = new ReplyView(emailV);
 
         reply.startAll(stage, accountName);
     }
 
     /**
      * Start the forward fxml page
-     * @throws Exception
      */
     public void forward() throws IOException {
         Stage stage = new Stage();
-        Reply reply = new Reply(emailV);
+        ReplyView reply = new ReplyView(emailV);
 
         reply.startLoaded(stage, accountName);
     }

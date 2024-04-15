@@ -8,29 +8,29 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Reply extends Application {
+public class ReplyView extends Application {
     public Email email;
-    public Reply() {
+
+    public ReplyView() {
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-
     }
 
     /**
      * Constructor
+     *
      * @param email The email
      */
-    public Reply(Email email) {
+    public ReplyView(Email email) {
         this.email = email;
     }
 
     /**
      * Call the reply page loader
-     * @param stage
+     *
      * @param selectedAccount The user account
-     * @throws IOException
      */
     public void start(Stage stage, String selectedAccount) throws IOException {
         loader(stage, 0, selectedAccount);
@@ -38,9 +38,8 @@ public class Reply extends Application {
 
     /**
      * Call the reply all page loader
-     * @param stage
+     *
      * @param selectedAccount The user account
-     * @throws IOException
      */
     public void startAll(Stage stage, String selectedAccount) throws IOException {
         loader(stage, 1, selectedAccount);
@@ -48,9 +47,8 @@ public class Reply extends Application {
 
     /**
      * Call the forward page loader
-     * @param stage
+     *
      * @param selectedAccount The user account
-     * @throws IOException
      */
     public void startLoaded(Stage stage, String selectedAccount) throws IOException {
         forwardLoaded(stage, selectedAccount);
@@ -58,9 +56,8 @@ public class Reply extends Application {
 
     /**
      * Load the reply or reply all page
-     * @param stage
+     *
      * @param selectedAccount The user account
-     * @throws IOException
      */
     private void forwardLoaded(Stage stage, String selectedAccount) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Forward.fxml"));
@@ -75,10 +72,9 @@ public class Reply extends Application {
 
     /**
      * Load the email reply page
-     * @param stage
-     * @param option 0: reply, 1: reply all
+     *
+     * @param option          0: reply, 1: reply all
      * @param selectedAccount The user account
-     * @throws IOException
      */
     private void loader(Stage stage, int option, String selectedAccount) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Reply.fxml"));

@@ -1,44 +1,24 @@
 {
   "UserList": [
     {
-      "name": "carrapax@gormail.com",
+      "name": "ginevra@gimail.com",
       "emailSent": [
-        "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com\",\"subject\":\"prova\",\"content\":\"mi senti?\",\"timestamp\":\"13/03/2024:19.29.38\"}",
-        "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com\",\"subject\":\"dfg\",\"content\":\"dfd\",\"timestamp\":\"13/03/2024:19.33.54\"}",
-        "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com\",\"subject\":\"rbgvfdcsx\",\"content\":\"b vfcdx gfdx fd\",\"timestamp\":\"13/03/2024:20.53.29\"}",
-        "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com\",\"subject\":\"prova notify\",\"content\":\"evqrfreq\",\"timestamp\":\"14/03/2024:21.21.58\"}",
-        "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com;orrore.profondo@gormail.com\",\"subject\":\"threads!\",\"content\":\"vre\",\"timestamp\":\"19/03/2024:18.51.37\"}",
-        "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.lumiescente@gormail.com\",\"subject\":\"c\",\"content\":\"c\",\"timestamp\":\"21/03/2024:11.20.36\"}",
-        "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com;orrore.profondo@gormail.com\",\"subject\":\"sasa\",\"content\":\"sasa\",\"timestamp\":\"21/03/2024:12.08.00\"}",
-        "{\"from\":\"carrapax@gormail.com\",\"to\":\"sommo.luminescente@gormail.com\",\"subject\":\"s\",\"content\":\"s\",\"timestamp\":\"14/04/2024:12.19.36\"}",
-        "{\"from\":\"carrapax@gormail.com\",\"to\":\"orrore.profondo@gormail.com;sommo.luminescente@gormail.com\",\"subject\":\"Re: perche\",\"content\":\"per la fuerza\",\"timestamp\":\"14/04/2024:12.23.27\"}"
+        "{\"from\":\"ginevra@gimail.com\",\"to\":\"andrea@gimail.com;holly@gimail.com\",\"subject\":\"ciaooo\",\"content\":\"ci sono anche io!\",\"timestamp\":\"15/04/2024:20.56.55\"}",
+        "{\"from\":\"ginevra@gimail.com\",\"to\":\"andrea@gimail.com;holly@gimail.com\",\"subject\":\"test2\",\"content\":\"sa sa sa\",\"timestamp\":\"15/04/2024:21.08.32\"}"
       ],
       "emailReceived": []
     },
     {
-      "name": "orrore.profondo@gormail.com",
+      "name": "andrea@gimail.com",
       "emailSent": [
-        "{\"from\":\"orrore.profondo@gormail.com\",\"to\":\"carrapa\",\"subject\":\"xx\",\"content\":\"xxx\",\"timestamp\":\"19/03/2024:20.01.57\"}",
-        "{\"from\":\"orrore.profondo@gormail.com\",\"to\":\"carrapax@gormail.com;sommo.luminescente@gormail.com\",\"subject\":\"Re: sasa\",\"content\":\"momomo\",\"timestamp\":\"21/03/2024:12.17.31\"}",
-        "{\"from\":\"orrore.profondo@gormail.com\",\"to\":\"sommo.luminescente@gormail.com;carrapax@gormail.com\",\"subject\":\"Prova1\",\"content\":\"prova esame\",\"timestamp\":\"08/04/2024:20.43.58\"}",
-        "{\"from\":\"orrore.profondo@gormail.com\",\"to\":\"carrapax@gormail.com;sommo.luminescente@gormail.com\",\"subject\":\"perche\",\"content\":\"daoi\",\"timestamp\":\"14/04/2024:12.15.03\"}",
-        "{\"from\":\"orrore.profondo@gormail.com\",\"to\":\"sommo.luminescente@gormail.com;carrapax@gormail.com\",\"subject\":\"perche\",\"content\":\"daoi\",\"timestamp\":\"14/04/2024:12.22.56\"}"
+        "{\"from\":\"andrea@gimail.com\",\"to\":\"ginevra@gimail.com\",\"subject\":\"dai\",\"content\":\"lo sai\",\"timestamp\":\"15/04/2024:20.58.05\"}"
       ],
       "emailReceived": []
     },
     {
-      "name": "sommo.luminescente@gormail.com",
+      "name": "holly@gimail.com",
       "emailSent": [
-        "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com;sommo.luminescente@gormail.com\",\"subject\":\"prova\",\"content\":\"porcaccio dio\",\"timestamp\":\"13/03/2024:13.21.57\"}",
-        "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"ssssss\",\"content\":\"ssssssssssssssssssssssss\",\"timestamp\":\"13/03/2024:20.53.06\"}",
-        "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"orrore.profondo@gormail.com\",\"subject\":\"PROVAA\",\"content\":\"AAAA\",\"timestamp\":\"13/03/2024:23.14.50\"}",
-        "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"prova notify\",\"content\":\"prova notify\",\"timestamp\":\"14/03/2024:21.22.49\"}",
-        "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"notify\",\"content\":\"notify\",\"timestamp\":\"14/03/2024:21.28.19\"}",
-        "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"lock\",\"content\":\"cfgvhb\",\"timestamp\":\"19/03/2024:19.20.06\"}",
-        "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"cc\",\"subject\":\"cc\",\"content\":\"cc\",\"timestamp\":\"19/03/2024:19.58.42\"}",
-        "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapax@gormail.com\",\"subject\":\"ss\",\"content\":\"ss\",\"timestamp\":\"20/03/2024:17.30.14\"}",
-        "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"carrapa@gormail.com\",\"subject\":\"s\",\"content\":\"s\",\"timestamp\":\"21/03/2024:11.21.27\"}",
-        "{\"from\":\"sommo.luminescente@gormail.com\",\"to\":\"orrore.profondo@gormail.com;carrapax@gormail.com\",\"subject\":\"Re: Prova1\",\"content\":\"prova reply\",\"timestamp\":\"08/04/2024:20.44.35\"}"
+        "{\"from\":\"holly@gimail.com\",\"to\":\"ginevra@gimail.com;andrea@gimail.com\",\"subject\":\"Re: ciaooo\",\"content\":\"bau\",\"timestamp\":\"15/04/2024:20.57.18\"}"
       ],
       "emailReceived": []
     }

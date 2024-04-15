@@ -37,6 +37,19 @@
                 </font>
             </Label>
         </HBox>
+
+        <HBox spacing="5">
+            <Label text="Date of message:">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </Label>
+            <Label fx:id="timestampField">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </Label>
+        </HBox>
     </VBox>
 
     <BorderPane prefWidth="530" style="-fx-padding: 0 10 0 0;">

@@ -14,6 +14,7 @@ import java.io.*;
 import java.net.Socket;
 
 public class ClientModel {
+    boolean isSent = false;
     private final ObservableList<Email> mailList;
     Socket socket = null;
     ObjectOutputStream outputStream;
@@ -160,6 +161,7 @@ public class ClientModel {
     public void viewSent(String selectedAccount) {
         mailList.clear();
         loadEmailsFromFile(selectedAccount, "emailSent");
+        isSent = true;
     }
     /**
      * Load the received email list
@@ -168,6 +170,7 @@ public class ClientModel {
     public void viewReceived(String selectedAccount) {
         mailList.clear();
         loadEmailsFromFile(selectedAccount, "emailReceived");
+        isSent = false;
     }
 
     /**
@@ -223,7 +226,7 @@ public class ClientModel {
             closeConnection();
         }
 
-        loadEmailsFromFile(selectedAccount, "emailReceived");
+        if (!isSent) loadEmailsFromFile(selectedAccount, "emailReceived");
     }
 
     /**

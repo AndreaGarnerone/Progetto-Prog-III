@@ -32,7 +32,6 @@ public class WriteEmailController {
     /**
      * Check if all the fields are correct.
      * If all are valid, send the mail anc close the page
-     * @param event
      */
     public void sendEmail(ActionEvent event) {
         String to = toField.getText();
@@ -102,7 +101,7 @@ public class WriteEmailController {
             return false;
         }
         String domain = parts[1].trim();
-        return domain.equals("gormail.com");
+        return domain.equals("gimail.com");
     }
 
     /**
@@ -156,7 +155,6 @@ public class WriteEmailController {
 
     /**
      * Setter method
-     * @param sender
      */
     public void setSender(String sender) {
         this.from = sender;

@@ -1,0 +1,12 @@
+[
+  {
+    "emailSent": [
+      "{\"from\":\"ginevra@gimail.com\",\"to\":\"andrea@gimail.com;holly@gimail.com\",\"subject\":\"ciaooo\",\"content\":\"ci sono anche io!\",\"timestamp\":\"15/04/2024:20.56.55\"}",
+      "{\"from\":\"ginevra@gimail.com\",\"to\":\"andrea@gimail.com;holly@gimail.com\",\"subject\":\"test2\",\"content\":\"sa sa sa\",\"timestamp\":\"15/04/2024:21.08.32\"}"
+    ],
+    "emailReceived": [
+      "{\"from\":\"holly@gimail.com\",\"to\":\"ginevra@gimail.com;andrea@gimail.com\",\"subject\":\"Re: ciaooo\",\"content\":\"bau\",\"timestamp\":\"15/04/2024:20.57.18\"}",
+      "{\"from\":\"andrea@gimail.com\",\"to\":\"ginevra@gimail.com\",\"subject\":\"dai\",\"content\":\"lo sai\",\"timestamp\":\"15/04/2024:20.58.05\"}"
+    ]
+  }
+]

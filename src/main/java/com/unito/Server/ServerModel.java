@@ -66,7 +66,6 @@ public class ServerModel {
         try {
             socket = serverSocket.accept();
 
-            // Handle client connection using ExecutorService
             executor.submit(() -> {
                 try {
                     inputStream = new ObjectInputStream(socket.getInputStream());
@@ -130,6 +129,7 @@ public class ServerModel {
 
     /**
      * After receiving a new mail it stores it in the JSon file
+     *
      * @param email The email to be saved
      */
     public void storeEmail(Email email) {
@@ -184,8 +184,8 @@ public class ServerModel {
 
     /**
      * Read the json for sending the email received to the client
+     *
      * @return the JSon mail file
-     * @throws IOException
      */
     private JsonObject readJSON() throws IOException {
         rl.lock();
@@ -199,8 +199,6 @@ public class ServerModel {
 
     /**
      * After receiving a mail it stores it in the JSon file
-     * @param jsonObject
-     * @throws IOException
      */
     private void writeJSON(JsonObject jsonObject) throws IOException {
         wl.lock();
@@ -217,6 +215,7 @@ public class ServerModel {
 
     /**
      * Send the email on refresh
+     *
      * @param selectedAccount The user account
      */
     public void refresh(String selectedAccount) {
@@ -251,6 +250,7 @@ public class ServerModel {
 
     /**
      * Send the email to the client
+     *
      * @param emailArray The email to be sent
      */
     public void sendEmails(JsonArray emailArray) {
@@ -275,6 +275,7 @@ public class ServerModel {
 
     /**
      * Getter method
+     *
      * @return the eventLog
      */
     public ObservableList<String> getEventLog() {
@@ -283,6 +284,7 @@ public class ServerModel {
 
     /**
      * Add a new line to the log
+     *
      * @param event The event to be added
      */
     private void addEventLog(String event) {

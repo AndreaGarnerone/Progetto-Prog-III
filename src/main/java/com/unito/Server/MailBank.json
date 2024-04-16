@@ -4,21 +4,51 @@
       "name": "ginevra@gimail.com",
       "emailSent": [
         "{\"from\":\"ginevra@gimail.com\",\"to\":\"andrea@gimail.com;holly@gimail.com\",\"subject\":\"ciaooo\",\"content\":\"ci sono anche io!\",\"timestamp\":\"15/04/2024:20.56.55\"}",
-        "{\"from\":\"ginevra@gimail.com\",\"to\":\"andrea@gimail.com;holly@gimail.com\",\"subject\":\"test2\",\"content\":\"sa sa sa\",\"timestamp\":\"15/04/2024:21.08.32\"}"
+        "{\"from\":\"ginevra@gimail.com\",\"to\":\"andrea@gimail.com;holly@gimail.com\",\"subject\":\"test2\",\"content\":\"sa sa sa\",\"timestamp\":\"15/04/2024:21.08.32\"}",
+        "{\"from\":\"ginevra@gimail.com\",\"to\":\"holly@gimail.com\",\"subject\":\"test cambiamenti\",\"content\":\"funge??\",\"timestamp\":\"16/04/2024:17.57.11\"}",
+        "{\"from\":\"ginevra@gimail.com\",\"to\":\"holly@gimail.com;andrea@gimail.com\",\"subject\":\"Re: test cambiamenti\",\"content\":\"si\",\"timestamp\":\"16/04/2024:18.01.18\"}",
+        "{\"from\":\"ginevra@gimail.com\",\"to\":\"holly@gimail.com\",\"subject\":\"funge\",\"content\":\"prova\",\"timestamp\":\"16/04/2024:18.21.46\"}",
+        "{\"from\":\"ginevra@gimail.com\",\"to\":\"andrea@gimail.com;holly@gimail.com\",\"subject\":\"Re: dai\",\"content\":\"si\u0027 e funziona\",\"timestamp\":\"16/04/2024:18.23.26\"}",
+        "{\"from\":\"ginevra@gimail.com\",\"to\":\"andrea@gimail.com;holly@gimail.com\",\"subject\":\"s\",\"content\":\"s\",\"timestamp\":\"16/04/2024:18.35.43\"}",
+        "{\"from\":\"ginevra@gimail.com\",\"to\":\"andrea@gimail.com;holly@gimail.com\",\"subject\":\"s\",\"content\":\"s\",\"timestamp\":\"16/04/2024:18.41.48\"}",
+        "{\"from\":\"ginevra@gimail.com\",\"to\":\"andrea@gimail.com\",\"subject\":\"ds\",\"content\":\"ads\",\"timestamp\":\"16/04/2024:20.45.22\"}",
+        "{\"from\":\"ginevra@gimail.com\",\"to\":\"holly@gimail.com;andrea@gimail.com\",\"subject\":\"Re: Vieni a trovarmi\",\"content\":\"Quando vuoi che ci troviamo?\",\"timestamp\":\"16/04/2024:22.03.02\"}",
+        "{\"from\":\"ginevra@gimail.com\",\"to\":\"holly@gimail.com;andrea@gimail.com\",\"subject\":\"Re: Vieni a trovarmi\",\"content\":\"dai\",\"timestamp\":\"16/04/2024:22.35.46\"}",
+        "{\"from\":\"ginevra@gimail.com\",\"to\":\"holly@gimail.com\",\"subject\":\"Re: Vieni a trovarmi\",\"content\":\"sdf\",\"timestamp\":\"16/04/2024:22.48.49\"}",
+        "{\"from\":\"ginevra@gimail.com\",\"to\":\"holly@gimail.com\",\"subject\":\"Re: Vieni a trovarmi\",\"content\":\"fs\",\"timestamp\":\"16/04/2024:22.50.29\"}",
+        "{\"from\":\"ginevra@gimail.com\",\"to\":\"andrea@gimail.com\",\"subject\":\"wef\",\"content\":\"d\",\"timestamp\":\"16/04/2024:22.52.08\"}",
+        "{\"from\":\"ginevra@gimail.com\",\"to\":\"andrea@gimail.com\",\"subject\":\"bubu\",\"content\":\"sss\",\"timestamp\":\"16/04/2024:23.44.0045\"}",
+        "{\"from\":\"ginevra@gimail.com\",\"to\":\"holly@gimail.com;andrea@gimail.com\",\"subject\":\"s\",\"content\":\"s\",\"timestamp\":\"16/04/2024:23.45.0024\"}"
       ],
       "emailReceived": []
     },
     {
       "name": "andrea@gimail.com",
       "emailSent": [
-        "{\"from\":\"andrea@gimail.com\",\"to\":\"ginevra@gimail.com\",\"subject\":\"dai\",\"content\":\"lo sai\",\"timestamp\":\"15/04/2024:20.58.05\"}"
+        "{\"from\":\"andrea@gimail.com\",\"to\":\"ginevra@gimail.com\",\"subject\":\"dai\",\"content\":\"lo sai\",\"timestamp\":\"15/04/2024:20.58.05\"}",
+        "{\"from\":\"andrea@gimail.com\",\"to\":\"ginevra@gimail.com;holly@gimail.com\",\"subject\":\"dai\",\"content\":\"doppia mail\",\"timestamp\":\"16/04/2024:18.22.59\"}",
+        "{\"from\":\"andrea@gimail.com\",\"to\":\"ginevra@gimail.com;holly@gimail.com\",\"subject\":\"GENERALE\",\"content\":\"prova finale\",\"timestamp\":\"16/04/2024:18.27.48\"}",
+        "{\"from\":\"andrea@gimail.com\",\"to\":\"ginevra@gimail.com\",\"subject\":\"Re\",\"content\":\"reply-all generale\",\"timestamp\":\"16/04/2024:18.29.23\"}",
+        "{\"from\":\"andrea@gimail.com\",\"to\":\"holly@gimail.com;ginevra@gimail.com\",\"subject\":\"asdfgg\",\"content\":\"saDFGB\",\"timestamp\":\"16/04/2024:22.24.0048\"}",
+        "{\"from\":\"andrea@gimail.com\",\"to\":\"holly@gimail.com;ginevra@gimail.com\",\"subject\":\"Re: wef\",\"content\":\"few\",\"timestamp\":\"16/04/2024:22.51.11\"}",
+        "{\"from\":\"andrea@gimail.com\",\"to\":\"holly@gimail.com\",\"subject\":\"Re: wef\",\"content\":\"few\",\"timestamp\":\"16/04/2024:22.51.19\"}"
       ],
       "emailReceived": []
     },
     {
       "name": "holly@gimail.com",
       "emailSent": [
-        "{\"from\":\"holly@gimail.com\",\"to\":\"ginevra@gimail.com;andrea@gimail.com\",\"subject\":\"Re: ciaooo\",\"content\":\"bau\",\"timestamp\":\"15/04/2024:20.57.18\"}"
+        "{\"from\":\"holly@gimail.com\",\"to\":\"ginevra@gimail.com;andrea@gimail.com\",\"subject\":\"Re: ciaooo\",\"content\":\"bau\",\"timestamp\":\"15/04/2024:20.57.18\"}",
+        "{\"from\":\"holly@gimail.com\",\"to\":\"andrea@gimail.com\",\"subject\":\"test cambiamenti\",\"content\":\"funge??\",\"timestamp\":\"16/04/2024:17.52.12\"}",
+        "{\"from\":\"holly@gimail.com\",\"to\":\"ginevra@gimail.com;andrea@gimail.com\",\"subject\":\"test cambiamenti\",\"content\":\"funge??\",\"timestamp\":\"16/04/2024:18.00.19\"}",
+        "{\"from\":\"holly@gimail.com\",\"to\":\"andrea@gimail.com;ginevra@gimail.com\",\"subject\":\"Re: GENERALE\",\"content\":\"reply-all generale\",\"timestamp\":\"16/04/2024:18.28.43\"}",
+        "{\"from\":\"holly@gimail.com\",\"to\":\"andrea@gimail.com;ginevra@gimail.com\",\"subject\":\"s\",\"content\":\"s\",\"timestamp\":\"16/04/2024:18.45.00\"}",
+        "{\"from\":\"holly@gimail.com\",\"to\":\"ginevra@gimail.com;andrea@gimail.com\",\"subject\":\"dai\",\"content\":\"non fare scherzi\",\"timestamp\":\"16/04/2024:21.37.22\"}",
+        "{\"from\":\"holly@gimail.com\",\"to\":\"ginevra@gimail.com;andrea@gimail.com\",\"subject\":\"dfsg\",\"content\":\"sdaasf\",\"timestamp\":\"16/04/2024:21.49.0017\"}",
+        "{\"from\":\"holly@gimail.com\",\"to\":\"ginevra@gimail.com;andrea@gimail.com\",\"subject\":\"Vieni a trovarmi\",\"content\":\"Mi machi!\",\"timestamp\":\"16/04/2024:22.02.0033\"}",
+        "{\"from\":\"holly@gimail.com\",\"to\":\"andrea@gimail.com;ginevra@gimail.com\",\"subject\":\"wef\",\"content\":\"d\",\"timestamp\":\"16/04/2024:22.50.0056\"}",
+        "{\"from\":\"holly@gimail.com\",\"to\":\"ginevra@gimail.com\",\"subject\":\"Re: s\",\"content\":\"d\",\"timestamp\":\"16/04/2024:23.45.37\"}",
+        "{\"from\":\"holly@gimail.com\",\"to\":\"ginevra@gimail.com;andrea@gimail.com\",\"subject\":\"Re: s\",\"content\":\"d\",\"timestamp\":\"16/04/2024:23.45.43\"}"
       ],
       "emailReceived": []
     }

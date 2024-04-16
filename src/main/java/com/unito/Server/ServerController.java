@@ -4,10 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 
 public class ServerController {
-    public ServerApplication serverApplication;
     @FXML
     public ListView<String> listView;
-    private ServerModel serverModel; // declare ServerModel here
+    private ServerModel serverModel;
 
     public void setServerModel(ServerModel serverModel) {
         this.serverModel = serverModel;
@@ -20,4 +19,3 @@ public class ServerController {
         }
     }
 }
-

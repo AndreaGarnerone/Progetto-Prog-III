@@ -26,7 +26,7 @@ public class ServerModel {
     ObjectInputStream inputStream = null;
     ObjectOutputStream outputStream = null;
 
-    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private final ExecutorService executor = Executors.newFixedThreadPool(10);
     private static final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
     private final Lock rl = lock.readLock();
     private final Lock wl = lock.writeLock();
@@ -41,11 +41,11 @@ public class ServerModel {
         try {
             int port = 27;
             serverSocket = new ServerSocket(port);
-            while (!serverSocket.isClosed()) { // Check if the socket is closed
+            while (!serverSocket.isClosed()) {
                 receiveEmail();
             }
         } catch (IOException e) {
-            if (!serverSocket.isClosed()) { // Check if the socket is not closed
+            if (!serverSocket.isClosed()) {
                 e.printStackTrace();
             }
         } finally {
@@ -133,13 +133,11 @@ public class ServerModel {
      * @param email The email to be saved
      */
     public void storeEmail(Email email) {
-        wl.lock();
         try {
             JsonObject jsonObject = readJSON();
 
             JsonArray userList = jsonObject.getAsJsonArray("UserList");
 
-            // Find the user and update emailSent and emailReceived arrays
             for (int i = 0; i < userList.size(); i++) {
                 JsonObject user = userList.get(i).getAsJsonObject();
                 String name = user.get("name").getAsString();
@@ -149,7 +147,6 @@ public class ServerModel {
                     emailSent.add(email.toJson());
                 }
 
-                // Check if there are multiple receivers
                 if (!email.getToAll().equals(email.getToFirst())) {
                     String[] recipients = email.getToAll().split(";");
 
@@ -176,8 +173,6 @@ public class ServerModel {
             System.out.println("Email added successfully to the email bank");
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            wl.unlock();
         }
 
     }
@@ -210,7 +205,6 @@ public class ServerModel {
         }
     }
 
-
     //---------------------------- Send the email on refresh ----------------------------//
 
     /**
@@ -220,10 +214,8 @@ public class ServerModel {
      */
     public void refresh(String selectedAccount) {
         try {
-            // Read existing JSON file
             JsonObject jsonObject = readJSON();
 
-            // Retrieve the "UserList" array
             JsonArray userList = jsonObject.getAsJsonArray("UserList");
 
             for (int i = 0; i < userList.size(); i++) {
@@ -254,20 +246,15 @@ public class ServerModel {
      * @param emailArray The email to be sent
      */
     public void sendEmails(JsonArray emailArray) {
-        lock.readLock().lock();
         try {
-            // Convert JsonArray to string
             String jsonString = emailArray.toString();
 
-            // Send the string representation of JsonArray
             outputStream.writeObject(jsonString);
             outputStream.flush();
         } catch (SocketException e) {
             System.out.println("Client closed the connection");
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            lock.readLock().unlock();
         }
     }
 
@@ -299,10 +286,7 @@ public class ServerModel {
             if (serverSocket != null && !serverSocket.isClosed()) {
                 serverSocket.close();
             }
-            // Shutdown the executor service
             executor.shutdown();
-        } catch (SocketException ignored) {
-            // Socket is already closed, no need to handle this exception
         } catch (IOException e) {
             e.printStackTrace();
         }

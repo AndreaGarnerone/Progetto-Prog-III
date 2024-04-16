@@ -64,7 +64,7 @@ public class WriteEmailController {
             }
 
             if (allValid) {
-                String timestamp = new SimpleDateFormat("dd/MM/yyyy:HH.mm.ss").format(Calendar.getInstance().getTime());
+                String timestamp = new SimpleDateFormat("dd/MM/yyyy:HH.mm.ssss").format(Calendar.getInstance().getTime());
                 clientModel.addEmail(new Email(from, to, subject, content, timestamp));
 
                 Node source = (Node) event.getSource();
@@ -77,6 +77,7 @@ public class WriteEmailController {
 
     /**
      * Perform the check for the correctness of the email address
+     *
      * @param recipient The account name
      * @return true if the email is valid, false otherwise
      */
@@ -92,6 +93,7 @@ public class WriteEmailController {
 
     /**
      * Perform the check for the correctness of the email address
+     *
      * @param email The email written
      * @return true if the email is valid, false otherwise
      */
@@ -106,6 +108,7 @@ public class WriteEmailController {
 
     /**
      * Perform the check for the correctness of the email address
+     *
      * @param email The email written
      * @return true if the email is valid, false otherwise
      */
@@ -125,7 +128,8 @@ public class WriteEmailController {
 
     /**
      * Show an alert element type if there were some errors compiling all the fields.
-     * @param message The error message to be shown
+     *
+     * @param message   The error message to be shown
      * @param typeError The error type (ERROR or WARNING)
      */
     public void showAlert(String message, int typeError) {

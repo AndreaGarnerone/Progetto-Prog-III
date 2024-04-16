@@ -39,7 +39,6 @@ public class ClientApplication extends Application {
             shutdown();
         });
 
-        // Start a ScheduledExecutorService to call refresh() every two seconds
         scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(clientController::refreshEmail, 0, 2, TimeUnit.SECONDS);
     }

@@ -140,7 +140,6 @@ public class Email implements Serializable {
                         timestamp = value;
                         break;
                     default:
-                        // Handle unknown fields if necessary
                         break;
                 }
             }

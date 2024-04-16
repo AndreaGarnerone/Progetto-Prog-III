@@ -85,7 +85,7 @@ public class ReplyView extends Application {
 
         ReplyController replyController = fxmlLoader.getController();
         if (option == 0) {
-            replyController.loadEmail(email);
+            replyController.loadEmail(email, selectedAccount);
         } else {
             replyController.loadEmailAll(email, selectedAccount);
         }

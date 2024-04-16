@@ -1,5 +1,6 @@
 package com.unito.Client;
 
+import com.google.gson.*;
 import com.unito.Client.ShowEmail.ShowEmailController;
 import com.unito.Client.WriteEmail.WriteEmailView;
 import javafx.application.Platform;
@@ -10,12 +11,14 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class ClientController {
+    private ClientModel clientModel;
     @FXML
     public Label setAccountName;
-    private ClientModel clientModel;
     @FXML
     public Button writeEmailButton;
     @FXML
@@ -25,6 +28,7 @@ public class ClientController {
     @FXML
     public ToggleGroup selector;
     private String accountName;
+    private boolean isReceived = true;
 
     /**
      * Constructor
@@ -34,6 +38,7 @@ public class ClientController {
 
     /**
      * Initialize the necessary elements for the application
+     *
      * @param selectedAccount The user account
      */
     @FXML
@@ -50,17 +55,6 @@ public class ClientController {
 
         try {
             clientModel.sendString("new");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Close the applications
-     */
-    void close() {
-        try {
-            clientModel.sendString("close");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -106,11 +100,63 @@ public class ClientController {
      * Remove an email from the file
      */
     @FXML
-    private void deleteEmail() {
+    private void deleteEmail() throws IOException {
         Email selectedEmail = (Email) mailListView.getSelectionModel().getSelectedItem();
-        if (selectedEmail != null) {
-            mailListView.getItems().remove(selectedEmail);
+        JsonObject jsonObject = readJSON().get(0).getAsJsonObject(); // Accessing the first element of the array
+
+        mailListView.getItems().remove(selectedEmail);
+        if (isReceived) {
+            JsonArray emailReceived = jsonObject.getAsJsonArray("emailReceived");
+            removeEmail(selectedEmail.getContent(), emailReceived);
+        } else {
+            JsonArray emailSent = jsonObject.getAsJsonArray("emailSent");
+            removeEmail(selectedEmail.getContent(), emailSent);
         }
+
+        JsonArray jsonArray = new JsonArray();
+        jsonArray.add(jsonObject);
+
+        writeJSON(jsonArray);
+    }
+
+    /**
+     * Find the email to remove in the json array
+     *
+     * @param keyForRemoval Key value for find the correct email to remove
+     * @param emailArray    The array containing the mail
+     */
+    private void removeEmail(String keyForRemoval, JsonArray emailArray) {
+        for (int i = 0; i < emailArray.size(); i++) {
+            String emailJsonString = emailArray.get(i).getAsString();
+            JsonObject emailObject = JsonParser.parseString(emailJsonString).getAsJsonObject();
+            String timestamp = emailObject.get("content").getAsString();
+            if (timestamp.equals(keyForRemoval)) {
+                emailArray.remove(i);
+                break;
+            }
+        }
+    }
+
+    /**
+     * Read the json for sending the email received to the client
+     *
+     * @return the JSon mail file
+     */
+    private JsonArray readJSON() throws IOException {
+        String filepath = "src/main/java/com/unito/Client/MailStorage/" + accountName + ".json";
+        FileReader reader = new FileReader(filepath);
+        JsonElement jsonElement = JsonParser.parseReader(reader);
+        return jsonElement.getAsJsonArray();
+    }
+
+    /**
+     * After receiving a mail it stores it in the JSon file
+     */
+    private void writeJSON(JsonArray jsonArray) throws IOException {
+        String filepath = "src/main/java/com/unito/Client/MailStorage/" + accountName + ".json";
+        FileWriter writer = new FileWriter(filepath);
+        new Gson().toJson(jsonArray, writer);
+        writer.close();
     }
 
     /**
@@ -139,6 +185,17 @@ public class ClientController {
     }
 
     /**
+     * Close the applications
+     */
+    void close() {
+        try {
+            clientModel.sendString("close");
+        } catch (IOException e) {
+            //e.printStackTrace();
+        }
+    }
+
+    /**
      * Refresh the email list
      */
     @FXML
@@ -150,14 +207,16 @@ public class ClientController {
      * Change from the email sent view to the email received view
      */
     public void changeListViewReceived() {
-        clientModel.viewReceived(accountName);
+        clientModel.loadReceived(accountName);
+        isReceived = true;
     }
 
     /**
      * Change from the email received view to the email sent view
      */
     public void changeListViewSent() {
-        clientModel.viewSent(accountName);
+        clientModel.loadSent(accountName);
+        isReceived = false;
     }
 
 }

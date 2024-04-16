@@ -15,7 +15,7 @@ public class WriteEmailView {
         Parent root = fxmlLoader.load();
 
         WriteEmailController writeEmailController = fxmlLoader.getController();
-        writeEmailController.setClientModel(clientModel); // Set the client model
+        writeEmailController.setClientModel(clientModel);
         writeEmailController.setSender(sender);
 
         Scene scene = new Scene(root, 600, 400);

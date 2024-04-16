@@ -52,7 +52,8 @@ public class ReplyController {
 
     /**
      * Set the texts of the fields of the mail to forward on the forward page
-     * @param email The email to be showed
+     *
+     * @param email           The email to be showed
      * @param selectedAccount The user account
      */
     public void loadForward(Email email, String selectedAccount) {
@@ -64,9 +65,11 @@ public class ReplyController {
 
     /**
      * Set the text of the mail to be showed
+     *
      * @param email The email to be showed
      */
-    public void loadEmail(Email email) {
+    public void loadEmail(Email email, String selectedAccount) {
+        this.selectedAccount = selectedAccount;
         toField.setText(email.getFrom());
         subjectField.setText("Re: " + email.getSubject());
 
@@ -79,13 +82,13 @@ public class ReplyController {
 
     /**
      * Set the text of the mail to be showed
-     * @param email The email to be showed
+     *
+     * @param email           The email to be showed
      * @param selectedAccount The user account
      */
     public void loadEmailAll(Email email, String selectedAccount) {
         this.selectedAccount = selectedAccount;
         String toAllCorrect = getToAll(email, selectedAccount);
-        System.out.println(toAllCorrect);
 
         toField.setText(toAllCorrect);
         subjectField.setText("Re: " + email.getSubject());
@@ -99,12 +102,13 @@ public class ReplyController {
 
     /**
      * Return the string with all the receivers of the new mail
-     * @param email The email to be showed
+     *
+     * @param email           The email to be showed
      * @param selectedAccount The user account
      * @return The list of all the email receivers
      */
     private static String getToAll(Email email, String selectedAccount) {
-        boolean addedRecipient = false; // Flag to track if any recipients were added
+        boolean addedRecipient = false;
 
         String[] toControlled = email.getToAll().split(";");
         StringBuilder toAllCorrect = new StringBuilder(email.getFrom() + ";");
@@ -118,7 +122,7 @@ public class ReplyController {
                 addedRecipient = true;
             }
         }
-        // If any recipient was added, remove ending ";"
+
         if (addedRecipient && toAllCorrect.toString().endsWith(";")) {
             toAllCorrect = new StringBuilder(toAllCorrect.substring(0, toAllCorrect.length() - 1));
         }
@@ -164,6 +168,7 @@ public class ReplyController {
 
     /**
      * Check for the correctness of the fields and send the email. Then close the window
+     *
      * @param fields The fields of the mail, saved in an array for simplicity
      */
     private void sendEmailAction(String[] fields, ActionEvent event) {

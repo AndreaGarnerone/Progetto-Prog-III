@@ -26,7 +26,6 @@ public class ServerApplication extends Application {
 
         Thread serverThread = new Thread(serverModel::listen);
         serverThread.setDaemon(true);
-
         serverThread.start();
 
         primaryStage.setOnCloseRequest(event -> {

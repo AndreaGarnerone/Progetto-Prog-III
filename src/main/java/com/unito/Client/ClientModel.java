@@ -19,7 +19,6 @@ public class ClientModel {
     Socket socket = null;
     ObjectOutputStream outputStream;
     ObjectInputStream inputStream;
-
     ClientController clientController = new ClientController();
 
     public ClientModel(String account) {
@@ -34,6 +33,7 @@ public class ClientModel {
 
     /**
      * Add an email to the list
+     *
      * @param email The email to be added
      */
     public void addEmail(Email email) {
@@ -43,37 +43,8 @@ public class ClientModel {
     }
 
     /**
-     * Save the email in the sender json file in the emailSent array
-     * @param email The email to be saved
-     */
-    private void saveToSender(Email email) {
-        String emailJson = email.toJson();
-        try {
-            // Read JSON file
-            FileReader reader = new FileReader("src/main/java/com/unito/Client/MailStorage/" + email.getFrom() + ".json");
-            JsonArray jsonArray = JsonParser.parseReader(reader).getAsJsonArray();
-            reader.close();
-
-            // Add email to "emailSent" array
-            JsonObject jsonObject = jsonArray.get(0).getAsJsonObject();
-            JsonArray emailSentArray = jsonObject.getAsJsonArray("emailSent");
-            emailSentArray.add(emailJson);
-
-            // Write updated JSON back to the file
-            FileWriter writer = new FileWriter("src/main/java/com/unito/Client/MailStorage/" + email.getFrom() + ".json");
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            gson.toJson(jsonArray, writer);
-            writer.close();
-
-            System.out.println("Email saved to sender successfully.");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Failed to save email to sender.");
-        }
-    }
-
-    /**
      * Send the email to the server to store it
+     *
      * @param email The email to be saved
      * @return true if the email is sent correctly, false otherwise
      */
@@ -109,6 +80,7 @@ public class ClientModel {
 
     /**
      * Send the email via the socket connection
+     *
      * @param email The email to be sent
      */
     private void sendEmail(Email email) throws IOException {
@@ -130,8 +102,37 @@ public class ClientModel {
     }
 
     /**
+     * Save the email in the sender json file in the emailSent array
+     *
+     * @param email The email to be saved
+     */
+    private void saveToSender(Email email) {
+        String emailJson = email.toJson();
+        try {
+            FileReader reader = new FileReader("src/main/java/com/unito/Client/MailStorage/" + email.getFrom() + ".json");
+            JsonArray jsonArray = JsonParser.parseReader(reader).getAsJsonArray();
+            reader.close();
+
+            JsonObject jsonObject = jsonArray.get(0).getAsJsonObject();
+            JsonArray emailSentArray = jsonObject.getAsJsonArray("emailSent");
+            emailSentArray.add(emailJson);
+
+            FileWriter writer = new FileWriter("src/main/java/com/unito/Client/MailStorage/" + email.getFrom() + ".json");
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            gson.toJson(jsonArray, writer);
+            writer.close();
+
+            System.out.println("Email saved to sender successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Failed to save email to sender.");
+        }
+    }
+
+    /**
      * It selects the received or sent mail list
-     * @param account The user account
+     *
+     * @param account  The user account
      * @param selector The selector value. Possible values: emailReceived, emailSent
      */
     private void loadEmailsFromFile(String account, String selector) {
@@ -156,18 +157,21 @@ public class ClientModel {
 
     /**
      * Load the email sent list
+     *
      * @param selectedAccount The user account
      */
-    public void viewSent(String selectedAccount) {
+    public void loadSent(String selectedAccount) {
         mailList.clear();
         loadEmailsFromFile(selectedAccount, "emailSent");
         isSent = true;
     }
+
     /**
      * Load the received email list
+     *
      * @param selectedAccount The user account
      */
-    public void viewReceived(String selectedAccount) {
+    public void loadReceived(String selectedAccount) {
         mailList.clear();
         loadEmailsFromFile(selectedAccount, "emailReceived");
         isSent = false;
@@ -175,6 +179,7 @@ public class ClientModel {
 
     /**
      * Save the email to the list
+     *
      * @param jsonArray The list off the mails
      */
     private void addEmailsToList(JSONArray jsonArray) {
@@ -182,7 +187,6 @@ public class ClientModel {
             String jsonString = (String) obj;
             Email email = Email.fromString(jsonString);
 
-            // Check if the email already exists in mailList. Add only the new emails
             boolean emailExists = false;
             for (Email existingEmail : mailList) {
                 if (existingEmail.equals(email)) {
@@ -191,7 +195,6 @@ public class ClientModel {
                 }
             }
 
-            // Add the email to mailList only if it doesn't already exist
             if (!emailExists) {
                 mailList.add(0, email);
             }
@@ -202,6 +205,7 @@ public class ClientModel {
 
     /**
      * Send the request to the server for obtaining the emails still not read
+     *
      * @param selectedAccount The user account
      */
     public void refresh(String selectedAccount) {
@@ -231,18 +235,19 @@ public class ClientModel {
 
     /**
      * Send a message to the server for the server log
+     *
      * @param s The parameter. Values: new or close
      */
     public void sendString(String s) throws IOException {
         connectToServer();
 
         try {
-            if (outputStream != null) { // Check if outputStream is not null
+            if (outputStream != null) {
                 outputStream.writeObject(s);
                 outputStream.flush();
             }
-        } catch (NullPointerException ignored) {
-            // Handle any NullPointerException if needed
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         } finally {
             closeConnection();
         }
@@ -250,6 +255,7 @@ public class ClientModel {
 
     /**
      * Receive a new email and store it
+     *
      * @param selectedAccount The account of the user
      */
     private void receiveNewEmail(String selectedAccount) throws IOException {
@@ -270,27 +276,24 @@ public class ClientModel {
 
     /**
      * Actually save the email to the correct file
-     * @param emailList The JSon rappresentation of the email list
+     *
+     * @param emailList       The JSon rappresentation of the email list
      * @param selectedAccount The account of the user
      */
     private void saveEmail(JsonArray emailList, String selectedAccount) {
         try {
             String pathName = "src/main/java/com/unito/Client/MailStorage/" + selectedAccount + ".json";
 
-            // Parse the existing JSON file
             JsonParser parser = new JsonParser();
             JsonArray jsonArray = parser.parse(new FileReader(pathName)).getAsJsonArray();
             JsonObject jsonObject = jsonArray.get(0).getAsJsonObject();
 
-            // Get the "emailToRead" array from the JSON object
             JsonArray emailToReadArray = jsonObject.getAsJsonArray("emailReceived");
 
-            // Add each email from emailList to emailToReadArray
             for (int i = 0; i < emailList.size(); i++) {
                 emailToReadArray.add(emailList.get(i));
             }
 
-            // Write the modified JSON object back to the file
             try (JsonWriter writer = new JsonWriter(new FileWriter(pathName))) {
                 writer.setIndent("  ");
                 writer.beginArray();

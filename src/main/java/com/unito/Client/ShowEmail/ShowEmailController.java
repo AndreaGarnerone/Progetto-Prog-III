@@ -22,7 +22,8 @@ public class ShowEmailController {
 
     /**
      * Convert the JSon to Email  and set the parameters
-     * @param emailJson The email selected to show
+     *
+     * @param emailJson       The email selected to show
      * @param selectedAccount The user's account
      */
     public void initialize(String emailJson, String selectedAccount) {
